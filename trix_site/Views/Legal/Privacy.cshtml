@@ -1,0 +1,127 @@
+@{
+    ViewData["Title"] = "מדיניות פרטיות – 12trix";
+    Layout = "_Layout";
+}
+@section Styles {
+    <style>
+        .legal {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 16px;
+            line-height: 1.9
+        }
+
+            .legal h1 {
+                margin-bottom: 8px
+            }
+
+            .legal .meta {
+                color: #666;
+                margin-bottom: 24px
+            }
+
+            .legal h2 {
+                margin-top: 28px;
+                font-size: 1.2rem
+            }
+
+            .legal ul {
+                padding-inline-start: 20px;
+                margin: 8px 0
+            }
+
+            .legal .actions {
+                margin: 20px 0 0;
+                display: flex;
+                gap: 10px
+            }
+
+        .btn {
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            padding: 8px 12px;
+            background: #fff
+        }
+
+        .btn-primary {
+            background: #27AE60;
+            border-color: #27AE60;
+            color: #fff
+        }
+        /* הדפסה */
+        @@media print {
+            header, footer, .actions {
+                display: none !important;
+            }
+
+            .legal {
+                max-width: 100%;
+                padding: 0
+            }
+
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 90%
+            }
+        }
+    </style>
+}
+
+<section class="legal" dir="rtl">
+    <h1>מדיניות פרטיות</h1>
+    <div class="meta">עודכן לאחרונה: @DateTime.Now.ToString("dd.MM.yyyy")</div>
+
+    <p>
+        ב-<strong>12trix</strong> (להלן: “החברה”, “אנו”) אנו מכבדים את פרטיות המשתמשים. מסמך זה מסביר אילו נתונים נאספים,
+        למטרות אילו, כיצד אנו שומרים עליהם, ואילו זכויות עומדות לכם. השימוש באתר ובאפליקציות מהווה הסכמה למדיניות זו.
+    </p>
+
+    <h2>איזה מידע אנו אוספים?</h2>
+    <ul>
+        <li><strong>מידע שמסרתם לנו מרצון</strong> – לדוגמה: שם, דוא״ל, טלפון, שם בית ספר והערות בטפסי יצירת קשר/בקשת הדגמה.</li>
+        <li><strong>מידע טכני ושימוש</strong> – כתובת IP מקוצרת/מוסווית, סוג דפדפן, עמודים שנצפו, משך ביקור, הפניות ועוד (באמצעות כלים אנליטיים).</li>
+        <li><strong>קבצי Cookie ואחסון מקומי</strong> – לשיפור חוויית משתמש, שמירת העדפות ומדידות.</li>
+    </ul>
+
+    <h2>Google Analytics (GA4)</h2>
+    <p>
+        אנו עשויים להשתמש ב-Google Analytics לצורכי מדידה ושיפור חוויית המשתמש. השירות עושה שימוש ב-Cookies ונתוני שימוש אנונימיים/מצומצמים.
+        ניתן לבקר במדיניות הפרטיות של Google בקישור: <a href="https://policies.google.com/privacy?hl=he" target="_blank" rel="noopener">מדיניות פרטיות של Google</a>.
+        אפשר לבטל מדידה באמצעות תוספי דפדפן ייעודיים של Google או באמצעות שינוי הגדרות העוגיות באתר.
+    </p>
+
+    <h2>למה אנו משתמשים במידע?</h2>
+    <ul>
+        <li>מענה לפניות, תיאום הדגמות ושליחת הצעות.</li>
+        <li>שיפור מוצרים, תוכן וחוויית משתמש.</li>
+        <li>ניתוח אנונימי של שימוש לצורכי איכות ותפעול.</li>
+        <li>עמידה בדרישות חוק, מניעת הונאה ושמירה על אבטחה.</li>
+    </ul>
+
+    <h2>מסירת מידע לצדדים שלישיים</h2>
+    <p>
+        איננו מוכרים מידע אישי. אנו עשויים לשתף מידע עם ספקים המסייעים בהפעלת השירות (אירוח, דוא״ל, אנליטיקה) בכפוף להתחייבויות סודיות ואבטחה,
+        או כאשר הדבר נדרש לפי דין.
+    </p>
+
+    <h2>אבטחת מידע ושמירה</h2>
+    <p>
+        אנו מפעילים אמצעי אבטחה סבירים להגנה על מידע. שמירת המידע נעשית למשך הזמן הנדרש למטרות שלשמן נאסף או לפי החוק.
+    </p>
+
+    <h2>זכויות המשתמשים</h2>
+    <p>
+        ניתן לבקש גישה, תיקון או מחיקה של פרטים שנמסרו, ולהתנגד לשימוש שיווקי. פנייה בנושא פרטיות:
+        <a href="mailto:support@12trix.com">support@12trix.com</a> או בטלפון <a href="tel:+972544684216">054-4684-216</a>.
+    </p>
+
+    <h2>שינויים במדיניות</h2>
+    <p>
+        נעדכן מדיניות זו מעת לעת. פרסום גרסה מעודכנת באתר יהווה הודעה מספקת על השינוי.
+    </p>
+
+    <div class="actions">
+        <button class="btn" onclick="window.print()">הדפס</button>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Index">חזרה לעמוד הראשי</a>
+    </div>
+</section>

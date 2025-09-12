@@ -1,0 +1,43 @@
+<nav class="container nav">
+  <div class="logo">
+    <a asp-controller="Home" asp-action="Index" aria-label="עמוד הבית">
+      <img src="~/images/logo.webp" alt="12trix" style="height:48px" />
+    </a>
+  </div>
+
+  <ul class="nav-menu">
+    <li><a asp-controller="Home" asp-action="Index">עמוד הבית</a></li>
+    <li><a asp-controller="Home" asp-action="Parents">הורים</a></li>
+    <li><a asp-controller="Home" asp-action="Schools">בתי ספר</a></li>
+    <li><a asp-controller="Apps" asp-action="Index">אפליקציות</a></li>
+    <li><a asp-controller="Home" asp-action="Contact">צור קשר</a></li>
+  </ul>
+
+  <button class="mobile-toggle" aria-label="פתח תפריט" type="button">
+    <span class="sr-only">פתח תפריט</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="3" y="6" width="18" height="2" rx="1"></rect>
+      <rect x="3" y="11" width="18" height="2" rx="1"></rect>
+      <rect x="3" y="16" width="18" height="2" rx="1"></rect>
+    </svg>
+  </button>
+
+  <div class="nav-actions">
+    <a href="https://wa.link/62uesa" target="_blank" rel="noopener" class="whatsapp-link" aria-label="ווטסאפ">
+      <img src="~/images/whatsUpIcon.webp" alt="WhatsApp" style="height:40px;width:40px" />
+    </a>
+    <a href="https://app.12trix.com/Accounts/Account/login" target="_blank" rel="noopener" class="login-btn">
+      התחברות
+    </a>
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="תפריט">
+    <a asp-controller="Home" asp-action="Index">עמוד הבית</a>
+    <a asp-controller="Home" asp-action="Parents">הורים</a>
+    <a asp-controller="Home" asp-action="Schools">בתי ספר</a>
+    <a href="~/apps.html">אפליקציות</a>
+    <a asp-controller="Home" asp-action="Contact">צור קשר</a>
+    <a href="https://wa.link/62uesa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://app.12trix.com/Accounts/Account/login" target="_blank" rel="noopener" class="login-btn">התחברות</a>
+  </div>
+</nav>

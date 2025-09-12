@@ -1,0 +1,19 @@
+@{
+    var grade = (string)(ViewContext.RouteData.Values["grade"] ?? "");
+    var action = (string)(ViewContext.RouteData.Values["action"] ?? "");
+
+    if (string.IsNullOrEmpty(grade))
+    {
+        var p = (ViewContext.View.Path ?? "").ToLowerInvariant();
+        grade = p.Contains("k6") ? "K6" : p.Contains("k7") ? "K7" : "K5";
+    }
+
+    var isPrograms = string.Equals(action, "Programs", System.StringComparison.OrdinalIgnoreCase);
+    var targetAction = isPrograms ? "Results" : "Programs";
+    var label = isPrograms ? "לתוצאות המהירות" : "לתוכנית המלאה";
+}
+<div class="switcher" style="margin:16px 0">
+    <a class="btn btn-ghost" asp-controller="Schools" asp-action="@targetAction" asp-route-grade="@grade">
+        @label
+    </a>
+</div>

@@ -1,0 +1,822 @@
+@{
+    ViewData["Title"] = "12trix - בוטקמפ מתמטיקה להורים וילדים";
+}
+
+
+@section Styles {
+<style>
+/* הרחבות ל-CSS קיים */
+        .hero-parents {
+            background: linear-gradient(135deg, #e8f5e9 0%, #FFFFFF 50%, #F7F8FA 100%);
+            padding: 60px 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            line-height: 1.15;
+        }
+
+        .hero-features {
+            list-style: none;
+            margin: 32px 0;
+        }
+
+            .hero-features li {
+                font-size: 20px;
+                color: var(--text-dark);
+                margin-bottom: 12px;
+                padding-right: 30px;
+                position: relative;
+            }
+
+                .hero-features li::before {
+                    content: "✗";
+                    position: absolute;
+                    right: 0;
+                    color: var(--red-plus);
+                    font-weight: bold;
+                    font-size: 24px;
+                }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .trust-banner {
+            background: linear-gradient(90deg, var(--green-primary), var(--blue-accent));
+            color: var(--white);
+            padding: 16px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 40px 0;
+        }
+
+            .trust-banner .stars {
+                color: #FFD700;
+                margin: 0 10px;
+            }
+
+        .program-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .program-card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .program-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            }
+
+        .program-card-header {
+            background: linear-gradient(135deg, var(--green-primary), var(--blue-accent));
+            color: var(--white);
+            padding: 24px;
+            text-align: center;
+        }
+
+            .program-card-header h3 {
+                font-size: 28px;
+                font-weight: 800;
+                margin-bottom: 8px;
+                color: var(--text-dark);
+            }
+
+        .program-card-body {
+            padding: 32px;
+        }
+
+            .program-card-body ul {
+                list-style: none;
+                margin-bottom: 24px;
+            }
+
+            .program-card-body li {
+                padding: 8px 0;
+                padding-right: 28px;
+                position: relative;
+                color: var(--text-dark);
+            }
+
+                .program-card-body li::before {
+                    content: "✓";
+                    position: absolute;
+                    right: 0;
+                    color: var(--green-primary);
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+
+        .price-tag {
+            background: var(--bg-light);
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 24px 0;
+        }
+
+            .price-tag .old-price {
+                text-decoration: line-through;
+                color: var(--text-gray);
+                font-size: 20px;
+            }
+
+            .price-tag .new-price {
+                color: var(--green-primary);
+                font-size: 32px;
+                font-weight: 800;
+            }
+
+        .bonus-section {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffffff 100%);
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .bonus-item {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .bonus-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--orange-accent), #ff8a65);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 40px;
+            color: var(--white);
+            color: var(--text-dark); /* במקום var(--white) */
+            font-weight: bold;
+        }
+       
+        .comparison-table {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            margin: 60px 0;
+        }
+
+            .comparison-table table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .comparison-table th {
+                background: linear-gradient(135deg, var(--green-primary), var(--blue-accent));
+                color: var(--white);
+                padding: 20px;
+                font-weight: 700;
+                font-size: 18px;
+            }
+
+            .comparison-table td {
+                padding: 20px;
+                border-bottom: 1px solid #eee;
+                text-align: center;
+            }
+
+            .comparison-table .check {
+                color: var(--green-primary);
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .comparison-table .cross {
+                color: var(--red-plus);
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+        .faq-section {
+            margin: 60px 0;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+            .faq-item:hover {
+                box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .faq-answer {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .progress-bar {
+            background: #eee;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--green-primary), var(--blue-accent));
+            height: 100%;
+            width: 65%;
+            animation: fillProgress 2s ease-out;
+        }
+
+        @@keyframes fillProgress {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 65%;
+            }
+        }
+
+        .urgency-banner {
+            background: var(--orange-accent);
+          /*  color: var(--white);*/
+            padding: 20px;
+            text-align: center;
+            border-radius: 16px;
+            margin: 40px 0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .btn-info {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--text-gray);
+            padding: 12px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+            .btn-info:hover {
+                background: var(--text-gray);
+                color: var(--white);
+            }
+
+        @@media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .program-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+</style>
+}
+
+<!-- Header מעמוד הבית -->
+    
+
+    <!-- Hero Section -->
+    <section class="hero-parents">
+        <div class="container">
+            <h1 class="fade-in" style="text-align: center;">בוטקאמפ - קפיצה אמיתית בחודש אחד!</h1>
+            <p class="subtitle fade-in" style="text-align: center;">אפליקציות חכמות · 3 מפגשי זום בשבוע · קבוצה קטנה (עד 5 ילדים) · תרגול יומי (20 דק')</p>
+
+            <div class="hero-content ">
+                <div class="hero-text">
+
+                    <h2 style="font-size: 32px; margin-top: 32px; margin-bottom: 24px;">4 שבועות, 30 דקות ביום, ואני אהפוך את הילד שלך לבטוח ומצליח במתמטיקה</h2>
+
+                    <ul class="hero-features">
+                        <li>לא עוד דמעות על שיעורי בית</li>
+                        <li>לא עוד "אני לא מבין מתמטיקה"</li>
+                        <li>לא עוד פחד וחוסר אונים</li>
+                    </ul>
+
+                    <div class="cta-container">
+                        <a href="#pricing" class="btn-primary">התחילו עם Starter-7 ב-₪89</a>
+                    <a href="https://wa.link/62uesa" target="_blank" rel="noopener" class="btn-secondary">אני רוצה לברר פרטים</a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img src="~/images/parentHero.png" alt="ילד מצליח במתמטיקה">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Banner -->
+    <div class="trust-banner">
+        <span>רואים תוצאות ומחליטים</span>
+        <span class="stars">★★★★★</span>
+        <span>97% שביעות רצון · [5 כוכבים] קורס מוכח</span>
+    </div>
+
+    <!-- למה זה עובד Section -->
+    <section class="container">
+        <h2 style="text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 20px;">למה זה עובד?</h2>
+        <p style="text-align: center; font-size: 20px; color: var(--text-gray); margin-bottom: 60px;">
+            שיטת 12trix הופכת ילדים מ"לא טוב בזה" ל"אני מצליח!" באמצעות למידה חווייתית מבוססת גילוי.
+        </p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>לומדים דרך עשייה</h4>
+                <p>המחשות שמאפשרות 'לראות' את התרגילים ולהבין לעומק</p>
+            </div>
+            <div class="feature-card">
+                <h4>הצלחות שיוצרות ביטחון</h4>
+                <p>הצלחה גוררת הצלחה. 90% מהפתרון טמון בתחושת היכולת ובאמונה העצמית.</p>
+            </div>
+            <div class="feature-card">
+                <h4>הכוונה נכונה</h4>
+                <p>דימוי נכון, הדגש, הסבר מכיוון אחר, משחררים מתקיעות ועושים פלאים.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- מה מקבלים בבוטקאמפ -->
+    <section class="container" style="margin-top: 80px;">
+        <h2 style="text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 60px;">מה מקבלים בבוטקאמפ לחודש?</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div style="font-size: 40px; margin-bottom: 16px;">🎥</div>
+                <h4>מפגשי ZOOM</h4>
+                <p>שלוש פעמים בשבוע, 30 דקות בלבד - מדויק ויעיל</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 40px; margin-bottom: 16px;">👥</div>
+                <h4>קבוצה קטנה</h4>
+                <p>עד 5 ילדים - כל אחד מקבל תשומת לב</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 40px; margin-bottom: 16px;">📱</div>
+                <h4>כלים דיגיטליים</h4>
+                <p>אפליקציות מהנות, כלים שהופכים מתמטיקה למשחק</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 40px; margin-bottom: 16px;">✨</div>
+                <h4>הצלחה</h4>
+                <p>תוצאות מהירות - תוך שבועיים הילד כבר מרגיש שינוי</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- מסלולים לפי שכבת גיל -->
+    <section class="container" style="margin-top: 80px;" id="programs">
+        <h2 style="text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 60px;">מסלולים לפי שכבת גיל</h2>
+
+        <div class="program-cards">
+            <!-- כיתה ה' -->
+            <div class="program-card">
+                <div class="program-card-header">
+                    <h3>כיתה ה'</h3>
+                    <p>שברים וחילוק ארוך</p>
+                </div>
+                <div class="program-card-body">
+                    <img src="~/images/app-long-division.webp" alt="חילוק ארוך" style="width: 100%; border-radius: 12px; margin-bottom: 24px;">
+
+                    <h4 style="margin-bottom: 16px;">מה מרוויחים?</h4>
+                    <ul>
+                        <li>שליטה בחילוק ארוך בקלות</li>
+                        <li>הבנה ושליטה בנושא השברים כמו מקצוען</li>
+                        <li>קבלת ביטחון עצמי ותחושת יכולת</li>
+                        <li>תוספות: גיאומטריה, השלמת פערים</li>
+                    </ul>
+
+                    <div class="price-tag">
+                        <span class="old-price">₪1,500</span>
+                        <span class="new-price"> רק ₪779</span>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 16px;">
+                        <span style="font-size: 18px;">⏱️ תוצאות תוך 7 ימים</span>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a class="btn btn-primary" asp-controller="Schools" asp-action="Programs" asp-route-grade="K5">סילבוס מפורט</a>
+                    <a class="btn btn-secondary" asp-controller="Schools" asp-action="Results" asp-route-grade="K5">ראה תוצאות</a>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <a href="#pricing" class="btn-primary" style="width: 100%; text-align: center;">התחל עכשיו ב-₪89</a>
+                        <p style="text-align: center; margin-top: 12px; color: var(--text-gray);">או התקשר: 0544-684-216</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כיתה ו' -->
+            <div class="program-card">
+                <div class="program-card-header">
+                    <h3>כיתה ו'</h3>
+                    <p>שברים ושבר עשרוני</p>
+                </div>
+                <div class="program-card-body">
+                    <img src="~/images/app-fractions.png" alt="שברים" style="width: 100%; border-radius: 12px; margin-bottom: 24px;">
+
+                    <h4 style="margin-bottom: 16px;">מה מרוויחים?</h4>
+                    <ul>
+                        <li>הבנת שברים כמו מקצוען</li>
+                        <li>הבנה ושליטה בשבר עשרוני</li>
+                        <li>הבנה ושליטה באחוזים</li>
+                        <li>תוספות: גיאומטריה, השלמת פערים</li>
+                    </ul>
+
+                    <div class="price-tag">
+                        <span class="old-price">₪1,500</span>
+                        <span class="new-price"> רק ₪779</span>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 16px;">
+                        <span style="font-size: 18px;">⏱️ תוצאות תוך 7 ימים</span>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                    <a class="btn btn-primary" asp-controller="Schools" asp-action="Programs" asp-route-grade="K6">סילבוס מפורט</a>
+                    <a class="btn btn-secondary" asp-controller="Schools" asp-action="Results" asp-route-grade="K6">ראה תוצאות</a>
+
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <a href="#pricing" class="btn-primary" style="width: 100%; text-align: center;">התחל עכשיו ב-₪89</a>
+                        <p style="text-align: center; margin-top: 12px; color: var(--text-gray);">או התקשר: 0544-684-216</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כיתה ז' -->
+            <div class="program-card">
+                <div class="program-card-header">
+                    <h3>כיתה ז'</h3>
+                    <p>מחשבון לאלגברה בצורה בטוחה</p>
+                </div>
+                <div class="program-card-body">
+                    <img src="~/images/app-algebra.png" alt="משוואות" style="width: 100%; border-radius: 12px; margin-bottom: 24px;">
+
+                    <h4 style="margin-bottom: 16px;">מה מרוויחים?</h4>
+                    <ul>
+                        <li>ביטוי אלגברי - שליטה והבנה</li>
+                        <li>מספרים שליליים - חיזוק הבנה</li>
+                        <li>משוואות עם נעלם אחד - שליטה והבנה בפתרון</li>
+                        <li>כפל, חילוק, שברים - חיזוק והשלמה</li>
+                        <li>הכנה לגיאומטריה</li>
+                    </ul>
+
+                    <div class="price-tag">
+                        <span class="old-price">₪1,500</span>
+                        <span class="new-price"> רק ₪779</span>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 16px;">
+                        <span style="font-size: 18px;">⏱️ תוצאות תוך 7 ימים</span>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <a class="btn btn-primary" asp-controller="Schools" asp-action="Programs" asp-route-grade="K7">סילבוס מפורט</a>
+                        <a class="btn btn-secondary" asp-controller="Schools" asp-action="Results" asp-route-grade="K7">ראה תוצאות</a>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <a href="#pricing" class="btn-primary" style="width: 100%; text-align: center;">התחל עכשיו ב-₪89</a>
+                        <p style="text-align: center; margin-top: 12px; color: var(--text-gray);">או התקשר: 0544-684-216</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- עדויות הורים -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="testimonials-title">הורים מספרים</h2>
+
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p class="testimonial-text">לא האמנתי שהילדה שלי תשנה כך את היחס שלה למתמטיקה. כיף לה בשיעור... והשיא היה כשאמרה לי שהיא מרגישה מאוד מוכנה ללמוד שברים.</p>
+                <div class="testimonial-author">
+                    <img src="~/images/elinor.png" alt="אלינור" class="author-avatar">
+                    <div class="author-info">
+                        <div class="author-name">אלינור</div>
+                        <div class="author-role">אמא של לני, כיתה ה', טבעון</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p class="testimonial-text">עמי פשוט קוסם! הוא הצליח לגרום לילד שלי לאהוב מתמטיקה.</p>
+                <div class="testimonial-author">
+                    <img src="~/images/template1.png" alt="אור גדעון" class="author-avatar">
+                    <div class="author-info">
+                        <div class="author-name">אור גדעון</div>
+                        <div class="author-role">אבא לאלכס, כיתה ה', חיפה</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p class="testimonial-text">אחרי שנים של תסכול עם שברים, מיה שולטת בשברים. אין לי מילים</p>
+                <div class="testimonial-author">
+                    <img src="~/images/template2.png" alt="יעקב ביודנסה" class="author-avatar">
+                    <div class="author-info">
+                        <div class="author-name">יעקב ביודנסה</div>
+                        <div class="author-role">אבא למיה, כיתה ז', פרדס חנה</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="rating">★★★★★</div>
+                <p class="testimonial-text">האמת, בזמן שנרשמנו ההבטחות נראו לי מוגזמות. בסוף הכל התממש יותר טוב ממה שקיוויתי. אני ממליצה מכל הלב.</p>
+                <div class="testimonial-author">
+                    <img src="~/images/michal.webp" alt="מיכל גרבר" class="author-avatar">
+                    <div class="author-info">
+                        <div class="author-name">מיכל גרבר</div>
+                        <div class="author-role">אמא לנועה, כיתה ז', בית גוברין</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- מחירים -->
+    <section class="container" id="pricing" style="margin-top: 80px;">
+        <h2 style="text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 20px;">💰 השקעה חכמה בעתיד הילד</h2>
+
+        <div style="background: var(--white); border-radius: 24px; padding: 48px; box-shadow: var(--shadow-card); text-align: center;">
+            <h3 style="font-size: 36px; margin-bottom: 32px;">
+                <span style="text-decoration: line-through; color: var(--text-gray);">₪1,500</span>
+                <span style="color: var(--green-primary); font-weight: 900;"> רק ₪779</span>
+                <span style="font-size: 24px; color: var(--text-dark);"> לחודש מלא!</span>
+            </h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 40px 0;">
+                <div>
+                    <div style="font-size: 48px; color: var(--green-primary); margin-bottom: 12px;">✓</div>
+                    <p style="font-size: 18px;">פחות ממורה פרטי</p>
+                </div>
+                <div>
+                    <div style="font-size: 48px; color: var(--green-primary); margin-bottom: 12px;">✓</div>
+                    <p style="font-size: 18px;">89₪ לשבוע הראשון</p>
+                </div>
+                <div>
+                    <div style="font-size: 48px; color: var(--green-primary); margin-bottom: 12px;">✓</div>
+                    <p style="font-size: 18px;">אח"כ 10×69₪ נוחים</p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, var(--bg-light) 0%, #e8f5e9 100%); border-radius: 16px; padding: 32px; margin: 32px 0;">
+                <h4 style="font-size: 24px; margin-bottom: 20px;">3 מפגשים ראשונים: רק 89 ₪</h4>
+                <ul style="list-style: none; text-align: right; max-width: 400px; margin: 0 auto;">
+                    <li style="padding: 8px 0;">• 3 מפגשים מלאים</li>
+                    <li style="padding: 8px 0;">• גישה לאפליקציה הראשונה</li>
+                    <li style="padding: 8px 0;">• הילד שלך בקבוצה ומתחיל ללמוד</li>
+                    <li style="padding: 8px 0; font-weight: bold; color: var(--green-primary);">• אחרי מפגש ראשון, לא מרוצה - החזר כספי מלא!</li>
+                </ul>
+            </div>
+
+            <div style="background: var(--white); border: 2px solid var(--green-primary); border-radius: 16px; padding: 32px; margin: 32px 0;">
+                <h4 style="font-size: 24px; margin-bottom: 20px;">אחרי שתראי שזה עובד:</h4>
+                <ul style="list-style: none; text-align: right; max-width: 400px; margin: 0 auto;">
+                    <li style="padding: 8px 0;">• 10 תשלומים נוחים של 69 ₪ בלבד</li>
+                    <li style="padding: 8px 0;">• גישה מלאה לכל 4 השבועות</li>
+                    <li style="padding: 8px 0;">• כל האפליקציות והכלים</li>
+                    <li style="padding: 8px 0; font-weight: bold; color: var(--orange-accent);">• כל הבונוסים בשווי 1,495 ₪!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- בונוסים -->
+    <section class="bonus-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 60px;">🎁 מה מקבלים בנוסף? 4 בונוסים בשווי 1,495 ₪!</h2>
+
+            <div class="bonus-grid">
+                <div class="bonus-item">
+                    <div class="bonus-icon">1</div>
+                    <h4>חבילת אפליקציות חיזוק</h4>
+                    <p style="font-size: 20px; color: var(--orange-accent); font-weight: bold;">שווי 897 ₪</p>
+                    <ul style="list-style: none; text-align: right; margin-top: 16px;">
+                        <li>• אפליקציות משוואות, ביטוי אלגברי</li>
+                        <li>• אפליקציית שברים מוכחת</li>
+                        <li>• לוח הכפל, חילוק ארוך</li>
+                        <li>• אימון אריתמטי מתקדם</li>
+                    </ul>
+                </div>
+
+                <div class="bonus-item">
+                    <div class="bonus-icon">2</div>
+                    <h4>וובינר להורים</h4>
+                    <p style="font-size: 20px; color: var(--orange-accent); font-weight: bold;">שווי 299 ₪</p>
+                    <ul style="list-style: none; text-align: right; margin-top: 16px;">
+                        <li>• שעה וחצי עם עמי</li>
+                        <li>• טכניקות מוכחות</li>
+                        <li>• בלי מריבות</li>
+                        <li>• הקלטה לצפייה חוזרת</li>
+                    </ul>
+                </div>
+
+                <div class="bonus-item">
+                    <div class="bonus-icon">3</div>
+                    <h4>תמיכה אישית חודש נוסף</h4>
+                    <p style="font-size: 20px; color: var(--orange-accent); font-weight: bold;">שווי 299 ₪</p>
+                    <ul style="list-style: none; text-align: right; margin-top: 16px;">
+                        <li>• זמינות בוואטסאפ</li>
+                        <li>• עזרה עם תרגילים</li>
+                        <li>• ייעוץ מותאם אישית</li>
+                        <li>• ליווי עד שבטוח</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- טבלת השוואה -->
+    <section class="container" style="margin-top: 80px;">
+        <h2 style="text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 60px;">בוטקאמפ או מורה פרטי?</h2>
+
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>מורה פרטי</th>
+                        <th style="background: linear-gradient(135deg, #219a52, var(--green-primary));">בוטקמפ חודש</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: bold; text-align: right;">יוצר תלות או עצמאות</td>
+                        <td>בד"כ תלות במורה פרטי עד הבגרות</td>
+                        <td>נותן בסיס ואמון עצמי שמאפשר עצמאות</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align: right;">מפתח כישורי למידה</td>
+                        <td class="cross">✗</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align: right;">מפתח תחושת מסוגלות וביטחון עצמי</td>
+                        <td class="cross">✗</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align: right;">תוצאות מובטחות</td>
+                        <td>לא</td>
+                        <td style="color: var(--green-primary); font-weight: bold;">כן, או החזר כספי</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-align: right;">עלות</td>
+                        <td>
+                            600-800 ש"ח לחודש<br>
+                            6,000-8,000 ש"ח לשנה<br>
+                            <span style="color: var(--red-plus); font-weight: bold;">30,000-56,000 ש"ח במצטבר</span>
+                        </td>
+                        <td>
+                            <span style="color: var(--green-primary); font-weight: bold; font-size: 20px;">
+                                89 ש"ח שבוע ראשון<br>
+                                + 690 ש"ח בוטקמפ מלא
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section container">
+        <h2 style="text-align: center; font-size: 42px; font-weight: 800; margin-bottom: 60px;">שאלות נפוצות</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">מה זה Starter-7?</div>
+            <div class="faq-answer">שבוע ראשון ב-₪89: 3 מפגשי זום + גישה מלאה לאפליקציות. אחרי המפגש השלישי מחליטים אם להמשיך.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">מה המחיר המלא אם ממשיכים?</div>
+            <div class="faq-answer">מחיר השקה לבוטקמפ חודש: ₪779. תשלום ה-Starter מתקזז.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">ואם הילד לא התחבר?</div>
+            <div class="faq-answer">אם בסוף השבוע הראשון מחליטים לא להמשיך – לא מחויבים מעבר ל-₪89.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">כמה ילדים בקבוצה?</div>
+            <div class="faq-answer">עד 5 ילדים, כדי לשמור על קצב אישי ותשומת לב.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">כמה זמן צריך לתרגל בבית?</div>
+            <div class="faq-answer">20 דק' ביום באפליקציות בין המפגשים. זה סוד ההתקדמות.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">מה אם מפספסים מפגש?</div>
+            <div class="faq-answer">אפשר להצטרף למועד חלופי/השלמה, בכפוף לזמינות השבועית.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">אילו כלים טכניים צריך?</div>
+            <div class="faq-answer">מחשב/טאבלט עם חיבור יציב, דפדפן כרום מעודכן ואוזניות.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">האם זה מתאים גם לילדים ש"לא אוהבים מתמטיקה"?</div>
+            <div class="faq-answer">זה קיים בעיקר עבורם. מתחילים בהמחשה ובפעולה—לא בהרצאה. חווים "אני מצליח" כבר בתחילת הדרך.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">האם הבוטקמפ מחליף מורה פרטי?</div>
+            <div class="faq-answer">ברוב המקרים כן. המטרה: עצמאות, ביטחון ושליטה—לא תלות לאורך השנה.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">האם 30 דקות מספיק?</div>
+            <div class="faq-answer">בהחלט! המוח של ילד בגיל 10-13 עובד במיטבו ב-30 דקות של ריכוז מלא. 3 מפגשים בשבוע יוצרים עקביות ורצף למידה. התוצאות מדברות בעד עצמן.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">מה כולל הקורס בדיוק?</div>
+            <div class="faq-answer">12 מפגשי ZOOM חיים (3 בשבוע), אפליקציות ייחודיות, תמיכת WhatsApp, וקבוצה קטנה של עד 5 ילדים. הכל מותאם במיוחד לאתגרים של כל שכבת גיל.</div>
+        </div>
+    </section>
+
+    <!-- Urgency Section -->
+    <section class="container" style="margin-top: 80px; margin-bottom: 80px;">
+        <div class="urgency-banner">
+            ⏰ המחזור הקרוב מתחיל ב-21/9/2025
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <h3 style="font-size: 28px; margin-bottom: 20px;">📊 65% מהמקומות כבר תפוסים</h3>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <!--<p style="font-size: 18px; color: var(--text-gray); margin-top: 20px;">נותרו 7 מקומות בלבד</p>-->
+        </div>
+
+        <div class="cta-container">
+        <a href="https://pay.grow.link/2e2d26e42480fb717e2a30a528e67dc1-MjIyMjY1NQ" target="_blank" class="btn-primary" style="font-size: 24px; padding: 20px 48px;">התחל עכשיו ב-₪89</a>
+            <a href="https://wa.link/62uesa" target="_blank" class="btn-secondary" style="font-size: 24px; padding: 20px 48px;">שלחי הודעת ווטסאפ</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+
+@section Scripts {
+    <script src="~/js/parents.js" asp-append-version="true"></script>
+}
+

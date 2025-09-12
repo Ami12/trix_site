@@ -1,0 +1,16 @@
+@{
+    var code = ViewBag.StatusCode as int?;
+    var title = code.HasValue ? $"שגיאה {code}" : "אירעה שגיאה";
+    ViewData["Title"] = title;
+}
+<section class="container" style="padding:60px 0;text-align:center">
+  <h1>@title</h1>
+  <p>משהו השתבש. נסו לרענן את הדף, לחזור לעמוד הבית, או ליצור קשר.</p>
+  @if (code == 404)
+  {
+    <p>הדף שחיפשתם לא נמצא.</p>
+  }
+  <div style="margin-top:24px">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">לעמוד הבית</a>
+  </div>
+</section>

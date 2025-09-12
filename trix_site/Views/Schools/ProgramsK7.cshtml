@@ -1,0 +1,585 @@
+@{
+    ViewData["Title"] = "מה כוללת התוכנית?";
+    Layout = "_Layout";
+}
+
+@section Styles {
+<style>
+/* עיצוב ייחודי לעמוד התוכנית */
+        .program-hero {
+            background: linear-gradient(135deg, #2E86DE 0%, #1e5aa8 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            
+
+@await Html.PartialAsync("_ProgramResultSwitch")
+
+.program-hero::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+                background-size: 30px 30px;
+                animation: float 25s linear infinite;
+            }
+
+        @@keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50px, -50px) rotate(180deg);
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 20px 0 30px 0;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+            .back-link:hover {
+                background: rgba(255,255,255,0.3);
+                transform: translateY(-2px);
+            }
+
+        .program-title {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .program-subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .course-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .detail-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(90deg, var(--green-primary), #2E86DE);
+            }
+
+            .detail-card:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--shadow-hover);
+            }
+
+        .detail-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detail-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .detail-text {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .apps-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e8f5e9 100%);
+            padding: 60px 0;
+            margin: 60px 0;
+            border-radius: 30px;
+        }
+
+        .apps-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 50px;
+        }
+
+        .timeline-section {
+            margin: 80px 0;
+        }
+
+        .timeline-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .timeline-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 60px;
+        }
+
+        .program-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+            .program-timeline::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 50%;
+                width: 4px;
+                height: 100%;
+                background: linear-gradient(180deg, var(--green-primary), #2E86DE);
+            }
+
+        .week-item {
+            position: relative;
+            margin-bottom: 60px;
+            width: 50%;
+            display: flex;
+            align-items: flex-start;
+        }
+
+            .week-item:nth-child(odd) {
+                right: 0;
+                justify-content: flex-start;
+                padding-left: 50px;
+            }
+
+            .week-item:nth-child(even) {
+                right: 50%;
+                justify-content: flex-end;
+                padding-right: 50px;
+            }
+
+        .week-marker {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--green-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
+            z-index: 2;
+        }
+
+        .week-item:nth-child(odd) .week-marker {
+            left: -30px;
+        }
+
+        .week-item:nth-child(even) .week-marker {
+            right: -30px;
+        }
+
+        .week-item:nth-child(2) .week-marker {
+            background: #FF6B6B;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+        }
+
+        .week-item:nth-child(3) .week-marker {
+            background: #2E86DE;
+            box-shadow: 0 0 0 3px rgba(46, 134, 222, 0.3);
+        }
+
+        .week-item:nth-child(4) .week-marker {
+            background: #F39C12;
+            box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3);
+        }
+
+        .week-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 400px;
+        }
+
+            .week-content:hover {
+                transform: scale(1.02);
+                box-shadow: var(--shadow-hover);
+            }
+
+        .week-header {
+            margin-bottom: 20px;
+        }
+
+        .week-number {
+            color: var(--green-primary);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .week-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .week-apps {
+            background: var(--bg-light);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+
+        .zoom-sessions {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+            .zoom-sessions li {
+                padding: 8px 0;
+                font-size: 15px;
+                color: var(--text-dark);
+                position: relative;
+                padding-right: 20px;
+            }
+
+                .zoom-sessions li::before {
+                    content: '📹';
+                    position: absolute;
+                    right: 0;
+                    font-size: 14px;
+                }
+
+        .week-task {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(255,255,255,1));
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--text-dark);
+            border-right: 4px solid var(--green-primary);
+        }
+
+        .cta-program {
+            background: linear-gradient(135deg, #2E86DE 0%, #1e5aa8 100%);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            border-radius: 30px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .cta-program::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -20%;
+                width: 600px;
+                height: 600px;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                animation: float 20s ease-in-out infinite reverse;
+            }
+
+        .cta-program-title {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-program-text {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mobile Responsive */
+        @@media (max-width: 768px) {
+            .program-title {
+                font-size: 28px;
+            }
+
+            .course-details {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .program-timeline::before {
+                right: 20px;
+            }
+
+            .week-item {
+                width: 100%;
+                padding-right: 50px !important;
+                padding-left: 0 !important;
+            }
+
+                .week-item:nth-child(even) {
+                    right: 0;
+                    justify-content: flex-start;
+                }
+
+            .week-marker {
+                right: 10px !important;
+                left: auto !important;
+            }
+
+            .cta-program-title {
+                font-size: 24px;
+            }
+        }
+</style>
+}
+
+<!-- Header פשוט -->
+    
+
+    <!-- Program Hero Section -->
+    <section class="program-hero">
+        <div class="container">
+        <a asp-controller="Home" asp-action="Parents" asp-fragment="programs" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+                חזרה לעמוד הראשי
+            </a>
+
+            <h1 class="program-title">מה כוללת התוכנית?</h1>
+            <p class="program-subtitle">4 שבועות של למידה מהנה, קבוצות קטנות ותוצאות מדהימות</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container">
+        <!-- Course Details -->
+        <div class="course-details">
+            <div class="detail-card">
+                <div class="detail-icon">📅</div>
+                <div class="detail-title">משך הקורס</div>
+                <div class="detail-text">הקורס מתחיל ב-21/9 ונמשך 4 שבועות - בקצב נעים וממוקד</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-icon">🎥</div>
+                <div class="detail-title">3 מפגשי זום בשבוע</div>
+                <div class="detail-text">כל מפגש באורך שלושים דקות בלבד - מדויק ויעיל</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-icon">👥</div>
+                <div class="detail-title">עד 5 ילדים בקבוצה</div>
+                <div class="detail-text">כדי שכל ילד יקבל תשומת לב אמיתית</div>
+            </div>
+
+            <div class="detail-card">
+                <div class="detail-icon">🕐</div>
+                <div class="detail-title">3 קבוצות לבחירה</div>
+                <div class="detail-text">16:00 / 16:30 / 17:00</div>
+            </div>
+        </div>
+
+        <!-- Apps Section -->
+        <div class="apps-section">
+            <div class="container">
+                <h3 class="apps-title">אפליקציות ייחודיות</h3>
+                <p style="text-align: center; font-size: 18px; color: var(--text-gray); line-height: 1.8;">
+                    כלים דיגיטליים שהופכים למידה למשחק - אפליקציות מותאמות במיוחד לכל נושא שמאפשרות חוויית למידה אינטראקטיבית ומהנה
+                </p>
+            </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2 class="timeline-title">תוכנית הקורס - שבוע אחר שבוע</h2>
+            <p class="timeline-subtitle">מסע מובנה להצלחה במתמטיקה</p>
+
+            <div class="program-timeline">
+                <div class="week-item">
+                    <div class="week-marker">1</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-number">שבוע ראשון</div>
+                            <div class="week-title">משוואות - הבסיס לאלגברה</div>
+                        </div>
+                        <div class="week-apps">אפליקציות: משוואות</div>
+                        <ul class="zoom-sessions">
+                            <li>ביטוי אלגברי, משוואות מבוא</li>
+                            <li>משוואות העמקה</li>
+                            <li>כל תלמיד מקבל 100 במבחן במשוואות</li>
+                        </ul>
+                        <div class="week-task">
+                            משימות לשבוע הבא: 15 דקות באפליקציית שברים
+                        </div>
+                    </div>
+                </div>
+
+                <div class="week-item">
+                    <div class="week-marker">2</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-number">שבוע שני</div>
+                            <div class="week-title">שברים - הבנה עמוקה</div>
+                        </div>
+                        <div class="week-apps">אפליקציות: שברים</div>
+                        <ul class="zoom-sessions">
+                            <li>שברים בסיס</li>
+                            <li>הרחבת שבר</li>
+                            <li>הכפלת שברים והשלמות</li>
+                        </ul>
+                        <div class="week-task">
+                            משימה לסופ"ש: 15 דקות באפליקציית שבר עשרוני
+                        </div>
+                    </div>
+                </div>
+
+                <div class="week-item">
+                    <div class="week-marker">3</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-number">שבוע שלישי</div>
+                            <div class="week-title">נושאים מתקדמים</div>
+                        </div>
+                        <div class="week-apps">אפליקציות: שבר עשרוני, מספרים שליליים, גיאומטריה</div>
+                        <ul class="zoom-sessions">
+                            <li>שבר עשרוני</li>
+                            <li>מספרים שליליים</li>
+                            <li>גיאומטריה</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="week-item">
+                    <div class="week-marker">4</div>
+                    <div class="week-content">
+                        <div class="week-header">
+                            <div class="week-number">שבוע רביעי</div>
+                            <div class="week-title">חיזוק ושלמות</div>
+                        </div>
+                        <div class="week-apps">אפליקציות: שימוש חופשי בכל האפליקציות</div>
+                        <ul class="zoom-sessions">
+                            <li>שיעור דינמי לפי צורך הקבוצה</li>
+                            <li>שיעור דינמי לפי צורך הקבוצה</li>
+                            <li>שיעור דינמי לפי צורך הקבוצה</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta-program">
+            <h2 class="cta-program-title">מוכנים להתחיל?</h2>
+            <p class="cta-program-text">הצטרפו עכשיו ותנו לילד שלכם את הכלים להצליח בחטיבת ביניים</p>
+
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1;">
+                <a asp-controller="Home" asp-action="Parents" asp-fragment="pricing" class="btn-primary" style="border: 3px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">התחל עכשיו ב-₪89</a>
+                <a asp-controller="Schools" asp-action="Results" asp-route-grade="K7" class="btn-secondary" style="background: var(--white); color: #2E86DE;">ראה תוצאות מהירות</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+@section Scripts {
+<script>
+// Add animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            // אנימציה לכרטיסי הפרטים
+            document.querySelectorAll('.detail-card').forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'all 0.6s ease';
+                observer.observe(item);
+            });
+
+            // אנימציה לפריטי Timeline
+            document.querySelectorAll('.week-item').forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'all 0.6s ease';
+                observer.observe(item);
+            });
+        });
+</script>
+}

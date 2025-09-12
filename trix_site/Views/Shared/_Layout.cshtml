@@ -1,0 +1,44 @@
+@{
+    var title = ViewData["Title"] as string ?? "12trix";
+}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/trix.css" asp-append-version="true" />
+
+    @* GA4 (optional) *@
+    @* <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    </script> *@
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+   
+
+    <header class="site-header">
+        @await Html.PartialAsync("_Header")
+    </header>
+
+    <main id="main" class="site-main container">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        @await Html.PartialAsync("_Footer")
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+    @await Html.PartialAsync("_LeadModal")
+</body>
+</html>

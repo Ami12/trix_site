@@ -1,0 +1,77 @@
+@* Modal טופס לידים דינמי *@
+<div id="leadModalOverlay" class="lead-modal-overlay" aria-hidden="true">
+    <div id="leadModal" class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+        <button type="button" class="lead-close" aria-label="סגור" data-lead-close>×</button>
+
+        <h3 id="leadTitle" class="lead-title">יצירת קשר</h3>
+        <p id="leadIntro" class="lead-intro">נשמח לחזור אליכם עם פרטים.</p>
+
+        <!-- גוף הטופס (מוצג כברירת מחדל) -->
+        <div id="leadBody">
+            <form id="leadForm" method="post" asp-controller="Schools" asp-action="SubmitLead" novalidate>
+                @Html.AntiForgeryToken()
+
+                <!-- חבויים -->
+                <input type="hidden" name="cta_type" id="leadCtaType" />
+                <input type="hidden" name="section" id="leadSection" />
+                <input type="text" name="website" id="leadWebsite" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+                <div class="lead-grid">
+                    <label>
+                        שם מלא
+                        <input name="full_name" required />
+                        <small class="field-error" data-for="full_name"></small>
+                    </label>
+
+                    <label>
+                        תפקיד (רכז/ת, מנהלת, מחנך/ת)
+                        <input name="role" />
+                    </label>
+
+                    <label>
+                        שם בית ספר
+                        <input name="school_name" required />
+                        <small class="field-error" data-for="school_name"></small>
+                    </label>
+
+                    <label>
+                        דוא״ל
+                        <input name="email" type="email" required />
+                        <small class="field-error" data-for="email"></small>
+                    </label>
+
+                    <label>
+                        טלפון
+                        <input name="phone" type="tel" />
+                    </label>
+
+                    <label>
+                        הערות
+                        <textarea name="notes" rows="3"></textarea>
+                    </label>
+                </div>
+
+                <!-- תוספות דינמיות לפי CTA -->
+                <div id="leadExtras" class="lead-extras"></div>
+
+                <div class="lead-actions">
+                    <button type="submit" class="btn btn-primary">שליחה</button>
+                    <button type="button" class="btn btn-ghost" data-lead-close>ביטול</button>
+                </div>
+
+                <div id="leadMsg" class="lead-msg" role="status" aria-live="polite"></div>
+            </form>
+        </div>
+
+        <!-- הודעת תודה (מוסתרת עד אחרי שליחה מוצלחת) -->
+        <div id="leadThanks" class="lead-thanks" hidden>
+            <h3>תודה! קיבלנו את הפנייה</h3>
+            <p>נחזור אליכם בהקדם. אם זה דחוף — אפשר תמיד לפנות גם בווטסאפ.</p>
+            <div style="margin-top:16px">
+                <button type="button" class="btn btn-primary" data-lead-close>סגירת החלון</button>
+            </div>
+            <small id="leadAutoClose" class="auto-close-hint">החלון ייסגר אוטומטית בעוד 20 שניות…</small>
+        </div>
+    </div>
+</div>
+

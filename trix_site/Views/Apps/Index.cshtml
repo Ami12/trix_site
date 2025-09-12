@@ -1,0 +1,366 @@
+@model List<trix_site.Models.AppItem>
+
+@{
+    ViewData["Title"] = "אפליקציות שעושות קסמים – 12trix";
+}
+
+@section Styles {
+    <style>
+        :root {
+            --brand: #27AE60;
+            --ink: #111;
+            --muted: #666;
+            --line: #eee;
+            --card: #fff;
+            --bg: #fafafa;
+        }
+
+        body.apps {
+            background: var(--bg);
+        }
+
+        .apps-hero {
+            text-align: center;
+            padding: 32px 16px 8px;
+        }
+
+            .apps-hero h1 {
+                font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+                margin: 0 0 6px;
+            }
+
+            .apps-hero p {
+                color: var(--muted);
+                margin: 0 0 16px;
+            }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 16px;
+            max-width: 1200px;
+            margin: 0 auto 42px;
+        }
+
+        @@@@media (max-width: 980px) {
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @@@@media (max-width: 640px) {
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .app-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 6px 20px rgba(0,0,0,.06);
+        }
+
+        .app-media {
+            aspect-ratio: 16/9;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+            .app-media img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+        .app-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .app-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+            font-size: 1.15rem;
+        }
+
+        .badge-soon {
+            font-size: .75rem;
+            background: #222;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+
+        .app-sub {
+            color: var(--muted);
+            font-size: .95rem;
+            margin: 0;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+            color: #333;
+        }
+
+            .meta span {
+                background: #f7f7f7;
+                border: 1px solid #eee;
+                border-radius: 999px;
+                padding: 4px 10px;
+                font-size: .85rem;
+            }
+
+        .price {
+            margin-top: 4px;
+            font-size: .95rem;
+            color: #333;
+        }
+
+            .price .strike {
+                text-decoration: line-through;
+                color: #999;
+                margin-inline-start: 8px;
+            }
+
+        .app-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--ink);
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--brand);
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .btn-ghost {
+            background: #fff;
+        }
+
+        .btn:focus {
+            outline: 2px solid rgba(39,174,96,.35);
+            outline-offset: 2px;
+        }
+
+        /* Modal (apps) */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+            .modal-overlay.open {
+                display: flex;
+            }
+
+        .modal {
+            width: min(880px, 94vw);
+            max-height: 86vh;
+            overflow: auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.25);
+        }
+
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .modal-body {
+            padding: 18px;
+            line-height: 1.7;
+        }
+
+        .modal-close {
+            border: 0;
+            background: transparent;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 6px;
+        }
+    </style>
+}
+
+<div class="apps-hero">
+    <h1>אפליקציות שעושות "קסמים"</h1>
+    <p> לומדים מהתנסות ללא הסברים.</p>
+</div>
+
+<section class="apps-grid">
+    @foreach (var app in Model)
+    {
+        <article class="app-card" id="app-@app.Id">
+            <div class="app-media">
+                <img src="~/images/apps/@app.Image" alt="@app.Title" />
+            </div>
+            <div class="app-body">
+                <h3 class="app-title">
+                    @app.Title
+                    @if (app.Soon)
+                    {
+                        <span class="badge-soon">בקרוב</span>
+                    }
+                </h3>
+                @if (!string.IsNullOrWhiteSpace(app.Subtitle))
+                {
+                    <p class="app-sub">@app.Subtitle</p>
+                }
+
+                @if (app.Meta?.Any() == true)
+                {
+                    <div class="meta">
+                        @foreach (var m in app.Meta)
+                        {
+                            <span>@m</span>
+                        }
+                    </div>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(app.Price) || !string.IsNullOrWhiteSpace(app.PriceStrike))
+                {
+                    <div class="price">
+                        @if (!string.IsNullOrWhiteSpace(app.Price))
+                        {
+                            @app.Price
+                        }
+                        @if (!string.IsNullOrWhiteSpace(app.PriceStrike))
+                        {
+                            <span class="strike">@app.PriceStrike</span>
+                        }
+                    </div>
+                }
+
+                <div class="app-actions">
+                    @* כפתור לידים — מתחבר למודל הלידים הקיים דרך site.js *@
+                    @if (!app.Soon)
+                    {
+                        <button class="btn btn-primary cta-btn" data-cta="demo" data-section="@app.Id">בקשו הדגמה (5 דק׳)</button>
+                    }
+                    else
+                    {
+                        <button class="btn" disabled>בקרוב</button>
+                    }
+
+                    <button class="btn btn-ghost" data-details="@app.Id">הצג פרטים נוספים</button>
+                </div>
+            </div>
+        </article>
+    }
+</section>
+
+@* מודל “פרטים נוספים” *@
+<div id="appsModalOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="appsModalTitle">
+        <div class="modal-header">
+            <h3 id="appsModalTitle" class="modal-title">פרטים נוספים</h3>
+            <button class="modal-close" aria-label="סגור" data-close>×</button>
+        </div>
+        <div id="appsModalBody" class="modal-body"></div>
+    </div>
+</div>
+
+@* תבניות התוכן — נסתרות, נבנות מה-Model (DetailsHtml) *@
+<section hidden id="appsDetailsTemplates">
+    @foreach (var app in Model)
+    {
+        <article id="details-@app.Id">
+            @Html.Raw(app.DetailsHtml ?? "")
+        </article>
+    }
+</section>
+
+@section Scripts {
+    <script>
+        (function(){
+          const $  = (s, r=document)=>r.querySelector(s);
+          const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
+
+          // פותח מודל מתוך התבניות הנסתרות
+          document.addEventListener('click', (e)=>{
+            const trg = e.target.closest('[data-details]');
+            if (!trg) return;
+            e.preventDefault();
+
+            const id  = trg.getAttribute('data-details');
+            const tpl = document.getElementById('details-' + id);
+            if (!tpl) return;
+
+            const card = trg.closest('.app-card');
+            const title = card?.querySelector('.app-title')?.textContent?.replace('בקרוב','').trim() || 'פרטים נוספים';
+            document.getElementById('appsModalTitle').textContent = title;
+            document.getElementById('appsModalBody').innerHTML   = tpl.innerHTML;
+
+            const overlay = document.getElementById('appsModalOverlay');
+            overlay.classList.add('open');
+            overlay.setAttribute('aria-hidden','false');
+          });
+
+          // סגירת מודל
+          document.addEventListener('click', (e)=>{
+            if (e.target.matches('[data-close]') || e.target.id === 'appsModalOverlay'){
+              const overlay = document.getElementById('appsModalOverlay');
+              overlay.classList.remove('open');
+              overlay.setAttribute('aria-hidden','true');
+              document.getElementById('appsModalBody').innerHTML = '';
+            }
+          });
+
+          document.addEventListener('keydown', (e)=>{
+            if (e.key === 'Escape'){
+              const overlay = document.getElementById('appsModalOverlay');
+              overlay.classList.remove('open');
+              overlay.setAttribute('aria-hidden','true');
+              document.getElementById('appsModalBody').innerHTML = '';
+            }
+          });
+
+          // סימון body לעיצוב רק בעמוד האפליקציות (אופציונלי)
+          document.body.classList.add('apps');
+        })();
+    </script>
+}

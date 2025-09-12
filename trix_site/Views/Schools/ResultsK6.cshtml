@@ -1,0 +1,581 @@
+@{
+    ViewData["Title"] = "מה הילד שלך ידע תוך 7 ימים?";
+    Layout = "_Layout";
+}
+
+@section Styles {
+<style>
+/* עיצוב ייחודי לעמוד התוצאות */
+        .results-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            
+
+@await Html.PartialAsync("_ProgramResultSwitch")
+
+.results-hero::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+                background-size: 20px 20px;
+                animation: float 20s linear infinite;
+            }
+
+        @@keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-100px, -100px) rotate(360deg);
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+            .back-link:hover {
+                background: rgba(255,255,255,0.3);
+                transform: translateY(-2px);
+            }
+
+        .results-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .results-subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e8f5e9 100%);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .highlight-box::before {
+                content: '✓';
+                position: absolute;
+                top: -30px;
+                left: -30px;
+                font-size: 150px;
+                color: rgba(39, 174, 96, 0.1);
+                font-weight: bold;
+            }
+
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .exercise-item {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            direction: ltr;
+        }
+
+            .exercise-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                transition: all 0.3s ease;
+            }
+
+            .exercise-item.easy::before {
+                background: linear-gradient(90deg, #4ECDC4, #44A08D);
+            }
+
+            .exercise-item.medium::before {
+                background: linear-gradient(90deg, #FF6B6B, #FF8E88);
+            }
+
+            .exercise-item.hard::before {
+                background: linear-gradient(90deg, #667eea, #764ba2);
+            }
+
+            .exercise-item:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            }
+
+            .exercise-item.easy:hover {
+                border-color: #4ECDC4;
+                background: linear-gradient(135deg, rgba(78,205,196,0.1), rgba(255,255,255,1));
+            }
+
+            .exercise-item.medium:hover {
+                border-color: #FF6B6B;
+                background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,255,255,1));
+            }
+
+            .exercise-item.hard:hover {
+                border-color: #667eea;
+                background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(255,255,255,1));
+            }
+
+        .benefits-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .benefit-card::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 4px;
+                background: linear-gradient(90deg, var(--green-primary), var(--blue-accent));
+                transition: width 0.3s ease;
+            }
+
+            .benefit-card:hover::after {
+                width: 80%;
+            }
+
+            .benefit-card:hover {
+                transform: translateY(-10px);
+                box-shadow: var(--shadow-hover);
+            }
+
+        .benefit-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .benefit-text {
+            color: var(--text-gray);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .journey-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+            padding: 80px 0;
+            margin: 80px 0;
+        }
+
+        .journey-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 60px;
+        }
+
+        .journey-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+            .journey-timeline::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 50%;
+                width: 3px;
+                height: 100%;
+                background: linear-gradient(180deg, var(--green-primary), #4ECDC4);
+            }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 50%;
+            display: flex;
+            align-items: center;
+        }
+
+            .timeline-item:nth-child(odd) {
+                right: 0;
+                justify-content: flex-start;
+                padding-left: 40px;
+            }
+
+            .timeline-item:nth-child(even) {
+                right: 50%;
+                justify-content: flex-end;
+                padding-right: 40px;
+            }
+
+        .timeline-marker {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--green-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            left: -25px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            right: -25px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+            .timeline-content:hover {
+                transform: scale(1.02);
+                box-shadow: var(--shadow-hover);
+            }
+
+        .timeline-day {
+            color: var(--green-primary);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .timeline-description {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            border-radius: 30px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .cta-section::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -20%;
+                width: 600px;
+                height: 600px;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                animation: float 25s ease-in-out infinite reverse;
+            }
+
+        .cta-title {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-text {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mobile Responsive */
+        @@media (max-width: 768px) {
+            .results-title {
+                font-size: 32px;
+            }
+
+            .exercises-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-row {
+                grid-template-columns: 1fr;
+            }
+
+            .journey-timeline::before {
+                right: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-right: 50px !important;
+                padding-left: 0 !important;
+            }
+
+                .timeline-item:nth-child(even) {
+                    right: 0;
+                    justify-content: flex-start;
+                }
+
+            .timeline-marker {
+                right: 10px !important;
+                left: auto !important;
+            }
+
+            .cta-title {
+                font-size: 28px;
+            }
+        }
+</style>
+}
+
+<!-- Header פשוט -->
+    
+
+    <!-- Results Hero Section -->
+    <section class="results-hero">
+        <div class="container">
+        <a asp-controller="Home" asp-action="Parents" asp-fragment="programs" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+                חזרה לעמוד הראשי
+            </a>
+
+            <h1 class="results-title">מה הילד שלך ידע תוך 7 ימים?</h1>
+            <p class="results-subtitle">התוצאות שיגרמו לך להתרגש כבר בסוף השבוע</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="container">
+        <!-- Highlight Box -->
+        <div class="highlight-box">
+            <h2 style="font-size: 32px; font-weight: 800; color: var(--text-dark); margin-bottom: 24px; text-align: center;">
+                התקדמות מטורפת בזמן קצר
+            </h2>
+            <p style="font-size: 20px; color: var(--text-gray); text-align: center; margin-bottom: 8px;">
+                בואי נדבר במספרים
+            </p>
+            <p style="font-size: 18px; color: var(--text-dark); text-align: center;">
+
+                אחרי 3 מפגשים של חצי שעה, הילד שלך ישלוט בשבר עשרוני
+            </p>
+        </div>
+
+        <!-- Exercises Section -->
+        <div style="background: var(--white); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-card); margin: 40px 0;">
+            <h3 style="font-size: 28px; font-weight: 800; text-align: center; margin-bottom: 32px; color: var(--text-dark);">
+                10 תרגילים שהילד שלך יפתור בקלות
+            </h3>
+            <p style="text-align: center; font-size: 18px; color: var(--green-primary); font-weight: 700; margin-bottom: 32px;">
+                כן, כבר בסוף השבוע הראשון!
+            </p>
+
+            <div class="exercises-grid">
+                <!-- משוואות קלות -->
+                <div class="exercise-item easy"> 27.38 + 67.49 =</div>
+                <div class="exercise-item easy"> 27.21 - 17.49 =</div>
+                <div class="exercise-item easy"> 3.82 x 44 =</div>
+
+                <!-- משוואות בינוניות -->
+                <div class="exercise-item medium">  348,485 : 5 =</div>
+                <div class="exercise-item medium">14,938 : 7 =</div>
+                <div class="exercise-item medium"> 13.2 : 4 =</div>
+
+                <!-- משוואות קשות -->
+                <div class="exercise-item hard">14/3 =</div>
+                <div class="exercise-item hard"> ½ → 0.5</div>
+                <div class="exercise-item hard">¼ → 0.25</div>
+                <div class="exercise-item hard">0.25 x 11 =</div>
+            </div>
+        </div>
+
+        <!-- Benefits Row -->
+        <div class="benefits-row">
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h4 class="benefit-title">מהירות מדהימה</h4>
+                <p class="benefit-text">3 מפגשים בלבד להבנה מלאה של שברים עשרוניים</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💪</div>
+                <h4 class="benefit-title">ביטחון עצמי</h4>
+                <p class="benefit-text">הילד ירגיש שהוא מסוגל והמתמטיקה לא מפחידה</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h4 class="benefit-title">מוכן לחטיבה</h4>
+                <p class="benefit-text">בסיס חזק שיעזור לו להצליח בהמשך</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section class="journey-section">
+        <div class="container">
+            <h2 class="journey-title">המסע של שלושת המפגשים הראשונים</h2>
+
+            <div class="journey-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-day">יום ראשון</h4>
+                        <p class="timeline-description">הבנה של שבר עשרוני - המקומות משמאל לנקודה</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-day">יום שני</h4>
+                        <p class="timeline-description">כפל - חילוק - המבנה העשרוני. המפתח לחידה</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4 class="timeline-day">יום שלישי</h4>
+                        <p class="timeline-description">תרגול והצלחה - פותרים בביטחון, הפחד נעלם, השמחה מתחילה!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta-section">
+            <h2 class="cta-title">רוצה לראות את הילד שלך מצליח כבר השבוע?</h2>
+            <p class="cta-text">הצטרפו עכשיו ותראו את השינוי בעיניים שלכם</p>
+
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1;">
+                <a asp-controller="Home" asp-action="Parents" asp-fragment="pricing" class="btn-primary" style="border: 3px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">התחל עכשיו ב-₪89</a>
+                <a asp-controller="Schools" asp-action="Programs" asp-route-grade="K6" class="btn-secondary" style="background: var(--white); color: #2E86DE;">ראה תוכנית מלאה</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+@section Scripts {
+<script>
+// Add animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            // הוסף אנימציה למשוואות
+            document.querySelectorAll('.exercise-item').forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'all 0.6s ease';
+                observer.observe(item);
+            });
+
+            // הוסף אנימציה לכרטיסי היתרונות
+            document.querySelectorAll('.benefit-card, .timeline-item').forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'all 0.6s ease';
+                observer.observe(item);
+            });
+        });
+</script>
+}
