@@ -50,19 +50,24 @@
   }
 
   // ===== FAQ (accordion) =====
-  function initFAQ() {
-    $$('[data-accordion], .faq-list').forEach(list => {
-      on('click', '.faq-q', (e, q) => {
-        const item = q.closest('.faq-item') || q.parentElement;
-        const a = item.querySelector('.faq-a');
-        const expanded = item.classList.toggle('open');
-        if (a) a.style.maxHeight = expanded ? (a.scrollHeight + 'px') : '0px';
-        // collapse siblings (single-open)
-        $$('.faq-item.open', list).forEach(el => { if (el!==item){ el.classList.remove('open'); const aa = el.querySelector('.faq-a'); if (aa) aa.style.maxHeight='0px'; }});
-        track('faq_toggle', {question: q.textContent?.trim() || ''});
-      }, list);
-    });
-  }
+    function initFAQ() {
+        $$('[data-accordion], .faq-list').forEach(list => {
+            on('click', '.faq-q', (e, q) => {
+                const item = q.closest('.faq-item') || q.parentElement;
+                const a = item.querySelector('.faq-a');
+                const expanded = item.classList.toggle('open');
+                item.classList.toggle('active', expanded);
+                if (a) a.style.maxHeight = expanded ? (a.scrollHeight + 'px') : '0px';
+                // collapse siblings (single-open)
+                $$('.faq-item.open', list).forEach(el => {
+                    if (el !== item) {
+                        el.classList.remove('open', 'active'); const aa = el.querySelector('.faq-a'); if (aa) aa.style.maxHeight = '0px';
+                    }
+                });
+                track('faq_toggle', { question: q.textContent?.trim() || '' });
+            }, list);
+        });
+    }
 
   // ===== Carousel (basic) =====
   function initCarousel() {
@@ -118,19 +123,32 @@
   }
 
   // ===== In-View Animations =====
-  function initInViewAnimations() {
-    const targets = $$('.target-card, .feature-card, .testimonial-card, .animate-on-scroll, .way-card, .process-step, [data-animate]');
-    if (!('IntersectionObserver' in window) || targets.length === 0) return;
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(en=>{
-        if (en.isIntersecting) {
-          en.target.classList.add('in-view');
-          io.unobserve(en.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
-    targets.forEach(t=> io.observe(t));
-  }
+    function initInViewAnimations() {
+        const targets = $$('.target-card, .feature-card, .testimonial-card, .animate-on-scroll, .way-card, .process-step, [data-animate]');
+        if (!('IntersectionObserver' in window) || targets.length === 0) return;
+
+        let i = 0;
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(en => {
+                if (!en.isIntersecting) return;
+                const el = en.target;
+
+                // סטאגר קל (100ms) לקלפים מסומנים; אפשר לשלוט ידנית עם data-delay="200"
+                const baseDelay = (el.classList.contains('animate-on-scroll') || el.classList.contains('way-card') || el.classList.contains('process-step')) ? (i++ * 100) : 0;
+                const extra = parseInt(el.getAttribute('data-delay') || '0', 10);
+                const delay = baseDelay + (isNaN(extra) ? 0 : extra);
+
+                setTimeout(() => {
+                    el.classList.add('in-view');   // המחלקה שהאתר שלך משתמש בה
+                    el.classList.add('visible');   // תאימות לקוד/‏CSS ישן מ-schools.js
+                    io.unobserve(el);
+                }, delay);
+            });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+        targets.forEach(t => io.observe(t));
+    }
+
 
   // ===== Lazy Images (data-src -> src) =====
   function initLazyImages() {
@@ -248,26 +266,73 @@
     }
 
     // ולידציה: שדות חובה + אימייל בסיסי
+    //function validateLeadForm(form) {
+    //    let ok = true;
+    //    const setErr = (name, text) => {
+    //        ok = false;
+    //        const input = form.querySelector(`[name="${name}"]`);
+    //        const err = form.querySelector(`.field-error[data-for="${name}"]`);
+    //        if (input) input.classList.add('input-error');
+    //        if (err) err.textContent = text || 'שדה חובה';
+    //    };
+
+    //    let required = ['full_name', 'school_name', 'email'];
+    //    if (contact)
+    //        required = ['full_name', 'Notes', 'email'];
+    //    required.forEach(n => {
+    //        const v = (form.querySelector(`[name="${n}"]`)?.value || '').trim();
+    //        if (!v) setErr(n);
+    //    });
+
+    //    const email = (form.querySelector('[name="email"]')?.value || '').trim();
+    //    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    //        setErr('email', 'כתובת דוא״ל לא תקינה');
+    //    }
+    //    return ok;
+    //}
+
     function validateLeadForm(form) {
+        // נקה שגיאות קודמות
+        form?.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+        form?.querySelectorAll('.field-error').forEach(el => (el.textContent = ''));
+
         let ok = true;
-        const setErr = (name, text) => {
+
+        // עוזרים: איתור שדה/ערך בלי תלות בקייס
+        const getEl = (n) => form.elements[n] || form.elements[n?.toLowerCase?.()] || form.elements[n?.toUpperCase?.()];
+        const getVal = (n) => ((getEl(n)?.value) || '').trim();
+        const setErr = (names, text) => {
             ok = false;
-            const input = form.querySelector(`[name="${name}"]`);
-            const err = form.querySelector(`.field-error[data-for="${name}"]`);
-            if (input) input.classList.add('input-error');
+            const el = Array.isArray(names) ? (getEl(names[0]) || getEl(names[1])) : getEl(names);
+            if (el) el.classList.add('input-error');
+            const sel = Array.isArray(names)
+                ? `.field-error[data-for="${names[0]}"], .field-error[data-for="${names[1]}"]`
+                : `.field-error[data-for="${names}"]`;
+            const err = form.querySelector(sel);
             if (err) err.textContent = text || 'שדה חובה';
         };
 
-        const required = ['full_name', 'school_name', 'email'];
-        required.forEach(n => {
-            const v = (form.querySelector(`[name="${n}"]`)?.value || '').trim();
-            if (!v) setErr(n);
+        // האם זה טופס "צור קשר"?
+        const ctaType = getVal('Cta_Type') || getVal('cta_type');
+        const section = getVal('Section') || getVal('section');
+        const isContact = /^contact/i.test(ctaType) || /^contact-/i.test(section);
+
+        // שדות חובה
+        const required = isContact
+            ? [['Full_Name', 'full_name'], ['Email', 'email'], ['Notes', 'notes']]          // צור קשר
+            : [['Full_Name', 'full_name'], ['School_Name', 'school_name'], ['Email', 'email']]; // שאר ה-CTA
+
+        required.forEach(([A, B]) => {
+            const v = getVal(A) || getVal(B);
+            if (!v) setErr([A, B]);
         });
 
-        const email = (form.querySelector('[name="email"]')?.value || '').trim();
+        // אימות אימייל
+        const email = getVal('Email') || getVal('email');
         if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            setErr('email', 'כתובת דוא״ל לא תקינה');
+            setErr(['Email', 'email'], 'כתובת דוא״ל לא תקינה');
         }
+
         return ok;
     }
 
@@ -347,7 +412,6 @@
             const type = btn.dataset.cta;
             const section = btn.dataset.section || '';
 
-            if (type === 'challenge') return; // מעבר ישיר
             if (btn.tagName === 'A') e.preventDefault();
 
             // mailto? אפשר גם לפתוח מודל (fallback)

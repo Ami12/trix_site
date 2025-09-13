@@ -33,7 +33,6 @@ namespace trix_site.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(new { ok = false, errors = ModelState });
 
-            // מעט נתוני הקשר
             var ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "";
             var ua = Request.Headers["User-Agent"].ToString() ?? "";
             var url = $"{Request.Scheme}://{Request.Host}{Request.PathBase}{Request.Path}";
@@ -41,31 +40,26 @@ namespace trix_site.Controllers
 
             try
             {
-                // 1) שמירה לקובץ CSV (לוג לידים)
                 await SaveLeadToCsvAsync(dto, when, ip, ua);
 
-                // 2) שליחת מייל התראה (יקרה רק אם הוגדר SMTP בקובץ ההגדרות)
                 await TrySendLeadEmailAsync(dto, when, ip, ua, url);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "SubmitLead: failed to persist/notify");
-                // נחזיר 500 ב-AJAX ונדפיס הודעה כללית
                 var isAjaxErr = string.Equals(Request.Headers["X-Requested-With"], "XMLHttpRequest",
                                               StringComparison.OrdinalIgnoreCase);
                 if (isAjaxErr)
                     return StatusCode(500, new { ok = false, error = "internal_error" });
-                // ללא JS – אפשר להפנות לעמוד תודה בכל מקרה או להציג עמוד שגיאה. נשמור על חוויה טובה:
+
                 return View("Thanks");
             }
 
-            // AJAX? מחזירים JSON
             var isAjax = string.Equals(Request.Headers["X-Requested-With"], "XMLHttpRequest",
                                        StringComparison.OrdinalIgnoreCase);
             if (isAjax)
                 return Json(new { ok = true });
 
-            // ללא JS – עמוד תודה מלא
             return View("Thanks");
         }
 

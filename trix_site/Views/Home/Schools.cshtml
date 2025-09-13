@@ -437,6 +437,7 @@
             font-size: 15px;
         }
 
+
         .faq-section {
             padding: 80px 0;
         }
@@ -449,21 +450,25 @@
             margin-bottom: 60px;
         }
 
-        .faq-container {
+        /* מיכל השאלות */
+        .faq-list {
             max-width: 800px;
             margin: 0 auto;
         }
 
+        /* כרטיס שאלה-תשובה */
         .faq-item {
-            background: white;
+            background: #fff;
             border-radius: 16px;
             margin-bottom: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            transition: box-shadow .3s ease, transform .3s ease;
             overflow: hidden;
         }
 
-        .faq-question {
+        /* הכותרת – עכשיו button.faq-q */
+        .faq-q {
+            width: 100%;
             padding: 24px;
             cursor: pointer;
             font-size: 18px;
@@ -472,41 +477,60 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            background: transparent;
+            border: 0;
+            text-align: start; /* RTL/‏LTR ידידותי */
+            outline: none;
+            transition: background .3s ease;
         }
 
-            .faq-question:hover {
+            .faq-q:hover {
                 background: var(--bg-light);
             }
 
-            .faq-question::after {
+            /* פלוס בקצה הימני/שמאלי */
+            .faq-q::after {
                 content: '+';
                 font-size: 24px;
                 font-weight: 300;
                 color: var(--green-primary);
-                transition: transform 0.3s ease;
+                transition: transform .3s ease;
             }
 
-        .faq-item.active .faq-question::after {
+        /* מצב פתוח – שים לב לשינוי מ-active ל-open */
+        .faq-item.open .faq-q::after {
             transform: rotate(45deg);
         }
 
-        .faq-answer {
+        /* התשובה – .faq-a */
+        .faq-a {
             padding: 0 24px;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: max-height .35s ease, padding .25s ease, opacity .25s ease;
+            opacity: 0;
         }
 
-        .faq-item.active .faq-answer {
+        /* פתוח: ה־JS קובע max-height בפועל; כאן Fallback ללא JS */
+        .faq-item.open .faq-a {
             padding: 0 24px 24px;
-            max-height: 200px;
+            max-height: 999px; /* Fallback אם JS לא מאתחל גובה */
+            opacity: 1;
         }
 
-        .faq-answer p {
+        .faq-a p {
             color: var(--text-gray);
             line-height: 1.8;
         }
+
+        /* פוקוס נגיש על הכותרת */
+        .faq-q:focus-visible {
+            box-shadow: 0 0 0 3px rgba(39,174,96,.25) inset;
+            border-radius: 12px;
+        }
+
+
+
 
         .final-cta-schools {
             background: linear-gradient(135deg, #2E86DE 0%, var(--green-primary) 100%);
@@ -751,48 +775,50 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="faq-title animate-on-scroll">שאלות נפוצות</h2>
+<section class="faq-section">
+    <div class="container">
+        <h2 class="faq-title animate-on-scroll">שאלות נפוצות</h2>
 
-            <div class="faq-container">
-                <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">איך מזמינים בגפ"ן?</div>
-                    <div class="faq-answer">
-                        <p>שבוע-נושא ואתגר לוח הכפל - קוד תוכנית בגפ"ן 35235. First-Apps - דרך ממשקאפ בתיאום איתנו.</p>
-                    </div>
+        <!-- שים לב: faq-list + data-accordion -->
+        <div class="faq-list" data-accordion>
+            <div class="faq-item animate-on-scroll">
+                <button type="button" class="faq-q">איך מזמינים בגפ"ן?</button>
+                <div class="faq-a" style="max-height:0">
+                    <p>שבוע-נושא ואתגר לוח הכפל - קוד תוכנית בגפ"ן 35235. First-Apps - דרך ממשקאפ בתיאום איתנו.</p>
                 </div>
+            </div>
 
-                <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">כמה תלמידים בקבוצה בשבוע-נושא?</div>
-                    <div class="faq-answer">
-                        <p>עד 7 תלמידים. מומלץ 2-4 קבוצות לפי שכבה/רמה.</p>
-                    </div>
+            <div class="faq-item animate-on-scroll">
+                <button type="button" class="faq-q">כמה תלמידים בקבוצה בשבוע-נושא?</button>
+                <div class="faq-a" style="max-height:0">
+                    <p>עד 7 תלמידים. מומלץ 2-4 קבוצות לפי שכבה/רמה.</p>
                 </div>
+            </div>
 
-                <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">מה נדרש טכנית?</div>
-                    <div class="faq-answer">
-                        <p>כרום מעודכן, אינטרנט יציב, מקרן/מסך בכיתה ומכשירי תלמידים לפי צורך.</p>
-                    </div>
+            <div class="faq-item animate-on-scroll">
+                <button type="button" class="faq-q">מה נדרש טכנית?</button>
+                <div class="faq-a" style="max-height:0">
+                    <p>כרום מעודכן, אינטרנט יציב, מקרן/מסך בכיתה ומכשירי תלמידים לפי צורך.</p>
                 </div>
+            </div>
 
-                <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">יש תמיכה בערבית?</div>
-                    <div class="faq-answer">
-                        <p>ברוב האפליקציות - כן. נעדכן לפי נושא ושכבה.</p>
-                    </div>
+            <div class="faq-item animate-on-scroll">
+                <button type="button" class="faq-q">יש תמיכה בערבית?</button>
+                <div class="faq-a" style="max-height:0">
+                    <p>ברוב האפליקציות - כן. נעדכן לפי נושא ושכבה.</p>
                 </div>
+            </div>
 
-                <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">מה הקריטריון להצלחה?</div>
-                    <div class="faq-answer">
-                        <p>שיפור של +85 ל-80% מהתלמידים שנכללו במדידה (נכחו לפחות בשני מפגשים).</p>
-                    </div>
+            <div class="faq-item animate-on-scroll">
+                <button type="button" class="faq-q">מה הקריטריון להצלחה?</button>
+                <div class="faq-a" style="max-height:0">
+                    <p>שיפור של +85 ל-80% מהתלמידים שנכללו במדידה (נכחו לפחות בשני מפגשים).</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Final CTA -->
     <section class="final-cta-schools">
@@ -812,6 +838,6 @@
 
 
 @section Scripts {
-    <script src="~/js/schools.js" asp-append-version="true"></script>
+  
 }
 

@@ -8,15 +8,12 @@ namespace trix_site.Models
         public string? Cta_Type { get; set; }
         public string? Section { get; set; }
 
-        // בסיס
-        [Required, MaxLength(120)]
         public string Full_Name { get; set; } = "";
 
         [MaxLength(120)]
         public string? Role { get; set; }
 
-        [Required, MaxLength(180)]
-        public string School_Name { get; set; } = "";
+        public string? School_Name { get; set; }
 
         [EmailAddress, MaxLength(180)]
         public string? Email { get; set; }
