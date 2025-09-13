@@ -3,685 +3,158 @@
 }
 
 
-@section Styles {
-<style>
-/* עיצוב ייחודי לעמוד בתי הספר */
-        .schools-hero {
-            background: linear-gradient(135deg, #27AE60 0%, #2E86DE 100%);
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-            .schools-hero::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle, rgba(255,255,255,0.1) 8%, transparent 8%);
-                background-size: 40px 40px;
-                animation: floatPattern 30s linear infinite;
-            }
-
-        @@keyframes floatPattern {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            100% {
-                transform: translate(-80px, -80px) rotate(180deg);
-            }
-        }
-
-        .schools-title {
-            font-size: 48px;
-            font-weight: 900;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: slideInDown 0.8s ease-out;
-        }
-
-        @@keyframes slideInDown {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .schools-subtitle {
-            font-size: 20px;
-            opacity: 0.95;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-            animation: slideInUp 0.8s ease-out 0.2s both;
-        }
-
-        @@keyframes slideInUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .trust-strip {
-            background: linear-gradient(90deg, var(--green-primary), #4ECDC4);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-            .trust-strip::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-                animation: shimmer 3s infinite;
-            }
-
-        @@keyframes shimmer {
-            0% {
-                left: -100%;
-            }
-
-            100% {
-                left: 100%;
-            }
-        }
-
-        .trust-items {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            animation: fadeInScale 0.6s ease-out;
-        }
-
-        @@keyframes fadeInScale {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .implementation-ways {
-            padding: 80px 0;
-        }
-
-        .ways-title {
-            text-align: center;
-            font-size: 40px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 60px;
-        }
-
-        .ways-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .way-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: var(--shadow-card);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            transform: translateY(20px);
-            opacity: 0;
-        }
-
-            .way-card.visible {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            .way-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 4px;
-                transition: all 0.3s ease;
-            }
-
-            .way-card.sprint::before {
-                background: linear-gradient(90deg, var(--green-primary), #4ECDC4);
-            }
-
-            .way-card.apps::before {
-                background: linear-gradient(90deg, #2E86DE, #4A90E2);
-            }
-
-            .way-card.challenge::before {
-                background: linear-gradient(90deg, #FF6B6B, #FF8E88);
-            }
-
-            .way-card:hover {
-                transform: translateY(-10px) scale(1.02);
-                box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            }
-
-                .way-card:hover::before {
-                    height: 8px;
-                }
-
-        .way-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: white;
-            margin-bottom: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .way-card.sprint .way-icon {
-            background: linear-gradient(135deg, var(--green-primary), #4ECDC4);
-        }
-
-        .way-card.apps .way-icon {
-            background: linear-gradient(135deg, #2E86DE, #4A90E2);
-        }
-
-        .way-card.challenge .way-icon {
-            background: linear-gradient(135deg, #FF6B6B, #FF8E88);
-        }
-
-        .way-card:hover .way-icon {
-            transform: rotate(360deg) scale(1.1);
-        }
-
-        .way-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-        }
-
-        .way-description {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin-bottom: 24px;
-            font-size: 16px;
-        }
-
-        .way-features {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-            .way-features li {
-                padding: 8px 0;
-                color: var(--text-dark);
-                position: relative;
-                padding-right: 24px;
-                font-size: 15px;
-            }
-
-                .way-features li::before {
-                    content: '✓';
-                    position: absolute;
-                    right: 0;
-                    color: var(--green-primary);
-                    font-weight: bold;
-                    font-size: 18px;
-                }
-
-        .way-cta {
-            background: linear-gradient(135deg, var(--green-primary), #4ECDC4);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-            .way-cta::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 0;
-                height: 0;
-                background: rgba(255,255,255,0.3);
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
-                transition: all 0.6s ease;
-            }
-
-            .way-cta:hover::before {
-                width: 300px;
-                height: 300px;
-            }
-
-            .way-cta:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
-            }
-
-        .process-section {
-            background: linear-gradient(135deg, var(--bg-light) 0%, #e8f5e9 100%);
-            padding: 80px 0;
-            margin: 80px 0;
-        }
-
-        .process-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 60px;
-        }
-
-        .process-timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-            .process-timeline::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 50%;
-                width: 4px;
-                height: 100%;
-                background: linear-gradient(180deg, var(--green-primary), #2E86DE);
-                transform: translateX(50%);
-            }
-
-        .process-step {
-            position: relative;
-            margin-bottom: 50px;
-            width: 50%;
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all 0.6s ease;
-        }
-
-            .process-step.visible {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            .process-step:nth-child(odd) {
-                right: 0;
-                padding-left: 50px;
-            }
-
-            .process-step:nth-child(even) {
-                right: 50%;
-                padding-right: 50px;
-                text-align: left;
-                transform: translateX(-30px);
-            }
-
-            .process-step.visible:nth-child(even) {
-                transform: translateX(0);
-            }
-
-        .process-marker {
-            position: absolute;
-            top: 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 700;
-            color: white;
-            border: 4px solid white;
-            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .process-step:nth-child(1) .process-marker {
-            background: var(--green-primary);
-            left: -25px;
-        }
-
-        .process-step:nth-child(2) .process-marker {
-            background: #2E86DE;
-            right: -25px;
-        }
-
-        .process-step:nth-child(3) .process-marker {
-            background: #FF6B6B;
-            left: -25px;
-        }
-
-        .process-step:nth-child(4) .process-marker {
-            background: #F39C12;
-            right: -25px;
-        }
-
-        .process-step:nth-child(5) .process-marker {
-            background: #9B59B6;
-            left: -25px;
-        }
-
-        .process-content {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-card);
-            transition: all 0.3s ease;
-        }
-
-            .process-content:hover {
-                transform: scale(1.02);
-                box-shadow: var(--shadow-hover);
-            }
-
-        .process-step-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .process-step-desc {
-            color: var(--text-gray);
-            font-size: 15px;
-        }
-
-
-        .faq-section {
-            padding: 80px 0;
-        }
-
-        .faq-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 60px;
-        }
-
-        /* מיכל השאלות */
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* כרטיס שאלה-תשובה */
-        .faq-item {
-            background: #fff;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: box-shadow .3s ease, transform .3s ease;
-            overflow: hidden;
-        }
-
-        /* הכותרת – עכשיו button.faq-q */
-        .faq-q {
-            width: 100%;
-            padding: 24px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-dark);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent;
-            border: 0;
-            text-align: start; /* RTL/‏LTR ידידותי */
-            outline: none;
-            transition: background .3s ease;
-        }
-
-            .faq-q:hover {
-                background: var(--bg-light);
-            }
-
-            /* פלוס בקצה הימני/שמאלי */
-            .faq-q::after {
-                content: '+';
-                font-size: 24px;
-                font-weight: 300;
-                color: var(--green-primary);
-                transition: transform .3s ease;
-            }
-
-        /* מצב פתוח – שים לב לשינוי מ-active ל-open */
-        .faq-item.open .faq-q::after {
-            transform: rotate(45deg);
-        }
-
-        /* התשובה – .faq-a */
-        .faq-a {
-            padding: 0 24px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height .35s ease, padding .25s ease, opacity .25s ease;
-            opacity: 0;
-        }
-
-        /* פתוח: ה־JS קובע max-height בפועל; כאן Fallback ללא JS */
-        .faq-item.open .faq-a {
-            padding: 0 24px 24px;
-            max-height: 999px; /* Fallback אם JS לא מאתחל גובה */
-            opacity: 1;
-        }
-
-        .faq-a p {
-            color: var(--text-gray);
-            line-height: 1.8;
-        }
-
-        /* פוקוס נגיש על הכותרת */
-        .faq-q:focus-visible {
-            box-shadow: 0 0 0 3px rgba(39,174,96,.25) inset;
-            border-radius: 12px;
-        }
-
-
-
-
-        .final-cta-schools {
-            background: linear-gradient(135deg, #2E86DE 0%, var(--green-primary) 100%);
-            padding: 80px 0;
-            text-align: center;
-            color: white;
-            border-radius: 30px;
-            margin: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-            .final-cta-schools::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                right: -20%;
-                width: 600px;
-                height: 600px;
-                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-                animation: floatPattern 20s ease-in-out infinite reverse;
-            }
-
-        .final-cta-title {
-            font-size: 36px;
-            font-weight: 900;
-            margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .final-cta-text {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Mobile Responsive */
-        @@media (max-width: 768px) {
-            .schools-title {
-                font-size: 32px;
-            }
-
-            .ways-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .trust-items {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .process-timeline::before {
-                right: 20px;
-                transform: none;
-            }
-
-            .process-step {
-                width: 100%;
-                padding-right: 50px !important;
-                padding-left: 0 !important;
-                text-align: right !important;
-            }
-
-                .process-step:nth-child(even) {
-                    right: 0;
-                }
-
-            .process-marker {
-                right: 10px !important;
-                left: auto !important;
-            }
-
-            .final-cta-title {
-                font-size: 24px;
-            }
-        }
-
-        /* Scroll-triggered animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-            .animate-on-scroll.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-</style>
-}
-
-<!-- Header -->
-<!-- פולד חדש לבתי-ספר (מדויק לעובדות) -->
 <section id="schools-hero" class="hero" dir="rtl" lang="he">
     <div class="container">
-        <h1>קפיצה מדידה בהישגי מתמטיקה — במסגרת גפ"ן</h1>
+        <h1>קפיצה מדידה בהישגי מתמטיקה — בלי להכביד על הצוות</h1>
         <p class="subtitle">
-            תרגול מונחה באפליקציות 12trix בלבד, בקבוצות קטנות, עם מדידה לפני/אחרי — בלי להכביד על הצוות. אפשרות להפעלה סדירה <strong>אחת לשבוע</strong>.
+            למידה מונחית ע"י <strong>המדריך/ה שלנו</strong> באפליקציות 12trix בלבד, <strong>בקבוצות קטנות</strong>, עם מדידה לפני/אחרי ו<strong>התחייבות לתוצאות</strong>. אפשרות הפעלה <strong>אחת לשבוע</strong>.
         </p>
 
-        <!-- Trust Bar -->
+        <!-- Trust bar -->
         <div class="code-strip">
             <p>
                 <strong>קוד גפ"ן: 35235</strong> •
                 <strong>תשלום מותנה בתוצאות</strong> •
-                <strong>הוכחת התכנות: פיילוט כיתות א׳–ג׳ — מ-16 ל-91 ב-6 שבועות</strong>
+                <strong>הוכחת התכנות: פיילוט כיתות א׳–ג׳ — 16 → 91 בתוך 6 שבועות</strong>
             </p>
         </div>
-
-        <div class="cta-container">
-            <a class="btn-primary" href="#book-demo" aria-label="קבעו הדגמה קצרה">קבעו הדגמה של 5 דקות</a>
-            <a class="btn-secondary" href="#request-quote" aria-label="בקשת הצעת מחיר">בקשת הצעת מחיר</a>
-        </div>
+        <!-- שים לב: כאן אין CTA לפי ההנחיה -->
     </div>
 </section>
 
-<section id="how-it-works" class="features" dir="rtl" lang="he">
+<section id="week-topic" class="features" dir="rtl" lang="he">
     <div class="container">
-        <h3 class="features-title">איך זה עובד — 3 צעדים פשוטים</h3>
+        <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
+            <h3 class="features-title" style="margin:0">שבוע נושא — ספרינט מדוד סביב יעד אחד</h3>
+            <a href="#" class="link" data-cta="program-details" data-program="week-topic">לפרטים</a>
+        </div>
+
         <div class="features-grid">
             <div class="feature-card">
-                <h4>1) שיחת התאמה קצרה</h4>
-                <p>מגדירים יעד פדגוגי ומסכימים על מתכונת הפעלה (למשל <strong>אחת לשבוע</strong>), לפי שעות ובחירה של בית-הספר.</p>
+                <h4>פוקוס חד-נושאי</h4>
+                <p>מגדירים יעד (למשל כפל/יסודות/שברים) ומקדישים שבוע מרוכז של תרגול מונחה באפליקציות 12trix בלבד.</p>
             </div>
             <div class="feature-card">
-                <h4>2) הפעלה בקבוצות קטנות</h4>
-                <p>למידה באפליקציות 12trix בלבד, בקבוצות קטנות — מינימום עומס על צוות בית-הספר.</p>
+                <h4>קבוצות קטנות והנחיה</h4>
+                <p>למידה מונחית ע"י המדריך/ה שלנו בקבוצות קטנות — מינימום עומס על הצוות.</p>
             </div>
             <div class="feature-card">
-                <h4>3) מדידה לפני/אחרי</h4>
-                <p>משימות פתיחה/סיום קצרות באפליקציות מאפשרות לראות שיפור מדיד בתוך שבועות.</p>
+                <h4>מדידה לפני/אחרי</h4>
+                <p>משימות פתיחה/סיום קצרות באפליקציות מאפשרות לראות שיפור מדיד בסוף השבוע.</p>
             </div>
         </div>
 
-        <div class="cta-container">
-            <a class="btn-primary" href="#book-demo">קבעו הדגמה של 5 דקות</a>
-            <a class="btn-secondary" href="#request-quote">בקשת הצעת מחיר</a>
+        <div class="cta-container" data-alt-secondary-group="week-topic">
+            <a class="btn-primary" href="#" data-cta="quote" data-section="week-topic">קבעו הדגמה של 5 דקות</a>
+            <a class="btn-secondary alt-secondary alt-option" data-alt="whatsapp"
+               href="https://wa.link/62uesa" target="_blank" rel="noopener">שלחו ווטסאפ</a>
+            <a class="btn-secondary alt-secondary alt-option" data-alt="phone"
+               href="https://calendly.com/12trix/15min" target="_blank" rel="noopener">קבעו שיחה טלפונית</a>
         </div>
     </div>
 </section>
 
-<section id="mini-case" class="apps-gallery" dir="rtl" lang="he">
+<section id="ms-prep" class="features" dir="rtl" lang="he">
     <div class="container">
-        <h3 class="gallery-title">מיני-קייס: בית ספר ניר צבי (כיתות א׳–ג׳)</h3>
+        <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
+            <h3 class="features-title" style="margin:0">קפיצת פתיחה לחטיבה — תוכנית בת 3 שבועות</h3>
+            <a href="#" class="link" data-cta="program-details" data-program="ms-prep">לפרטים</a>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>שבוע 1 — משוואות</h4>
+                <p>תרגול מונחה באפליקציות, עם משימות פתיחה/סיום קצרות למדידה.</p>
+            </div>
+            <div class="feature-card">
+                <h4>שבוע 2 — שברים</h4>
+                <p>למידה חווייתית מבוססת תרגול בלבד (ללא הסברים פרונטליים).</p>
+            </div>
+            <div class="feature-card">
+                <h4>שבוע 3 — ביטוי אלגברי ומספרים שליליים</h4>
+                <p>סגירת פערים מהירה לקראת תחילת החטיבה.</p>
+            </div>
+        </div>
+
+        <div class="features-grid" style="margin-top:12px">
+            <div class="feature-card">
+                <h4>מבחן שבועי ותנאי תוצאה</h4>
+                <p>מבחן מוגדר בסוף כל שבוע. <strong>התשלום השני מתבצע רק אם כל תלמידי הקבוצה ב-85+</strong>.</p>
+            </div>
+            <div class="feature-card">
+                <h4>שגרה בית-ספרית</h4>
+                <p>הפעלה <strong>אחת לשבוע</strong> לפי שעות ולפי בחירת בית-הספר, מינימום עומס על הצוות.</p>
+            </div>
+        </div>
+
+        <!-- CTA-ים רק בתוכניות -->
+        <div class="cta-container" data-alt-secondary-group="ms-prep">
+            <a class="btn-primary" href="#" data-cta="quote" data-section="ms-prep">קבעו הדגמה של 5 דקות</a>
+            <a class="btn-secondary alt-secondary alt-option" data-alt="whatsapp"
+               href="https://wa.link/62uesa" target="_blank" rel="noopener">שלחו ווטסאפ</a>
+            <a class="btn-secondary alt-secondary alt-option" data-alt="phone"
+               href="https://calendly.com/12trix/15min" target="_blank" rel="noopener">קבעו שיחה טלפונית</a>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- =====================
+     תוכניות נוספות
+===================== -->
+<section id="other-programs" class="features" dir="rtl" lang="he">
+    <div class="container">
+        <h3 class="features-title">תוכניות נוספות</h3>
+
+        <div class="features-grid">
+            <!-- אתגר לוח הכפל -->
+            <div class="feature-card">
+                <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
+                    <h4 style="margin:0">אתגר לוח הכפל</h4>
+                    <a href="#" class="link" data-cta="program-details" data-program="times-table-challenge">לפרטים</a>
+                </div>
+                <p>חודש של משחק ותרגול מדורג עם לוח הישגים לפי כיתה/קודים; מתאים לשגרה בית-ספרית.</p>
+
+                <div class="cta-container" data-alt-secondary-group="times-table">
+                    <a class="btn-primary" href="#" data-cta="quote" data-section="times-table">קבעו הדגמה של 5 דקות</a>
+                    <a class="btn-secondary alt-secondary alt-option" data-alt="whatsapp"
+                       href="https://wa.link/62uesa" target="_blank" rel="noopener">שלחו ווטסאפ</a>
+                    <a class="btn-secondary alt-secondary alt-option" data-alt="phone"
+                       href="https://calendly.com/12trix/15min" target="_blank" rel="noopener">קבעו שיחה טלפונית</a>
+                </div>
+            </div>
+
+            <!-- שימוש באפליקציות (גישה מוסדית) -->
+            <div class="feature-card">
+                <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
+                    <h4 style="margin:0">שימוש באפליקציות (גישה מוסדית)</h4>
+                    <a href="#" class="link" data-cta="program-details" data-program="apps-access">לפרטים</a>
+                </div>
+                <p>גישה מוסדית לאפליקציות 12trix (למשל דרך הזדהות משרד החינוך) + אפשרות השתלמות מורים.</p>
+
+                <div class="cta-container" data-alt-secondary-group="apps-access">
+                    <a class="btn-primary" href="#" data-cta="quote" data-section="apps-access">קבעו הדגמה של 5 דקות</a>
+                    <a class="btn-secondary alt-secondary alt-option" data-alt="whatsapp"
+                       href="https://wa.link/62uesa" target="_blank" rel="noopener">שלחו ווטסאפ</a>
+                    <a class="btn-secondary alt-secondary alt-option" data-alt="phone"
+                       href="https://calendly.com/12trix/15min" target="_blank" rel="noopener">קבעו שיחה טלפונית</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =====================
+     הוכחות מהשטח
+===================== -->
+<section id="proof" class="apps-gallery" dir="rtl" lang="he">
+    <div class="container">
+        <h3 class="gallery-title">הוכחות מהשטח</h3>
 
         <div class="pilot-results">
-            <div class="pilot-title">שיפור ממוצע מ-16 ל-91 בתוך 6 שבועות</div>
+            <div class="pilot-title">פיילוט כיתות א׳–ג׳ — 6 שבועות, למידה באפליקציות בלבד</div>
             <div class="chart-container">
                 <div class="bar">
                     <div class="bar-fill" title="לפני: 16"></div>
@@ -694,132 +167,148 @@
                     <div class="bar-value">91</div>
                 </div>
             </div>
+            <p class="note" style="margin-top:8px">* כל הלמידה והשיפור נעשו אך ורק באפליקציות 12trix.</p>
+        </div>
+    </div>
+</section>
 
-            <p style="margin-top:16px">
-                <strong>מה חשוב לדעת:</strong> כל הלמידה והשיפור בפיילוט נעשו <u>אך ורק</u> באפליקציות 12trix.
+<!-- =====================
+     עדות מהשטח
+===================== -->
+<section id="testimony" class="features" dir="rtl" lang="he">
+    <div class="container">
+        <h3 class="features-title">עדות מהשטח</h3>
+        <div class="feature-card">
+            <p class="way-description" style="margin:0">
+                מורה לחינוך מיוחד: שני תלמידים סיימו <strong>5 שיעורי שברים בתוך חצי שעה</strong> — וקיבלו 100 במבחן.
             </p>
-
-            <div class="cta-container">
-                <a class="btn-primary" href="#book-demo">ראו הדגמה קצרה</a>
-                <a class="btn-secondary" href="#request-quote">בקשת הצעת מחיר</a>
-            </div>
-        </div>
-
-        <div class="testimonials" style="margin-top:24px;">
-            <h4 class="testimonials-title" style="margin-bottom:16px;">עדות מהשטח</h4>
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    מורה לחינוך מיוחד דיווחה: שני תלמידים למדו <strong>5 שיעורים בתוך חצי שעה</strong> — כל חומר השברים של כיתה ד׳.
-                </div>
-                <div class="testimonial-author">
-                    <div class="author-avatar" aria-hidden="true"></div>
-                    <div class="author-info">
-                        <div class="author-name">מורת חנ״מ (שם שמור)</div>
-                        <div class="author-role">דיווח בית-ספרי</div>
-                    </div>
-                </div>
+            <div class="testimonial-actions" style="margin-top:8px">
+                <img src="~/images/fractionTestmony.png" alt="עדות מורה על הצלחה בשברים" style="width: 100%; max-width: 800px; height: auto; margin: 0 auto; display: block; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
             </div>
         </div>
     </div>
 </section>
 
-<!-- חלופות יישום (ממוקם מתחת לפולד הראשי) -->
-<section id="school-alternatives" class="features" dir="rtl" lang="he">
+
+<section class="final-cta-schools" style="padding-bottom: 30px;">
     <div class="container">
-        <h3 class="features-title">חלופות יישום לבית-הספר שלכם</h3>
+        <h2 class="final-cta-title">בואו נדבר 5 דקות</h2>
+        <p class="final-cta-text">ונבנה יחד מסלול שמתאים בדיוק לבית-הספר שלכם</p>
 
-        <div class="features-grid">
-            <!-- First-Apps דרך ממשקאפ -->
-            <div class="feature-card">
-                <h4>First-Apps דרך ממשקאפ</h4>
-                <p>
-                    גישה לאפליקציות דרך הזדהות משרד החינוך + השתלמות מורים.<br>
-                    רישוי שימוש מוסדי · רצפים לפי שכבה · השתלמות 60–90 דק׳ · אופציונלי: קליניקת תכנון 45 דק׳.
-                </p>
-                <div class="cta-container">
-                    <a class="btn-secondary" href="#first-apps-request">בקשו גישה + השתלמות</a>
-                </div>
-            </div>
-
-            <!-- חודש אתגר לוח הכפל -->
-            <div class="feature-card">
-                <h4>חודש אתגר לוח הכפל</h4>
-                <p>
-                    חודש של תרגול ומשחק לכיתות ג׳–ו׳ עם לוח הישגים.<br>
-                    לוח הישגים לפי קודי כיתה · אופציה למסלול “השפעה” · 10% הנחה למדידה.
-                </p>
-                <div class="cta-container">
-                    <a class="btn-secondary" href="#times-table-challenge">התחילו את האתגר</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- FAQ Section -->
-<section class="faq-section">
-    <div class="container">
-        <h2 class="faq-title animate-on-scroll">שאלות נפוצות</h2>
-
-        <!-- שים לב: faq-list + data-accordion -->
-        <div class="faq-list" data-accordion>
-            <div class="faq-item animate-on-scroll">
-                <button type="button" class="faq-q">איך מזמינים בגפ"ן?</button>
-                <div class="faq-a" style="max-height:0">
-                    <p>שבוע-נושא ואתגר לוח הכפל - קוד תוכנית בגפ"ן 35235. First-Apps - דרך ממשקאפ בתיאום איתנו.</p>
-                </div>
-            </div>
-
-            <div class="faq-item animate-on-scroll">
-                <button type="button" class="faq-q">כמה תלמידים בקבוצה בשבוע-נושא?</button>
-                <div class="faq-a" style="max-height:0">
-                    <p>עד 7 תלמידים. מומלץ 2-4 קבוצות לפי שכבה/רמה.</p>
-                </div>
-            </div>
-
-            <div class="faq-item animate-on-scroll">
-                <button type="button" class="faq-q">מה נדרש טכנית?</button>
-                <div class="faq-a" style="max-height:0">
-                    <p>כרום מעודכן, אינטרנט יציב, מקרן/מסך בכיתה ומכשירי תלמידים לפי צורך.</p>
-                </div>
-            </div>
-
-            <div class="faq-item animate-on-scroll">
-                <button type="button" class="faq-q">יש תמיכה בערבית?</button>
-                <div class="faq-a" style="max-height:0">
-                    <p>ברוב האפליקציות - כן. נעדכן לפי נושא ושכבה.</p>
-                </div>
-            </div>
-
-            <div class="faq-item animate-on-scroll">
-                <button type="button" class="faq-q">מה הקריטריון להצלחה?</button>
-                <div class="faq-a" style="max-height:0">
-                    <p>שיפור של +85 ל-80% מהתלמידים שנכללו במדידה (נכחו לפחות בשני מפגשים).</p>
-                </div>
-            </div>
+        <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; position:relative; z-index:1;">
+            <a href="#" class="btn-primary" data-cta="quote" data-section="final">קבעו הדגמה של 5 דקות</a>
+            <a href="https://wa.link/62uesa" target="_blank" rel="noopener" class="btn-secondary">שלחו ווטסאפ</a>
         </div>
     </div>
 </section>
 
 
-    <!-- Final CTA -->
-    <section class="final-cta-schools">
-        <div class="container">
-            <h2 class="final-cta-title">בואו נדבר 5 דקות</h2>
-            <p class="final-cta-text">ונבנה יחד מסלול שמתאים בדיוק לבית-הספר שלכם</p>
-
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1;">
-            <a href="https://wa.link/62uesa" target="_blank" rel="noopener" class="btn-primary" style="border: 3px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);">שלחו הודעת ווצאפ</a>
-            <a href="" class="btn-secondary" data-cta="email" data-section="implementation-ways"
-                style="background: var(--white); color: #2E86DE;">שלחו מייל</a>
-            </div>
+@* <div id="program-modal" class="lead-modal-overlay" style="display:none;">
+    <div class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="program-modal-title">
+        <button class="lead-close" type="button" aria-label="סגירה" data-close>&times;</button>
+        <h3 id="program-modal-title" class="lead-title">פרטי התוכנית</h3>
+        <div id="program-modal-body" class="lead-body"></div>
+        <div class="cta-container" style="margin-top:16px">
+            <a class="btn-primary" href="#" data-cta="quote" data-section="program-modal">קבעו הדגמה של 5 דקות</a>
+            <a class="btn-secondary" href="https://wa.link/62uesa" target="_blank" rel="noopener">שלחו ווטסאפ</a>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Footer -->
+<div id="program-templates" style="display:none">
+    <div data-program-template="ms-prep">
+        <p><strong>קפיצת פתיחה לחטיבה — 3 שבועות</strong></p>
+        <ul>
+            <li>שבוע 1: משוואות · שבוע 2: שברים · שבוע 3: ביטוי אלגברי ומספרים שליליים</li>
+            <li>מבחן שבועי; <strong>התשלום השני</strong> רק אם כל תלמידי הקבוצה ב-85+</li>
+            <li>הפעלה <strong>אחת לשבוע</strong> בקבוצות קטנות, מונחה ע"י המדריך/ה שלנו</li>
+        </ul>
+    </div>
 
+    <div data-program-template="week-topic">
+        <p><strong>שבוע נושא — ספринט מדוד</strong></p>
+        <ul>
+            <li>פוקוס חד-נושאי (למשל כפל/יסודות/שברים) עם תרגול באפליקציות בלבד</li>
+            <li>קבוצות קטנות, הנחיה ע"י המדריך/ה שלנו</li>
+            <li>מדידה לפני/אחרי בתוך האפליקציות</li>
+        </ul>
+    </div>
+
+    <div data-program-template="times-table-challenge">
+        <p><strong>אתגר לוח הכפל</strong></p>
+        <ul>
+            <li>חודש של משחק ותרגול מדורג עם לוח הישגים לפי כיתה/קודים</li>
+            <li>מתאים לשגרה בית-ספרית</li>
+        </ul>
+    </div>
+
+    <div data-program-template="apps-access">
+        <p><strong>שימוש באפליקציות (גישה מוסדית)</strong></p>
+        <ul>
+            <li>גישה מוסדית לאפליקציות 12trix (למשל דרך הזדהות משרד החינוך)</li>
+            <li>אפשרות להשתלמות מורים</li>
+        </ul>
+    </div>
+</div> *@
 
 @section Scripts {
-  
-}
+    <script>
+        /* החלפה לסירוגין של כפתור משני (ווצאפ/שיחה) בתוכניות בלבד */
+        (function() {
+          try {
+            var next = (localStorage.getItem('altSecondaryNext') || 'whatsapp') === 'whatsapp' ? 'whatsapp' : 'phone';
+            var showWhatsApp = (next === 'whatsapp');
+            document.querySelectorAll('.cta-container[data-alt-secondary-group]').forEach(function(container) {
+              var opts = container.querySelectorAll('.alt-secondary.alt-option');
+              opts.forEach(function(el) {
+                var isWhatsApp = el.getAttribute('data-alt') === 'whatsapp';
+                el.style.display = (isWhatsApp === showWhatsApp) ? 'inline-block' : 'none';
+              });
+            });
+            localStorage.setItem('altSecondaryNext', showWhatsApp ? 'phone' : 'whatsapp');
+          } catch(e) {
+            document.querySelectorAll('.alt-secondary.alt-option').forEach(function(el) {
+              el.style.display = (el.getAttribute('data-alt') === 'whatsapp') ? 'inline-block' : 'none';
+            });
+          }
+        })();
 
+        /* מודל "פרטי התוכנית" */
+        (function() {
+          var overlay = document.getElementById('program-modal');
+          var bodyEl  = document.getElementById('program-modal-body');
+          var titleEl = document.getElementById('program-modal-title');
+          var tmplRoot= document.getElementById('program-templates');
+
+          function openModal(programId, titleText) {
+            var tmpl = tmplRoot.querySelector('[data-program-template="' + programId + '"]');
+            if (!tmpl) return;
+            titleEl.textContent = titleText || 'פרטי התוכנית';
+            bodyEl.innerHTML = tmpl.innerHTML;
+            overlay.style.display = 'flex';
+            document.documentElement.classList.add('no-scroll');
+          }
+          function closeModal() {
+            overlay.style.display = 'none';
+            bodyEl.innerHTML = '';
+            document.documentElement.classList.remove('no-scroll');
+          }
+
+          document.addEventListener('click', function(ev) {
+            var a = ev.target.closest('a[data-cta="program-details"]');
+            if (a) {
+              ev.preventDefault();
+              var pid = a.getAttribute('data-program');
+              var ttl = a.closest('section')?.querySelector('.features-title, h3')?.textContent?.trim();
+              openModal(pid, ttl);
+            }
+            if (ev.target.matches('.lead-close') || ev.target.hasAttribute('data-close') || ev.target === overlay) {
+              closeModal();
+            }
+          });
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+          });
+        })();
+    </script>
+}
