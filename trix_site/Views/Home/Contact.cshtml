@@ -235,14 +235,17 @@
         </form>
     </div>
 
-    <div id="leadThanks" class="lead-modal-overlay lead-thanks" hidden>
-            <h3>תודה! קיבלנו את הפנייה</h3>
-            <p>נחזור אליכם בהקדם. אם זה דחוף — אפשר תמיד לפנות גם בווטסאפ.</p>
-            <div style="margin-top:16px">
-                <button type="button" class="btn btn-primary" data-lead-close>סגירת החלון</button>
-            </div>
-            <small id="leadAutoClose" class="auto-close-hint">החלון ייסגר אוטומטית בעוד 20 שניות…</small>
+<div id="leadThanks" class="lead-modal-overlay lead-thanks" hidden aria-hidden="true">
+    <div class="lead-modal-card" role="dialog" aria-labelledby="leadThanksTitle" aria-modal="true">
+        <h3 id="leadThanksTitle">תודה! קיבלנו את הפנייה</h3>
+        <p>נחזור אליכם בהקדם. אם זה דחוף — אפשר תמיד לפנות גם בווטסאפ.</p>
+        <div style="margin-top:16px">
+            <button type="button" class="btn btn-primary" data-lead-close>סגירת החלון</button>
         </div>
+        <small id="leadAutoClose" class="auto-close-hint">החלון ייסגר אוטומטית בעוד 20 שניות…</small>
+    </div>
+</div>
+
 
 
 <div class="cta-container" style="margin-top:18px">

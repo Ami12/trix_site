@@ -1,67 +1,70 @@
-
 /*!
  * 12trix · site.js (shared)
  * Lightweight utilities + common UI initializers
  * No dependencies, RTL-safe
  */
 (function () {
-  // ===== Utilities =====
-  const $  = (sel, root=document) => root.querySelector(sel);
-  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    // ===== Utilities =====
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  function on(event, selector, handler, root=document) {
-    root.addEventListener(event, function(e){
-      const target = e.target.closest(selector);
-      if (target && root.contains(target)) handler(e, target);
-    });
-  }
+    function on(event, selector, handler, root = document) {
+        root.addEventListener(event, function (e) {
+            const target = e.target.closest(selector);
+            if (target && root.contains(target)) handler(e, target);
+        });
+    }
 
-  const debounce = (fn, wait=200) => {
-    let t; return (...args) => { clearTimeout(t); t=setTimeout(()=>fn(...args), wait); };
-  };
+    const debounce = (fn, wait = 200) => {
+        let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
+    };
 
-  function track(eventName, params={}) {
-    try {
-      if (window.gtag) { window.gtag('event', eventName, params); }
-      else if (window.dataLayer) { window.dataLayer.push({event: eventName, ...params}); }
-      else { /* fallback */ console.debug('track:', eventName, params); }
-    } catch(e) { /* noop */ }
-  }
+    function track(eventName, params = {}) {
+        try {
+            if (window.gtag) { window.gtag('event', eventName, params); }
+            else if (window.dataLayer) { window.dataLayer.push({ event: eventName, ...params }); }
+            else { /* fallback */ console.debug('track:', eventName, params); }
+        } catch (e) { /* noop */ }
+    }
 
-  // ===== Mobile Menu =====
-  function toggleMobileMenu(force) {
-    const menu = $('#mobileMenu');
-    if (!menu) return;
-    const isOpen = typeof force === 'boolean' ? !force : menu.classList.contains('open');
-    menu.classList.toggle('open', !isOpen);
-    document.body.classList.toggle('menu-open', !isOpen);
-  }
+    // ===== Mobile Menu =====
+    function toggleMobileMenu(force) {
+        const menu = $('#mobileMenu');
+        if (!menu) return;
+        const isOpen = typeof force === 'boolean' ? !force : menu.classList.contains('open');
+        // תאימות: גם 'open' וגם 'active' עבור CSS ישן/חדש
+        menu.classList.toggle('open', !isOpen);
+        menu.classList.toggle('active', !isOpen);
+        document.body.classList.toggle('menu-open', !isOpen);
+    }
 
-  function initMobileMenu() {
-    on('click', '.mobile-toggle', () => toggleMobileMenu());
-    // close on ESC
-    document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') toggleMobileMenu(false); });
-    // close on outside click
-    document.addEventListener('click', (e)=>{
-      const menu = $('#mobileMenu'); if (!menu) return;
-      const within = e.target.closest('#mobileMenu, .mobile-toggle');
-      if (!within && menu.classList.contains('open')) toggleMobileMenu(false);
-    });
-  }
+    function initMobileMenu() {
+        on('click', '.mobile-toggle', () => toggleMobileMenu());
+        // close on ESC
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleMobileMenu(false); });
+        // close on outside click
+        document.addEventListener('click', (e) => {
+            const menu = $('#mobileMenu'); if (!menu) return;
+            const within = e.target.closest('#mobileMenu, .mobile-toggle');
+            if (!within && (menu.classList.contains('open') || menu.classList.contains('active'))) toggleMobileMenu(false);
+        });
+    }
 
-  // ===== FAQ (accordion) =====
+    // ===== FAQ (accordion) =====
     function initFAQ() {
         $$('[data-accordion], .faq-list').forEach(list => {
             on('click', '.faq-q', (e, q) => {
                 const item = q.closest('.faq-item') || q.parentElement;
                 const a = item.querySelector('.faq-a');
                 const expanded = item.classList.toggle('open');
-                item.classList.toggle('active', expanded);
+                item.classList.toggle('active', expanded); // תאימות ל-CSS ישן
                 if (a) a.style.maxHeight = expanded ? (a.scrollHeight + 'px') : '0px';
                 // collapse siblings (single-open)
                 $$('.faq-item.open', list).forEach(el => {
                     if (el !== item) {
-                        el.classList.remove('open', 'active'); const aa = el.querySelector('.faq-a'); if (aa) aa.style.maxHeight = '0px';
+                        el.classList.remove('open', 'active');
+                        const aa = el.querySelector('.faq-a');
+                        if (aa) aa.style.maxHeight = '0px';
                     }
                 });
                 track('faq_toggle', { question: q.textContent?.trim() || '' });
@@ -69,60 +72,60 @@
         });
     }
 
-  // ===== Carousel (basic) =====
-  function initCarousel() {
-    $$('[data-carousel]').forEach(carousel => {
-      const track = $('.carousel-track', carousel);
-      const slides = $$('.carousel-slide', track);
-      const prev = $('.carousel-prev', carousel);
-      const next = $('.carousel-next', carousel);
-      if (!track || slides.length === 0) return;
+    // ===== Carousel (basic) =====
+    function initCarousel() {
+        $$('[data-carousel]').forEach(carousel => {
+            const track = $('.carousel-track', carousel);
+            const slides = $$('.carousel-slide', track);
+            const prev = $('.carousel-prev', carousel);
+            const next = $('.carousel-next', carousel);
+            if (!track || slides.length === 0) return;
 
-      let idx = 0;
-      function layout() {
-        const w = carousel.clientWidth;
-        track.style.width = (w * slides.length) + 'px';
-        slides.forEach(s => s.style.width = w + 'px');
-        goTo(idx);
-      }
-      function goTo(i) {
-        idx = (i + slides.length) % slides.length;
-        const w = carousel.clientWidth;
-        track.style.transform = `translateX(${-(idx*w)}px)`;
-      }
+            let idx = 0;
+            function layout() {
+                const w = carousel.clientWidth;
+                track.style.width = (w * slides.length) + 'px';
+                slides.forEach(s => s.style.width = w + 'px');
+                goTo(idx);
+            }
+            function goTo(i) {
+                idx = (i + slides.length) % slides.length;
+                const w = carousel.clientWidth;
+                track.style.transform = `translateX(${-(idx * w)}px)`;
+            }
 
-      const relayout = debounce(layout, 100);
-      window.addEventListener('resize', relayout);
-      layout();
+            const relayout = debounce(layout, 100);
+            window.addEventListener('resize', relayout);
+            layout();
 
-      if (prev) prev.addEventListener('click', ()=> goTo(idx-1));
-      if (next) next.addEventListener('click', ()=> goTo(idx+1));
+            if (prev) prev.addEventListener('click', () => goTo(idx - 1));
+            if (next) next.addEventListener('click', () => goTo(idx + 1));
 
-      // swipe (touch)
-      let startX=0, currX=0, dragging=false;
-      track.addEventListener('touchstart', (e)=>{ dragging=true; startX=e.touches[0].clientX; }, {passive:true});
-      track.addEventListener('touchmove', (e)=>{ if(!dragging) return; currX=e.touches[0].clientX; }, {passive:true});
-      track.addEventListener('touchend', ()=> {
-        if(!dragging) return; dragging=false;
-        const dx = currX - startX;
-        if (Math.abs(dx) > 40) { dx>0 ? goTo(idx-1) : goTo(idx+1); }
-      });
-    });
-  }
+            // swipe (touch)
+            let startX = 0, currX = 0, dragging = false;
+            track.addEventListener('touchstart', (e) => { dragging = true; startX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchmove', (e) => { if (!dragging) return; currX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', () => {
+                if (!dragging) return; dragging = false;
+                const dx = currX - startX;
+                if (Math.abs(dx) > 40) { dx > 0 ? goTo(idx - 1) : goTo(idx + 1); }
+            });
+        });
+    }
 
-  // ===== Smooth Scroll =====
-  function initSmoothScroll() {
-    on('click', 'a[data-scroll]', (e, a) => {
-      const href = a.getAttribute('href') || '';
-      if (href.startsWith('#')) {
-        e.preventDefault();
-        const el = document.getElementById(href.slice(1));
-        if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    });
-  }
+    // ===== Smooth Scroll =====
+    function initSmoothScroll() {
+        on('click', 'a[data-scroll]', (e, a) => {
+            const href = a.getAttribute('href') || '';
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const el = document.getElementById(href.slice(1));
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
 
-  // ===== In-View Animations =====
+    // ===== In-View Animations =====
     function initInViewAnimations() {
         const targets = $$('.target-card, .feature-card, .testimonial-card, .animate-on-scroll, .way-card, .process-step, [data-animate]');
         if (!('IntersectionObserver' in window) || targets.length === 0) return;
@@ -139,8 +142,8 @@
                 const delay = baseDelay + (isNaN(extra) ? 0 : extra);
 
                 setTimeout(() => {
-                    el.classList.add('in-view');   // המחלקה שהאתר שלך משתמש בה
-                    el.classList.add('visible');   // תאימות לקוד/‏CSS ישן מ-schools.js
+                    el.classList.add('in-view');   // המחלקה שהאתר משתמש בה
+                    el.classList.add('visible');   // תאימות לקוד/‏CSS ישן
                     io.unobserve(el);
                 }, delay);
             });
@@ -149,71 +152,69 @@
         targets.forEach(t => io.observe(t));
     }
 
-
-  // ===== Lazy Images (data-src -> src) =====
-  function initLazyImages() {
-    const imgs = $$('img[data-src]');
-    if (!('IntersectionObserver' in window) || imgs.length === 0) {
-      imgs.forEach(img => { if (!img.getAttribute('src')) img.src = img.dataset.src; });
-      return;
-    }
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(en=>{
-        if (en.isIntersecting) {
-          const img = en.target;
-          if (img.dataset.src) img.src = img.dataset.src;
-          img.removeAttribute('data-src');
-          io.unobserve(img);
+    // ===== Lazy Images (data-src -> src) =====
+    function initLazyImages() {
+        const imgs = $$('img[data-src]');
+        if (!('IntersectionObserver' in window) || imgs.length === 0) {
+            imgs.forEach(img => { if (!img.getAttribute('src')) img.src = img.dataset.src; });
+            return;
         }
-      });
-    }, { rootMargin: '100px', threshold: 0.01 });
-    imgs.forEach(img => io.observe(img));
-  }
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(en => {
+                if (en.isIntersecting) {
+                    const img = en.target;
+                    if (img.dataset.src) img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    io.unobserve(img);
+                }
+            });
+        }, { rootMargin: '100px', threshold: 0.01 });
+        imgs.forEach(img => io.observe(img));
+    }
 
-  // ===== External links hardening =====
-  function initExternalLinks() {
-    $$('a[target="_blank"]').forEach(a=>{
-      const rel = (a.getAttribute('rel') || '').split(/\s+/);
-      if (!rel.includes('noopener')) rel.push('noopener');
-      if (!rel.includes('noreferrer')) rel.push('noreferrer');
-      a.setAttribute('rel', rel.join(' ').trim());
+    // ===== External links hardening =====
+    function initExternalLinks() {
+        $$('a[target="_blank"]').forEach(a => {
+            const rel = (a.getAttribute('rel') || '').split(/\s+/);
+            if (!rel.includes('noopener')) rel.push('noopener');
+            if (!rel.includes('noreferrer')) rel.push('noreferrer');
+            a.setAttribute('rel', rel.join(' ').trim());
+        });
+    }
+
+    // ===== Analytics hooks (examples) =====
+    function initAnalyticsHooks() {
+        on('click', 'a[data-track], button[data-track]', (e, el) => {
+            const name = el.getAttribute('data-track') || 'click';
+            track(name, {
+                href: el.getAttribute('href') || '',
+                text: (el.textContent || '').trim(),
+                id: el.id || '',
+                classes: el.className || ''
+            });
+        });
+    }
+
+    // ===== Document ready =====
+    function ready(fn) { if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+
+    ready(function () {
+        initMobileMenu();
+        initFAQ();
+        initCarousel();
+        initSmoothScroll();
+        initInViewAnimations();
+        initLazyImages();
+        initExternalLinks();
+        initAnalyticsHooks();
+
+        // expose small API if needed
+        window.Site = { on, $, $$, debounce, track, toggleMobileMenu };
     });
-  }
-
-  // ===== Analytics hooks (examples) =====
-  function initAnalyticsHooks() {
-    on('click', 'a[data-track], button[data-track]', (e, el)=>{
-      const name = el.getAttribute('data-track') || 'click';
-      track(name, {
-        href: el.getAttribute('href') || '',
-        text: (el.textContent || '').trim(),
-        id: el.id || '',
-        classes: el.className || ''
-      });
-    });
-  }
-
-  // ===== Document ready =====
-  function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
-
-  ready(function(){
-    initMobileMenu();
-    initFAQ();
-    initCarousel();
-    initSmoothScroll();
-    initInViewAnimations();
-    initLazyImages();
-    initExternalLinks();
-    initAnalyticsHooks();
-
-    // expose small API if needed
-    window.Site = { on, $, $$, debounce, track, toggleMobileMenu };
-  });
 })();
 
 
-// CTA → Modal logic for Schools page
-// CTA → Modal logic for Schools page
+// ===== CTA → Lead Modal + Contact Thanks =====
 (function () {
     const $ = (sel, root = document) => root.querySelector(sel);
     const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -259,46 +260,17 @@
         return '';
     }
 
-    // ניקוי שגיאות קודמות
+    // ===== Form error helpers =====
     function clearLeadErrors(form) {
         form?.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
         form?.querySelectorAll('.field-error').forEach(el => el.textContent = '');
     }
 
-    // ולידציה: שדות חובה + אימייל בסיסי
-    //function validateLeadForm(form) {
-    //    let ok = true;
-    //    const setErr = (name, text) => {
-    //        ok = false;
-    //        const input = form.querySelector(`[name="${name}"]`);
-    //        const err = form.querySelector(`.field-error[data-for="${name}"]`);
-    //        if (input) input.classList.add('input-error');
-    //        if (err) err.textContent = text || 'שדה חובה';
-    //    };
-
-    //    let required = ['full_name', 'school_name', 'email'];
-    //    if (contact)
-    //        required = ['full_name', 'Notes', 'email'];
-    //    required.forEach(n => {
-    //        const v = (form.querySelector(`[name="${n}"]`)?.value || '').trim();
-    //        if (!v) setErr(n);
-    //    });
-
-    //    const email = (form.querySelector('[name="email"]')?.value || '').trim();
-    //    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    //        setErr('email', 'כתובת דוא״ל לא תקינה');
-    //    }
-    //    return ok;
-    //}
-
     function validateLeadForm(form) {
         // נקה שגיאות קודמות
-        form?.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-        form?.querySelectorAll('.field-error').forEach(el => (el.textContent = ''));
+        clearLeadErrors(form);
 
         let ok = true;
-
-        // עוזרים: איתור שדה/ערך בלי תלות בקייס
         const getEl = (n) => form.elements[n] || form.elements[n?.toLowerCase?.()] || form.elements[n?.toUpperCase?.()];
         const getVal = (n) => ((getEl(n)?.value) || '').trim();
         const setErr = (names, text) => {
@@ -319,7 +291,7 @@
 
         // שדות חובה
         const required = isContact
-            ? [['Full_Name', 'full_name'], ['Email', 'email'], ['Notes', 'notes']]          // צור קשר
+            ? [['Full_Name', 'full_name'], ['Email', 'email'], ['Notes', 'notes']]              // צור קשר
             : [['Full_Name', 'full_name'], ['School_Name', 'school_name'], ['Email', 'email']]; // שאר ה-CTA
 
         required.forEach(([A, B]) => {
@@ -327,7 +299,6 @@
             if (!v) setErr([A, B]);
         });
 
-        // אימות אימייל
         const email = getVal('Email') || getVal('email');
         if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             setErr(['Email', 'email'], 'כתובת דוא״ל לא תקינה');
@@ -336,12 +307,13 @@
         return ok;
     }
 
+    // ===== Lead Modal (schools) =====
     function openLeadModal(type, ctx = {}) {
         const modalWrap = $('#leadModalOverlay');
         const modal = $('#leadModal');
         if (!modalWrap || !modal) return;
 
-        // אפס מצב תצוגה בכל פתיחה
+        // reset view
         const body = $('#leadBody');
         const thanks = $('#leadThanks');
         const form = $('#leadForm');
@@ -374,7 +346,7 @@
         modalWrap.classList.remove('open');
         modalWrap.setAttribute('aria-hidden', 'true');
 
-        // איפוס לטופס הבא
+        // reset for next open
         const body = $('#leadBody');
         const thanks = $('#leadThanks');
         const form = $('#leadForm');
@@ -386,6 +358,7 @@
         form?.reset();
     }
 
+    // תודה בתוך מודל (בתי ספר)
     function showLeadThanks() {
         const body = $('#leadBody');
         const thanks = $('#leadThanks');
@@ -398,50 +371,90 @@
         if (window.__leadCloseTimer) clearTimeout(window.__leadCloseTimer);
         window.__leadCloseTimer = setTimeout(() => closeLeadModal(), 20000);
 
-        // כפתור סגירה ידנית (ביטול הטיימר)
+        // כפתור סגירה ידנית
         thanks.querySelector('[data-lead-close]')?.addEventListener('click', () => {
             clearTimeout(window.__leadCloseTimer);
             closeLeadModal();
         }, { once: true });
     }
 
-    // Global clicks: פתיחת מודל לפי data-cta וסגירה
+    // ===== Thanks overlay נפרד (למשל בעמוד Contact) =====
+    function openLeadThanks() {
+        const ov = document.getElementById('leadThanks');
+        // אם אין אוברליי נפרד – אין מה לעשות כאן
+        if (!ov || document.getElementById('leadBody')) return;
+
+        ov.classList.add('open');                // CSS מציג כשיש .open
+        ov.removeAttribute('hidden');
+        ov.setAttribute('aria-hidden', 'false');
+
+        const hint = document.getElementById('leadAutoClose');
+        let secs = 20;
+        if (hint) hint.textContent = 'החלון ייסגר אוטומטית בעוד 20 שניות…';
+
+        clearInterval(ov._secTimer);
+        clearTimeout(ov._autoTimer);
+
+        if (hint) {
+            ov._secTimer = setInterval(() => {
+                secs--;
+                if (secs <= 0) { closeLeadThanks(); return; }
+                hint.textContent = `החלון ייסגר אוטומטית בעוד ${secs} שניות…`;
+            }, 1000);
+        } else {
+            ov._autoTimer = setTimeout(closeLeadThanks, 20000);
+        }
+    }
+
+    function closeLeadThanks() {
+        const ov = document.getElementById('leadThanks');
+        if (!ov || document.getElementById('leadBody')) return; // אם זה מודל פנימי – לא סוגרים כאן
+        ov.classList.remove('open');
+        ov.setAttribute('aria-hidden', 'true');
+        ov.setAttribute('hidden', '');
+        clearInterval(ov._secTimer);
+        clearTimeout(ov._autoTimer);
+    }
+
+    // ===== Global clicks =====
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-cta]');
         if (btn) {
             const type = btn.dataset.cta;
             const section = btn.dataset.section || '';
-
             if (btn.tagName === 'A') e.preventDefault();
-
-            // mailto? אפשר גם לפתוח מודל (fallback)
             openLeadModal(type, { section });
             return;
         }
 
-        if (e.target.matches('[data-lead-close]') || e.target.id === 'leadModalOverlay') {
+        // סגירות
+        if (e.target.matches('[data-lead-close]')) {
             closeLeadModal();
+            closeLeadThanks();
+            return;
         }
+        if (e.target.id === 'leadModalOverlay') closeLeadModal();
+        if (e.target.id === 'leadThanks') closeLeadThanks();
     });
 
-    // מאזין מואצל – תופס גם אם ה-Partial נטען אחרי
+    // ===== Submit handler (delegated) =====
     document.addEventListener('submit', async (e) => {
         const form = e.target;
         if (!form || form.id !== 'leadForm') return;
 
         e.preventDefault();
 
-        const msg = $('#leadMsg');
+        const msg = document.getElementById('leadMsg');
         clearLeadErrors(form);
         if (msg) msg.textContent = '';
 
         // honeypot
-        if ($('#leadWebsite')?.value?.trim()) {
+        if (document.getElementById('leadWebsite')?.value?.trim()) {
             if (msg) msg.textContent = 'אירעה שגיאה. נסו שוב.';
             return;
         }
 
-        // ולידציה בצד-לקוח
+        // client validation
         if (!validateLeadForm(form)) {
             if (msg) msg.textContent = 'יש למלא את שדות החובה המסומנים.';
             return;
@@ -454,7 +467,7 @@
                 method: 'POST',
                 body: fd,
                 credentials: 'same-origin',
-                headers: { 'X-Requested-With': 'XMLHttpRequest' } // מציין שזה AJAX
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
             });
 
             if (!res.ok) {
@@ -463,10 +476,23 @@
                 return;
             }
 
-            if (window.gtag) gtag('event', 'lead_form_submit', { cta_type: fd.get('cta_type') || '' });
+            // אנליטיקס
+            if (window.gtag) gtag('event', 'lead_form_submit', { cta_type: fd.get('Cta_Type') || fd.get('cta_type') || '' });
 
-            // תודה בתוך המודל + אוטו-סגירה
-            showLeadThanks();
+            // אם יש מודל בתי הספר (leadBody+leadThanks) – הצג תודה פנימית; אחרת נסה אוברליי נפרד
+            if (document.getElementById('leadModalOverlay') && document.getElementById('leadBody')) {
+                showLeadThanks();
+            } else if (document.getElementById('leadThanks')) {
+                // סגור מודל קיים אם יש (בטוח לסגור — לא יעשה כלום אם לא קיים)
+                closeLeadModal();
+                openLeadThanks();
+            }
+
+            // ניקוי טופס והודעות
+            if (msg) msg.textContent = 'קיבלנו!';
+            form.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+            form.querySelectorAll('.field-error').forEach(el => el.textContent = '');
+            form.reset();
 
         } catch (err) {
             if (msg) msg.textContent = 'שגיאה זמנית בשליחה. נסו שוב.';
@@ -476,5 +502,5 @@
 
     // חשיפה אם תרצה לפתוח מתסריט
     window.openLeadModal = openLeadModal;
-})();
 
+})();
