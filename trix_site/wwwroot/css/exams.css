@@ -1,0 +1,33 @@
+/* תוספות עיצוב למבחנים. מיועד לעבוד לצד schoolsPrograms.css */
+
+/* טיפוגרפיה ופאג'ינציה */
+@page { size: A4; margin: 12mm; }
+@media print { .back-top, .print-actions { display: none !important; } }
+
+.exam-wrap h1 { margin: 8px 0 2px; font-weight: 800; }
+.exam-wrap .micro { margin-bottom: 10px; }
+.exam-header { display: flex; align-items: center; gap: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--line); }
+.exam-header .logo { height: 40px; width: auto; }
+.exam-header .tag { margin-inline-start: auto; }
+
+.meta-row { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 10px; margin: 10px 0 12px; }
+.meta-item { display: flex; align-items: center; gap: 8px; }
+.meta-item label { white-space: nowrap; font-weight: 700; }
+.meta-item .line { flex: 1; border-bottom: 1px solid var(--line); min-height: 28px; }
+
+.section-box { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff; margin: 12px 0; }
+.section-title { font-weight: 800; margin: 0 0 8px; }
+.section-note { color: var(--sub); margin: 0 0 8px; }
+
+.questions { list-style: decimal; padding-inline-start: 24px; margin: 0; }
+.questions li { margin: 8px 0; }
+.ltr { direction: ltr; unicode-bidi: bidi-override; }
+
+.answer-line { display: block; border-bottom: 1px solid var(--line); height: 28px; margin-top: 4px; }
+.answer-area { width: 100%; min-height: 64px; border: 1px solid var(--line); border-radius: 8px; }
+
+.score-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; margin-top: 12px; }
+.score-label { font-weight: 800; }
+.score-line { width: 160px; border-bottom: 2px solid var(--ink); height: 28px; }
+
+.print-actions { margin-top: 8px; }

@@ -72,21 +72,19 @@ namespace trix_site.Controllers
         }
 
 
-        [HttpGet("Programs/{grade:regex(^K(5|6|7)$)}")]
-        public IActionResult Programs(string grade)
+        [HttpGet("Programs")]
+        public IActionResult Programs(string name)
         {
-            // יחפש View בשם Views/Schools/ProgramsK5.cshtml וכן הלאה
-            return View($"Programs{grade}");
+            return View(name);
         }
 
-
-        [HttpGet("Results/{grade:regex(^K(5|6|7)$)}")]
-        public IActionResult Results(string grade)
+        [HttpGet("Exam")]
+        public IActionResult Exam(string name)
         {
-            // יחפש View בשם Views/Schools/ResultsK5.cshtml וכן הלאה
-            return View($"Results{grade}");
+            return View(name);
         }
 
+        
         // ===== Helpers =====
 
         private async Task SaveLeadToCsvAsync(LeadDto dto, DateTime whenUtc, string ip, string ua)

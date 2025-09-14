@@ -1,0 +1,262 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "שבוע נושא — ספרינט מדוד סביב יעד אחד | 12Trix · תוכנית גפן 35235";
+}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="שבוע נושא — ספרינט מדוד סביב יעד אחד | 12Trix · תוכנית גפן 35235">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/schoolsPrograms.css" asp-append-version="true" />
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+            <img class="logo" src="~/images/logo.webp" alt="12Trix">
+            <a asp-controller="Home" asp-action="Schools" asp-fragment="week-topic">חזרה לעמוד הראשי</a>
+      <div class="tag">תוכנית גפן 35235</div>
+    </header>
+
+    <h1>שבוע נושא — ספרינט מדוד סביב יעד אחד</h1>
+    <div class="micro">מיועד לכיתות ז׳ ולבתי ספר יסודיים · בוחרים נושא אחד לשבוע · קבוצות עד 7 תלמידים · מינימום 2 קבוצות · מבחן ידוע מראש בסוף השבוע</div>
+
+    <div class="summary">
+      <div class="grid">
+        <div class="box">
+          <h3>מטרות</h3>
+          <ul>
+            <li>להשיג קפיצה ממוקדת בנושא ספציפי בתוך שבוע אחד</li>
+            <li>ליצור תחושת הצלחה וביטחון באמצעות למידה פעילה באפליקציות</li>
+            <li>מדידה שקופה מול בית הספר והורים</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>מבנה שבועי</h3>
+          <ul>
+            <li>2–3 מפגשים בני 45–60 ד׳ (לפי צרכי בית הספר)</li>
+            <li>תרגול מודרך + שיעורי בית באפליקציות</li>
+            <li>מבחן מסכם ידוע מראש – יעד 85+</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2>בחרו נושא לשבוע</h2>
+    <div class="topic-grid">
+      <div class="box">
+        <h3>מספרים שליליים</h3>
+        <p class="muted">הבנת ציר המספרים, פעולות עם שליליים וסימנים.</p>
+        <ul>
+          <li>ייצוג והזחה על ציר המספרים</li>
+          <li>חיבור/חיסור עם סימנים</li>
+          <li>כפל/חילוק של מספרים שליליים</li>
+        </ul>
+        <div class="cta-row">
+                    <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-negatives" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+      </div>
+
+      <div class="box">
+        <h3>ביטוי אלגברי</h3>
+        <p class="muted">אבני היסוד של השפה האלגברית.</p>
+        <ul>
+          <li>פישוט ביטויים, חוקי חיבור/חיסור</li>
+          <li>סדר פעולות וסוגריים</li>
+          <li>הצבה בביטוי</li>
+        </ul>
+        <div class="cta-row">
+            @* <a class="btn" href="./samples/exam-algebra.pdf" target="_blank" rel="noopener">מבחן לדוגמה</a> *@
+                    <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-algebra" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+      </div>
+
+      <div class="box">
+        <h3>משוואות</h3>
+        <p class="muted">פתרון אינטואיטיבי → ניסוח אלגברי.</p>
+        <ul>
+          <li>המחשה כמאזניים (X וכדורים)</li>
+          <li>פתרון צעד־אחר־צעד</li>
+          <li>בדיקת פתרון</li>
+        </ul>
+                <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-equations" target="_blank" rel="noopener">מבחן לדוגמה</a>
+      </div>
+
+      <div class="box">
+        <h3>שבר עשרוני</h3>
+        <p class="muted">ערך מקום, חיבור/חיסור/כפל/חילוק עשרוניים.</p>
+        <ul>
+          <li>ייצוג חזותי וערך מקום (עשיריות/מאיות)</li>
+          <li>יישור נקודה עשרונית בחיבור/חיסור</li>
+          <li>כפל/חילוק והזזת נקודה</li>
+        </ul>
+            <div class="cta-row">
+                  <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-decimal" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+      </div>
+
+      <div class="box">
+        <h3>שברים — חלק א׳</h3>
+        <p class="muted">יסודות: משמעות השבר ופעולת חילוק.</p>
+        <ul>
+          <li>שבר כחילוק, חלק מצ Whole</li>
+          <li>שוויון שברים, צמצום והרחבה</li>
+          <li>קריאת שברים על סרטי מדידה</li>
+        </ul>
+            <div class="cta-row">
+                    <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-fractions-a" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+      </div>
+
+      <div class="box">
+        <h3>שברים — חלק ב׳</h3>
+        <p class="muted">חיבור/חיסור עם מכנה משותף ושונה.</p>
+        <ul>
+          <li>מכנה משותף קטן</li>
+          <li>חיבור/חיסור מספרים מעורבים</li>
+          <li>תרגול מדורג עם המחשות</li>
+        </ul>
+            <div class="cta-row">
+                <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-fractions-b" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+      </div>
+
+      <div class="box">
+        <h3>שברים — חלק ג׳</h3>
+        <p class="muted">כפל וחילוק שברים ומעורבים.</p>
+        <ul>
+          <li>כפל שבר במספר שלם ובשבר</li>
+          <li>הפיכת מספר מעורב לשבר מדומה ולהפך</li>
+          <li>חילוק שברים (הופכי)</li>
+        </ul>
+            <div class="cta-row">
+                <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-fractions-c" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+
+      </div>
+
+      <div class="box">
+        <h3>חילוק ארוך</h3>
+        <p class="muted">אסטרטגיות וחיזוק שטף בחילוק ארוך.</p>
+        <ul>
+          <li>פירוק למנות חלקיות</li>
+          <li>קירוב ובקרה על שארית</li>
+          <li>קישור לשברים ועשרוניים</li>
+        </ul>
+            <div class="cta-row">
+                <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-long-division" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+      </div>
+
+      <div class="box">
+        <h3>חיבור/חיסור בטור</h3>
+        <p class="muted">יישור עמודות, המרות ו"שאילות".</p>
+        <ul>
+          <li>יישור לפי ערך מקום</li>
+          <li>שאילה/המרה בצורה חזותית</li>
+          <li>דיוק ושטף</li>
+        </ul>
+            <div class="cta-row">
+                <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-column-add-sub" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+    </div>
+
+      <div class="box">
+        <h3>גיאומטריה</h3>
+        <p class="muted">מושגי יסוד ומדידות.</p>
+        <ul>
+          <li>סוגי משולשים ומרובעים</li>
+          <li>היקף ושטח לצורות בסיס</li>
+          <li>זוויות — מדידה וחפיפה</li>
+        </ul>
+            <div class="cta-row">
+                <a class="btn" asp-controller="Schools" asp-action="Exam" asp-route-name="exam-geometry" target="_blank" rel="noopener">מבחן לדוגמה</a>
+            </div>
+      </div>
+    </div>
+
+    <h2>הַשִּׁיטָה והכלים</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>מה מייחד אותנו?</h3>
+        <ul>
+          <li>למידה פעילה לפני הסברים — אפליקציות ייעודיות לכל נושא</li>
+          <li>קבוצות קטנות הומוגניות — עד 7 תלמידים</li>
+          <li>מבחן ידוע מראש — מדידה הוגנת ושקופה</li>
+        </ul>
+        <div class="pill">ניתן למימון מתקציב גפ״ן</div>
+      </div>
+      <div class="box">
+        <h3>ראיות מהשטח</h3>
+        <ul>
+          <li>תלמידים חלשים עלו מ־16 ל־91 נק׳ בחודש וחצי</li>
+          <li>דיווחי מורים והורים על קפיצת ביטחון והישגים</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero-imgs">
+            <img src="~/images/apps/app-long-division.webp" alt="חילוק ארוך">
+            <img src="~/images/apps/app-columnAdditio.png" alt="חיבור בטור">
+            <img src="~/images/apps/app-fractions.png" alt="שברים">
+    </div>
+
+    <h2>מודל עבודה והתחייבות</h2>
+    <div class="box">
+      <div class="kv">
+        <div class="k">מסגרות:</div><div>מינימום 2 קבוצות להפעלה · עד 7 תלמידים בקבוצה</div>
+        <div class="k">מתווה שבוע:</div><div>שבוע אחד מרוכז לנושא שנבחר · מבחן מסכם ידוע מראש</div>
+        <div class="k">תשלום:</div><div>לפי נושא לשבוע. ניתן לשלב מודל מותנה יעד (85+) — לבחירת בית הספר</div>
+        <div class="k">תיאום:</div><div>חלוקת תלמידים לקבוצות הומוגניות, לו״ז וציוד כיתה (מקרן/מסך)</div>
+      </div>
+    </div>
+
+    <h2>לוחות זמנים והטמעה</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>לפני ההפעלה</h3>
+        <ul>
+          <li>שיחת התאמה קצרה עם הנהלה/רכז מתמטיקה</li>
+          <li>מיפוי קצר וחלוקת תלמידים לקבוצות</li>
+          <li>שיתוף מבחן הדוגמה לנושא שנבחר</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>במהלך השבוע</h3>
+        <ul>
+          <li>2–3 מפגשים בני 45–60 ד׳</li>
+          <li>תרגול מודרך באפליקציות + מטלות בית קצרות</li>
+          <li>מבחן מסכם בסוף השבוע</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>סיום והמלצות</h3>
+        <ul>
+          <li>דו״ח התקדמות קצר לקבוצה</li>
+          <li>המלצות להמשך בכיתה</li>
+          <li>אפשרות המשך/שבועים נוספים לפי צורך</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>קישורים ושירות</h2>
+    <div class="box">
+      <ul>
+        <li>WhatsApp: <a href="https://wa.link/62uesa">https://wa.link/62uesa</a></li>
+        <li>קביעת שיחה: <a href="https://calendly.com/12trix">https://calendly.com/12trix</a></li>
+        <li>אימייל: <a href="mailto:ami@12trix.com">ami@12trix.com</a></li>
+        <li>טל׳: 0544-684-216</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      מופעל במסגרת „לצמוח עם ניצה” • תוכנית גפן 35235 · 12Trix © 2025 · 0544‑684‑216 · ami@12trix.com
+    </div>
+  </div>
+
+</body>
+</html>

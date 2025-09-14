@@ -1,0 +1,30 @@
+@{
+    Layout = null;
+    var pageTitle = ViewData["Title"] as string ?? "מבחן | 12Trix";
+}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@pageTitle</title>
+    <link rel="stylesheet" href="~/css/schoolsPrograms.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/exams.css" asp-append-version="true" />
+    <script>
+        function printPage(){ window.print(); }
+    </script>
+</head>
+<body>
+    <header class="exam-header">
+        <img class="logo" src="~/images/logo.webp" alt="12Trix" />
+        <div class="tag">תוכנית גפן 35235</div>
+    </header>
+    <div class="wrap exam-wrap" dir="rtl">
+        
+        @RenderBody()
+        <div class="footer">
+            12Trix © 2025 · תוכנית גפן 35235
+        </div>
+    </div>
+</body>
+</html>

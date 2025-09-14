@@ -1,0 +1,173 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "אתגר לוח הכפל | 12Trix · שליטה בלוח הכפל בחודש אחד";
+}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/schoolsPrograms.css" asp-append-version="true" />
+</head>
+<body>
+<div class="wrap">
+    <header>
+            <img class="logo" src="~/images/logo.webp" alt="12Trix">
+            <a asp-controller="Home" asp-action="Schools" asp-fragment="other-programs">חזרה לעמוד הראשי</a>
+      <div class="tag">תוכנית חודשית · מתאים לגפ״ן</div>
+    </header>
+
+    <h1>אתגר לוח הכפל</h1>
+    <div class="micro">שליטה מלאה בלוח הכפל לכל תלמיד/ה מכיתה ג׳–ו׳ · חודש אחד מרוכז · תחרות כיתתית ולוח הישגים · גישה בדפדפן עם קוד לבית הספר · ללא שמירת פרטי תלמידים</div>
+
+    <div class="summary">
+      <div class="grid">
+        <div class="box">
+          <h3>המטרה</h3>
+          <ul>
+            <li>לאפשר לכל תלמיד/ה בכיתות ג׳–ו׳ לשלוט בלוח הכפל</li>
+            <li>להעלות דיוק ומהירות בצורה מדידה</li>
+            <li>להעצים ביטחון מתמטי דרך הצלחות קטנות</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>משך ותכולה</h3>
+          <ul>
+            <li>תוכנית חודשית (4 שבועות) עם יעדי שליטה שבועיים</li>
+            <li>אפליקציה ייחודית ללוח הכפל דרך לוח המאה</li>
+            <li>אפליקציות "מאמן כושר אריתמטי" לאימון יומי קצר</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2>איך זה עובד</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>מתווה מומלץ (גמיש)</h3>
+        <ul>
+          <li>אימון יומי של 10–15 ד׳ בכיתה/בבית (בדפדפן)</li>
+          <li>2 מפגשי חונכות קצרים בכל שבוע (או משולב בכיתה)</li>
+          <li>לוח הישגים כיתתי + תחרות ידידותית</li>
+        </ul>
+        <div class="pill">אין צורך ברישום תלמידים — כניסה עם קוד בית ספר</div>
+      </div>
+      <div class="box">
+        <h3>מדידה והנחה</h3>
+        <ul>
+          <li>מבדק קצר לפני/אחרי (3–5 ד׳) למדידת השיפור</li>
+          <li>בתי ספר שמבצעים מדידה יקבלו <b>10% הנחה</b></li>
+          <li>דו"ח תוצאות לביה"ס בסוף החודש</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn" href="~/samples/exam-multiplication.pdf" target="_blank" rel="noopener">מבדק כפל — לדוגמה</a>
+          <a class="btn alt" href="#request" onclick="document.getElementById('lead').showModal?.();return false;">בקשת הצעה</a>
+        </div>
+      </div>
+    </div>
+
+    <h2>הכלים</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>לוח המאה ← לוח הכפל</h3>
+        <ul>
+          <li>ויזואליזציה של רצפים וכפולות על לוח המאה</li>
+          <li>בנייה הדרגתית של קשרים והטמעת תבניות</li>
+          <li>מעבר טבעי לשליטה בלוח הכפל המלא</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>מאמן כושר אריתמטי</h3>
+        <ul>
+          <li>אימונים ממוקדים בקצב תלמיד/ה</li>
+          <li>משימות קצרות עם משוב מיידי</li>
+          <li>התאמה לרמת שליטה ולכיתה (ג׳–ו׳)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero-imgs">
+            <img src="~/images/apps/app-hundredgrid.png" alt="אפליקציית לוח הכפל">
+            <img src="~/images/apps/app-trainers.png" alt="אפליקציית לוח הכפל">
+            <img src="~/images/apps/app-coacher.png" alt="מאמן כושר אריתמטי">
+    </div>
+
+    <h2>פרטיות וגישה</h2>
+    <div class="box">
+      <div class="kv">
+        <div class="k">גישה לתלמידים:</div><div>בדפדפן מכל מכשיר (מחשב/טאבלט/נייד) באמצעות <b>קוד לבית הספר</b></div>
+        <div class="k">פרטיות:</div><div><b>לא שומרים פרטי תלמידים</b>; מעקב ברמת כיתה/קוד בלבד</div>
+        <div class="k">לוח הישגים:</div><div>דירוג לפי כיתה/קבוצה עם כינויים/מספרים — ללא זיהוי אישי</div>
+        <div class="k">תמיכה:</div><div>מדריך למורה + מענה מהיר ב-WhatsApp</div>
+      </div>
+    </div>
+
+    <h2>לוגיסטיקה והטמעה</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>לפני ההפעלה</h3>
+        <ul>
+          <li>שיחת התאמה קצרה (15–20 ד׳) עם רכז/ת</li>
+          <li>קבלת קודי כניסה לבית הספר ולכיתות</li>
+          <li>בחירת אופן התחרות והפרסים (אופציונלי)</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>במהלך החודש</h3>
+        <ul>
+          <li>אימון יומי קצר + מעקב התקדמות כיתתי</li>
+          <li>שילוב משימות "בונוס" לשגרה הבית־ספרית</li>
+          <li>עידוד והכרה בהישגים בלוח הכיתתי</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>סיום</h3>
+        <ul>
+          <li>מבדק סיכום והצגת שיפור</li>
+          <li>דו"ח ביצועים כיתתי/שכבתי</li>
+          <li>המלצות המשך לתחזוקת השטף</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>קישורים ושירות</h2>
+    <div class="box">
+      <ul>
+        <li>WhatsApp: <a href="https://wa.link/62uesa">https://wa.link/62uesa</a></li>
+        <li>קביעת שיחה: <a href="https://calendly.com/12trix">https://calendly.com/12trix</a></li>
+        <li>אימייל: <a href="mailto:ami@12trix.com">ami@12trix.com</a></li>
+        <li>טל׳: 0544-684-216</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      12Trix © 2025 · מופעל במסגרת "לצמוח עם ניצה" · ניתן לשילוב בתקציב גפ"ן · 0544‑684‑216 · ami@12trix.com
+    </div>
+
+    <!-- מודל לידים (placeholder) -->
+    <dialog id="lead" style="border:none;border-radius:12px;max-width:620px;width:92vw;padding:0">
+      <form method="dialog" style="padding:18px 16px">
+        <h3 style="margin:0 0 8px">בקשת הצעה — אתגר לוח הכפל</h3>
+        <p class="muted" style="margin:0 0 12px">השאירו פרטים ואחזור אליכם לשיחת התאמה קצרה.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <input required placeholder="שם בית ספר" style="padding:10px;border:1px solid var(--line);border-radius:8px">
+          <input required placeholder="עיר" style="padding:10px;border:1px solid var(--line);border-radius:8px">
+          <input required placeholder="שם איש קשר" style="padding:10px;border:1px solid var(--line);border-radius:8px;grid-column:span 1">
+          <input required placeholder="טלפון" style="padding:10px;border:1px solid var(--line);border-radius:8px;grid-column:span 1">
+          <input placeholder="אימייל" type="email" style="padding:10px;border:1px solid var(--line);border-radius:8px;grid-column:span 2">
+          <textarea placeholder="הערות/שאלות" rows="3" style="padding:10px;border:1px solid var(--line);border-radius:8px;grid-column:span 2"></textarea>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-start;margin-top:12px">
+          <button class="btn" value="submit">שליחה</button>
+          <button class="btn alt" value="cancel">סגירה</button>
+        </div>
+      </form>
+    </dialog>
+  </div>
+</body>
+</html>
