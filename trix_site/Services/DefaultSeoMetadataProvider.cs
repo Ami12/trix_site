@@ -14,59 +14,105 @@ namespace trix_site.Services
         {
             _siteBase = siteBase.TrimEnd('/');
 
-            _byPath = new(StringComparer.OrdinalIgnoreCase)
-            {
-                ["/"] = new SeoMetadata
+            _byPath = new(StringComparer.OrdinalIgnoreCase);
+
+            // בית
+            Add(new[] { "/", "/home", "/home/index" },
+                new SeoMetadata
                 {
                     Title = "12trix — מתמטיקה שנולדה מסקרנות",
                     Description = "קפיצה מדידה בהישגי מתמטיקה בלי להכביד על הצוות. למידה חווייתית, מדידה לפני/אחרי ותוצאות מוכחות.",
                     CanonicalUrl = $"{_siteBase}/",
                     OgImage = $"{_siteBase}/images/og/home.jpg"
-                },
-                ["/Parents"] = new SeoMetadata
+                });
+
+            // הורים
+            Add(new[] { "/home/parents", "/parents" },
+                new SeoMetadata
                 {
                     Title = "להורים — 12trix",
                     Description = "אפליקציות מתמטיקה חווייתיות לילדים בכיתות ג־ו, תרגול מותאם ותגמולים שמייצרים ביטחון והצלחה.",
-                    CanonicalUrl = $"{_siteBase}/Parents",
+                    CanonicalUrl = $"{_siteBase}/Home/Parents",
                     OgImage = $"{_siteBase}/images/og/parents.jpg"
-                },
-                ["/Schools"] = new SeoMetadata
+                });
+
+            // בתי ספר
+            Add(new[] { "/home/schools", "/schools" },
+                new SeoMetadata
                 {
                     Title = "לבתי ספר — 12trix",
-                    Description = "שבוע נושא, קפיצת פתיחה לחטיבה ועוד תוכניות מוכחות— עם מדידה לפני/אחרי ויישום קל לצוות.",
-                    CanonicalUrl = $"{_siteBase}/Schools",
+                    Description = "שבוע נושא, קפיצת פתיחה לחטיבה ועוד — מדידה לפני/אחרי ויישום קל לצוות. תוצאות מוכחות.",
+                    CanonicalUrl = $"{_siteBase}/Home/Schools",
                     OgImage = $"{_siteBase}/images/og/schools.jpg"
-                },
-                ["/Contact"] = new SeoMetadata
+                });
+
+            // אפליקציות
+            Add(new[] { "/home/apps", "/apps" },
+                new SeoMetadata
+                {
+                    Title = "האפליקציות שלנו — 12trix",
+                    Description = "שברים, מאמן אריתמטי, לוח המאה, גיאומטריה ועוד — אפליקציות אינטראקטיביות שפועלות בדפדפן, בלי התקנה.",
+                    CanonicalUrl = $"{_siteBase}/Home/Apps",
+                    OgImage = $"{_siteBase}/images/og/apps.jpg"
+                });
+
+            // יצירת קשר
+            Add(new[] { "/home/contact", "/contact" },
+                new SeoMetadata
                 {
                     Title = "יצירת קשר — 12trix",
                     Description = "צרו קשר להדגמה קצרה ולקבלת פרטים על תוכניות 12trix.",
-                    CanonicalUrl = $"{_siteBase}/Contact",
+                    CanonicalUrl = $"{_siteBase}/Home/Contact",
                     OgImage = $"{_siteBase}/images/og/contact.jpg"
-                },
-                ["/Contact"] = new SeoMetadata
-                {
-                    Title = "יצירת קשר — 12trix",
-                    Description = "צרו קשר להדגמה קצרה ולקבלת פרטים על תוכניות 12trix.",
-                    CanonicalUrl = $"{_siteBase}/Contact",
-                    OgImage = $"{_siteBase}/images/og/contact.jpg"
-                },
-            };
+                });
         }
 
         public SeoMetadata GetFor(HttpContext http)
         {
-            var path = http.Request.Path.HasValue ? http.Request.Path.Value! : "/";
-            if (_byPath.TryGetValue(path, out var meta)) return meta;
+            var normalized = Normalize(http?.Request?.Path.Value);
+
+            if (_byPath.TryGetValue(normalized, out var meta))
+                return meta;
 
             // ברירת מחדל (לכל עמוד אחר)
             return new SeoMetadata
             {
                 Title = "12trix",
                 Description = "למידת מתמטיקה חווייתית שמובילה להצלחה.",
-                CanonicalUrl = $"{_siteBase}{path}",
+                CanonicalUrl = $"{_siteBase}{normalized}",
                 OgImage = $"{_siteBase}/images/og/default.jpg"
             };
+        }
+
+        // ---------- Helpers ----------
+
+        private void Add(string[] aliases, SeoMetadata meta)
+        {
+            foreach (var a in aliases)
+            {
+                _byPath[Normalize(a)] = meta;
+            }
+        }
+
+        private static string Normalize(string? path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                return "/";
+
+            var p = path.Trim().ToLowerInvariant();
+
+            // וודא שמתחיל בסלאש
+            if (!p.StartsWith("/")) p = "/" + p;
+
+            // הסר סלאש סיום (מלבד root)
+            if (p.Length > 1 && p.EndsWith("/"))
+                p = p.TrimEnd('/');
+
+            // נרמל הביתה
+            if (p == "/home" || p == "/home/index")
+                return "/";
+
+            return p;
         }
     }
 }
