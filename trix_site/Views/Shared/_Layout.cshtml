@@ -1,14 +1,70 @@
 @{
-    var title = ViewData["Title"] as string ?? "12trix";
+    // Backward compat + SEO
+    var fallbackTitle = ViewData["Title"] as string ?? "12trix";
+
+    var seoTitle = (string?)ViewData["Seo.Title"] ?? fallbackTitle;
+    var seoDesc = (string?)ViewData["Seo.Description"] ?? "";
+    var seoCanonical = (string?)ViewData["Seo.Canonical"];
+    var seoOgImage = (string?)ViewData["Seo.OgImage"];
+    var seoNoIndex = (string?)ViewData["Seo.NoIndex"];
+    var seoOgType = (string?)ViewData["Seo.OgType"] ?? "website";
+    var seoLocale = (string?)ViewData["Seo.Locale"] ?? "he_IL";
+    var twitterCard = (string?)ViewData["Seo.TwitterCard"] ?? "summary_large_image";
 }
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@title</title>
+
+    <title>@seoTitle</title>
+    <meta name="description" content="@seoDesc" />
+    @if (!string.IsNullOrWhiteSpace(seoNoIndex))
+    {
+        <meta name="robots" content="@seoNoIndex" />
+    }
+    @if (!string.IsNullOrWhiteSpace(seoCanonical))
+    {
+        <link rel="canonical" href="@seoCanonical" />
+    }
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="@seoTitle" />
+    <meta property="og:description" content="@seoDesc" />
+    <meta property="og:type" content="@seoOgType" />
+    @if (!string.IsNullOrWhiteSpace(seoCanonical))
+    {
+        <meta property="og:url" content="@seoCanonical" />
+    }
+    @if (!string.IsNullOrWhiteSpace(seoOgImage))
+    {
+        <meta property="og:image" content="@seoOgImage" />
+    }
+    <meta property="og:locale" content="@seoLocale" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="@twitterCard" />
+    <meta name="twitter:title" content="@seoTitle" />
+    <meta name="twitter:description" content="@seoDesc" />
+    @if (!string.IsNullOrWhiteSpace(seoOgImage))
+    {
+        <meta name="twitter:image" content="@seoOgImage" />
+    }
+
+    <!-- Fonts & CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/trix.css" asp-append-version="true" />
+
+    @* JSON-LD (אופציונלי: ארגון בסיסי) *@
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Organization",
+          "name": "12trix",
+          "url": "https://12trix.co.il",
+          "logo": "https://12trix.co.il/images/logo.png"
+        }
+    </script>
 
     @* GA4 (optional) *@
     @* <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
@@ -22,8 +78,6 @@
     @RenderSection("Styles", required: false)
 </head>
 <body>
-   
-
     <header class="site-header">
         @await Html.PartialAsync("_Header")
     </header>

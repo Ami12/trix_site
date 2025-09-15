@@ -2,6 +2,711 @@
     ViewData["Title"] = "12trix - גפ\"ן קפיצת פתיחה מדידה במתמטיקה לבתי ספר";
 }
 
+@section Styles {
+    <style>
+        /* Professional animations for schools */
+        :root {
+            --school-blue: #2563eb;
+            --school-green: #059669;
+            --school-purple: #7c3aed;
+            --school-orange: #ea580c;
+            --school-gray: #6b7280;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base animations */
+        @@keyframes fadeInUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        @@keyframes slideInLeft {
+            from
+
+        {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        }
+
+        @@keyframes scaleIn {
+            from
+
+        {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        }
+
+        @@keyframes pulse {
+            0%, 100%
+
+        {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.02);
+        }
+
+        }
+
+        @@keyframes countUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        /* Hero section enhanced */
+        #schools-hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 50%, #f8fafc 100%);
+        }
+
+            #schools-hero::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(37, 99, 235, 0.03) 0%, transparent 50%);
+                animation: rotate 30s linear infinite;
+            }
+
+        @@keyframes rotate {
+            from
+
+        {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+
+        }
+
+        #schools-hero h1 {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            background: linear-gradient(135deg, var(--school-blue), var(--school-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        #schools-hero .subtitle {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        /* Trust bar enhanced */
+        .code-strip {
+            opacity: 0;
+            animation: scaleIn 0.8s ease-out 0.4s forwards;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+            .code-strip:hover {
+                transform: scale(1.02);
+            }
+
+            .code-strip::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+                animation: shimmer 3s infinite;
+            }
+
+        @@keyframes shimmer {
+            0%
+
+        {
+            left: -100%;
+        }
+
+        100% {
+            left: 100%;
+        }
+
+        }
+
+        /* Features section enhanced */
+        .features {
+            position: relative;
+        }
+
+        .features-title {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s var(--transition-smooth);
+        }
+
+            .features-title.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        /* Feature cards with stagger animation */
+        .features-grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        .feature-card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: all 0.6s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .feature-card.visible {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            .feature-card::before {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                background: linear-gradient(45deg, var(--school-blue), var(--school-green), var(--school-purple));
+                border-radius: 16px;
+                opacity: 0;
+                z-index: -1;
+                transition: opacity 0.3s ease;
+            }
+
+            .feature-card:hover::before {
+                opacity: 0.1;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            }
+
+            .feature-card h4 {
+                color: var(--text-dark);
+                transition: color 0.3s ease;
+                position: relative;
+            }
+
+            .feature-card:hover h4 {
+                color: var(--school-blue);
+            }
+
+            .feature-card h4::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--school-blue);
+                transition: width 0.3s ease;
+            }
+
+            .feature-card:hover h4::after {
+                width: 100%;
+            }
+
+        /* Pilot results enhanced */
+        .pilot-results {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin: 32px auto;
+            max-width: 600px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .pilot-results.visible {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            .pilot-results::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, var(--school-blue), var(--school-green), var(--school-purple));
+                animation: gradientMove 3s linear infinite;
+            }
+
+        @@keyframes gradientMove {
+            0%
+
+        {
+            background-position: 0% 50%;
+        }
+
+        100% {
+            background-position: 100% 50%;
+        }
+
+        }
+
+        .pilot-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Chart animation */
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 60px;
+            height: 250px;
+            position: relative;
+        }
+
+        .bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .bar-fill {
+            width: 100px;
+            background: linear-gradient(180deg, #3B82F6, #2563eb);
+            border-radius: 8px 8px 0 0;
+            transition: height 1.5s var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar:first-child .bar-fill {
+            height: 0;
+            background: linear-gradient(180deg, #94a3b8, #64748b);
+        }
+
+        .bar:last-child .bar-fill {
+            height: 0;
+            background: linear-gradient(180deg, var(--school-green), #059669);
+        }
+
+        .pilot-results.visible .bar:first-child .bar-fill {
+            height: 40px;
+        }
+
+        .pilot-results.visible .bar:last-child .bar-fill {
+            height: 230px;
+        }
+
+        .bar-fill::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent);
+            animation: fillShine 2s ease-in-out infinite;
+        }
+
+        @@keyframes fillShine {
+            0%, 100%
+
+        {
+            top: 100%;
+        }
+
+        50% {
+            top: -100%;
+        }
+
+        }
+
+        .bar-label {
+            font-size: 16px;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .bar-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-dark);
+            opacity: 0;
+        }
+
+        .pilot-results.visible .bar-value {
+            animation: countUp 0.5s ease-out 1.5s forwards;
+        }
+
+        .bar-value.counting {
+            animation: pulse 0.3s ease-out;
+        }
+
+        /* CTA buttons enhanced */
+        .cta-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s var(--transition-smooth);
+            transition-delay: 0.3s;
+        }
+
+            .cta-container.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .btn-primary, .btn-secondary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+            .btn-primary::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s, height 0.6s;
+            }
+
+            .btn-primary:hover::before {
+                width: 300px;
+                height: 300px;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3);
+            }
+
+        .btn-secondary {
+            background: var(--white);
+            border: 2px solid var(--school-blue);
+            color: var(--school-blue);
+        }
+
+            .btn-secondary:hover {
+                background: var(--school-blue);
+                color: var(--white);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+            }
+
+        /* Testimony section enhanced */
+        #testimony .way-description {
+            font-size: 18px;
+            line-height: 1.8;
+            position: relative;
+            padding-right: 40px;
+        }
+
+            #testimony .way-description::before {
+                content: '"';
+                position: absolute;
+                right: 0;
+                top: -10px;
+                font-size: 48px;
+                color: var(--school-blue);
+                opacity: 0.2;
+            }
+
+        #testimony img {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+            #testimony img.visible {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            #testimony img:hover {
+                transform: scale(1.02);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            }
+
+        /* Final CTA enhanced */
+        .final-cta-schools {
+            background: linear-gradient(135deg, var(--school-blue), var(--school-purple));
+            color: var(--white);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .final-cta-schools::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+                animation: rotate 20s linear infinite;
+            }
+
+        .final-cta-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .final-cta-text {
+            font-size: 24px;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        /* Scroll reveal classes */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+            .scroll-reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .scroll-reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+            .scroll-reveal-left.visible {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        .scroll-reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+            .scroll-reveal-scale.visible {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        /* Stagger animations for multiple elements */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s var(--transition-smooth);
+        }
+
+        .stagger-container.visible .stagger-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-container.visible .stagger-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-container.visible .stagger-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-container.visible .stagger-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .stagger-container.visible .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Number counter animation */
+        .counter {
+            display: inline-block;
+            font-weight: bold;
+            color: var(--school-green);
+        }
+
+        /* Link hover effects */
+        a[asp-controller] {
+            color: var(--school-blue);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+            a[asp-controller]::after {
+                content: '←';
+                margin-right: 5px;
+                display: inline-block;
+                transition: transform 0.3s ease;
+            }
+
+            a[asp-controller]:hover::after {
+                transform: translateX(-5px);
+            }
+
+            a[asp-controller]:hover {
+                color: var(--school-purple);
+            }
+
+        /* Loading shimmer effect */
+        @@keyframes loadingShimmer {
+            0%
+
+        {
+            background-position: -200% 0;
+        }
+
+        100% {
+            background-position: 200% 0;
+        }
+
+        }
+
+        .loading-shimmer {
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+            background-size: 200% 100%;
+            animation: loadingShimmer 2s infinite;
+        }
+
+        /* Floating animation */
+        @@keyframes float {
+            0%, 100%
+
+        {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive adjustments */
+        @@mediadia (max-width: 768px) {
+            #schools-hero h1
+
+        {
+            font-size: 32px;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-container {
+            gap: 40px;
+        }
+
+        .bar-fill {
+            width: 80px;
+        }
+
+        .final-cta-title {
+            font-size: 36px;
+        }
+
+        }
+
+        /* Accessibility improvements */
+        @@mediadia (prefers-reduced-motion: reduce) {
+            *, *::before, *::after
+
+        {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        }
+
+        /* Print styles */
+        @@mediadia print {
+            .cta-container
+
+        {
+            display: none;
+        }
+
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        }
+    </style>
+}
 
 <section id="schools-hero" class="hero" dir="rtl" lang="he">
     <div class="container">
@@ -15,30 +720,29 @@
             <p>
                 <strong>קוד גפ"ן: 35235</strong> •
                 <strong>תשלום מותנה בתוצאות</strong> •
-                <strong>הוכחת התכנות: פיילוט כיתות א׳–ג׳ — 16 → 91 בתוך 6 שבועות</strong>
+                <strong>הוכחת התכנות: פיילוט כיתות א׳–ג׳ — <span class="counter" data-start="16" data-end="91">16</span> → <span class="counter" data-end="91" data-static="true">91</span> בתוך 6 שבועות</strong>
             </p>
         </div>
-        <!-- שים לב: כאן אין CTA לפי ההנחיה -->
     </div>
 </section>
 
-<section id="week-topic" class="features" dir="rtl" lang="he">
+<section id="week-topic" class="features scroll-reveal" dir="rtl" lang="he">
     <div class="container">
         <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
-            <h3 class="features-title" style="margin:0">שבוע נושא — ספרינט מדוד סביב יעד אחד</h3>
-                <a asp-controller="Schools" asp-action="Programs" asp-route-name="week-topic">לפרטים</a>
+            <h3 class="features-title">שבוע נושא — ספרינט מדוד סביב יעד אחד</h3>
+            <a asp-controller="Schools" asp-action="Programs" asp-route-name="week-topic">לפרטים</a>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card">
+        <div class="features-grid stagger-container">
+            <div class="feature-card stagger-item">
                 <h4>פוקוס חד-נושאי</h4>
                 <p>מגדירים יעד (למשל ביטוי אלגברי/שבר עשרוני/שברים) ומקדישים שבוע מרוכז של תרגול מונחה באפליקציות 12trix בלבד.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card stagger-item">
                 <h4>קבוצות קטנות והנחיה</h4>
                 <p>למידה מונחית ע"י המדריך/ה שלנו בקבוצות קטנות — מינימום עומס על הצוות.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card stagger-item">
                 <h4>מדידה לפני/אחרי</h4>
                 <p>משימות פתיחה/סיום קצרות באפליקציות מאפשרות לראות שיפור מדיד בסוף השבוע.</p>
             </div>
@@ -54,40 +758,39 @@
     </div>
 </section>
 
-<section id="ms-prep" class="features" dir="rtl" lang="he">
+<section id="ms-prep" class="features scroll-reveal" dir="rtl" lang="he">
     <div class="container">
         <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
-            <h3 class="features-title" style="margin:0">קפיצת פתיחה לחטיבה — תוכנית בת 3 שבועות</h3>
+            <h3 class="features-title">קפיצת פתיחה לחטיבה — תוכנית בת 3 שבועות</h3>
             <a asp-controller="Schools" asp-action="Programs" asp-route-name="ms-prep">לפרטים</a>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card">
+        <div class="features-grid stagger-container">
+            <div class="feature-card stagger-item">
                 <h4>שבוע 1 — משוואות</h4>
                 <p>תרגול מונחה באפליקציות, עם משימות פתיחה/סיום קצרות למדידה.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card stagger-item">
                 <h4>שבוע 2 — שברים</h4>
                 <p>למידה חווייתית מבוססת תרגול בלבד (ללא הסברים פרונטליים).</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card stagger-item">
                 <h4>שבוע 3 — ביטוי אלגברי ומספרים שליליים</h4>
                 <p>סגירת פערים מהירה לקראת תחילת החטיבה.</p>
             </div>
         </div>
 
-        <div class="features-grid" style="margin-top:12px">
-            <div class="feature-card">
+        <div class="features-grid stagger-container" style="margin-top:12px">
+            <div class="feature-card stagger-item">
                 <h4>מבחן שבועי ותנאי תוצאה</h4>
-                <p>מבחן מוגדר בסוף כל שבוע. <strong>התשלום השני מתבצע רק אם כל תלמידי הקבוצה ב-85+</strong>.</p>
+                <p>מבחן מוגדר בסוף כל שבוע. <strong>התשלום השני מתבצע רק אם כל תלמידי הקבוצה ב-<span class="counter" data-end="85">0</span>+</strong>.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card stagger-item">
                 <h4>שגרה בית-ספרית</h4>
                 <p>הפעלה <strong>אחת לשבוע</strong> לפי שעות ולפי בחירת בית-הספר, מינימום עומס על הצוות.</p>
             </div>
         </div>
 
-        <!-- CTA-ים רק בתוכניות -->
         <div class="cta-container" data-alt-secondary-group="ms-prep">
             <a class="btn-primary" href="#" data-cta="quote" data-section="ms-prep">קבעו הדגמה של 5 דקות</a>
             <a class="btn-secondary alt-secondary alt-option" data-alt="whatsapp"
@@ -98,19 +801,14 @@
     </div>
 </section>
 
-
-
-
-<!-- =====================
-     תוכניות נוספות
-===================== -->
-<section id="other-programs" class="features" dir="rtl" lang="he">
+<!-- תוכניות נוספות -->
+<section id="other-programs" class="features scroll-reveal" dir="rtl" lang="he">
     <div class="container">
         <h3 class="features-title">תוכניות נוספות</h3>
 
-        <div class="features-grid">
+        <div class="features-grid stagger-container">
             <!-- אתגר לוח הכפל -->
-            <div class="feature-card">
+            <div class="feature-card stagger-item">
                 <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
                     <h4 style="margin:0">אתגר לוח הכפל</h4>
                     <a asp-controller="Schools" asp-action="Programs" asp-route-name="multy-challenge">לפרטים</a>
@@ -127,7 +825,7 @@
             </div>
 
             <!-- שימוש באפליקציות (גישה מוסדית) -->
-            <div class="feature-card">
+            <div class="feature-card stagger-item">
                 <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap">
                     <h4 style="margin:0">שימוש באפליקציות (גישה מוסדית)</h4>
                 </div>
@@ -145,10 +843,8 @@
     </div>
 </section>
 
-<!-- =====================
-     הוכחות מהשטח
-===================== -->
-<section id="proof" class="apps-gallery" dir="rtl" lang="he">
+<!-- הוכחות מהשטח -->
+<section id="proof" class="apps-gallery scroll-reveal" dir="rtl" lang="he">
     <div class="container">
         <h3 class="gallery-title">הוכחות מהשטח</h3>
 
@@ -158,12 +854,12 @@
                 <div class="bar">
                     <div class="bar-fill" title="לפני: 16"></div>
                     <div class="bar-label">לפני</div>
-                    <div class="bar-value">16</div>
+                    <div class="bar-value" data-value="16">16</div>
                 </div>
                 <div class="bar">
                     <div class="bar-fill" title="אחרי: 91"></div>
                     <div class="bar-label">אחרי</div>
-                    <div class="bar-value">91</div>
+                    <div class="bar-value" data-value="91">91</div>
                 </div>
             </div>
             <p class="note" style="margin-top:8px">* כל הלמידה והשיפור נעשו אך ורק באפליקציות 12trix.</p>
@@ -171,15 +867,13 @@
     </div>
 </section>
 
-<!-- =====================
-     עדות מהשטח
-===================== -->
-<section id="testimony" class="features" dir="rtl" lang="he">
+<!-- עדות מהשטח -->
+<section id="testimony" class="features scroll-reveal" dir="rtl" lang="he">
     <div class="container">
         <h3 class="features-title">עדות מהשטח</h3>
         <div class="feature-card">
             <p class="way-description" style="margin:0">
-                מורה לחינוך מיוחד: שני תלמידים סיימו <strong>5 שיעורי שברים בתוך חצי שעה</strong> — וקיבלו 100 במבחן.
+                מורה לחינוך מיוחד: שני תלמידים סיימו <strong>5 שיעורי שברים בתוך חצי שעה</strong> — וקיבלו <span class="counter" data-end="100">0</span> במבחן.
             </p>
             <div class="testimonial-actions" style="margin-top:8px">
                 <img src="~/images/fractionTestmony.png" alt="עדות מורה על הצלחה בשברים" style="width: 100%; max-width: 800px; height: auto; margin: 0 auto; display: block; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
@@ -188,79 +882,290 @@
     </div>
 </section>
 
-
 <section class="final-cta-schools" style="padding-bottom: 30px;">
     <div class="container">
         <h2 class="final-cta-title">בואו נדבר 5 דקות</h2>
         <p class="final-cta-text">ונבנה יחד מסלול שמתאים בדיוק לבית-הספר שלכם</p>
 
         <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; position:relative; z-index:1;">
-            <a href="#" class="btn-primary" data-cta="quote" data-section="final">קבעו הדגמה של 5 דקות</a>
+            <a href="#" class="btn-primary float" data-cta="quote" data-section="final">קבעו הדגמה של 5 דקות</a>
             <a href="https://wa.link/62uesa" target="_blank" rel="noopener" class="btn-secondary">שלחו ווטסאפ</a>
         </div>
     </div>
 </section>
 
-
-
 @section Scripts {
     <script>
-        /* החלפה לסירוגין של כפתור משני (ווצאפ/שיחה) בתוכניות בלבד */
+        // Enhanced Intersection Observer for scroll animations
         (function() {
-          try {
-            var next = (localStorage.getItem('altSecondaryNext') || 'whatsapp') === 'whatsapp' ? 'whatsapp' : 'phone';
-            var showWhatsApp = (next === 'whatsapp');
-            document.querySelectorAll('.cta-container[data-alt-secondary-group]').forEach(function(container) {
-              var opts = container.querySelectorAll('.alt-secondary.alt-option');
-              opts.forEach(function(el) {
-                var isWhatsApp = el.getAttribute('data-alt') === 'whatsapp';
-                el.style.display = (isWhatsApp === showWhatsApp) ? 'inline-block' : 'none';
-              });
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+
+                        // Trigger counter animations
+                        const counters = entry.target.querySelectorAll('.counter');
+                        counters.forEach(counter => {
+                            if (!counter.classList.contains('counted')) {
+                                animateCounter(counter);
+                                counter.classList.add('counted');
+                            }
+                        });
+
+                        // Trigger chart animation for pilot results
+                        if (entry.target.classList.contains('pilot-results')) {
+                            setTimeout(() => {
+                                animateChart(entry.target);
+                            }, 300);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-scale, .features-title, .feature-card, .pilot-results, .cta-container, #testimony img').forEach(el => {
+                observer.observe(el);
             });
-            localStorage.setItem('altSecondaryNext', showWhatsApp ? 'phone' : 'whatsapp');
-          } catch(e) {
-            document.querySelectorAll('.alt-secondary.alt-option').forEach(function(el) {
-              el.style.display = (el.getAttribute('data-alt') === 'whatsapp') ? 'inline-block' : 'none';
+
+            // Add stagger class to containers
+            document.querySelectorAll('.features-grid').forEach(grid => {
+                grid.classList.add('stagger-container');
+                observer.observe(grid);
             });
-          }
         })();
 
-        /* מודל "פרטי התוכנית" */
+        // Counter animation function
+        function animateCounter(element) {
+            const start = parseInt(element.dataset.start) || 0;
+            const end = parseInt(element.dataset.end) || parseInt(element.textContent);
+            const isStatic = element.dataset.static === 'true';
+            const duration = 2000;
+            const startTime = performance.now();
+
+            if (isStatic) {
+                element.textContent = end;
+                return;
+            }
+
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(start + (end - start) * easeOutQuart);
+
+                element.textContent = current;
+                element.classList.add('counting');
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = end;
+                    element.classList.remove('counting');
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Animate chart bars with counter
+        function animateChart(chartElement) {
+            const values = chartElement.querySelectorAll('.bar-value');
+            values.forEach((value, index) => {
+                const targetValue = parseInt(value.dataset.value);
+                let current = 0;
+                const increment = targetValue / 50;
+                const delay = index * 200;
+
+                setTimeout(() => {
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= targetValue) {
+                            value.textContent = targetValue;
+                            clearInterval(timer);
+                        } else {
+                            value.textContent = Math.floor(current);
+                        }
+                    }, 30);
+                }, delay);
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add hover ripple effect to buttons
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('mouseenter', function(e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple-hover');
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('#schools-hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Original functionality - alternating secondary buttons
         (function() {
-          var overlay = document.getElementById('program-modal');
-          var bodyEl  = document.getElementById('program-modal-body');
-          var titleEl = document.getElementById('program-modal-title');
-          var tmplRoot= document.getElementById('program-templates');
-
-          function openModal(programId, titleText) {
-            var tmpl = tmplRoot.querySelector('[data-program-template="' + programId + '"]');
-            if (!tmpl) return;
-            titleEl.textContent = titleText || 'פרטי התוכנית';
-            bodyEl.innerHTML = tmpl.innerHTML;
-            overlay.style.display = 'flex';
-            document.documentElement.classList.add('no-scroll');
-          }
-          function closeModal() {
-            overlay.style.display = 'none';
-            bodyEl.innerHTML = '';
-            document.documentElement.classList.remove('no-scroll');
-          }
-
-          document.addEventListener('click', function(ev) {
-            var a = ev.target.closest('a[data-cta="program-details"]');
-            if (a) {
-              ev.preventDefault();
-              var pid = a.getAttribute('data-program');
-              var ttl = a.closest('section')?.querySelector('.features-title, h3')?.textContent?.trim();
-              openModal(pid, ttl);
+            try {
+                var next = (localStorage.getItem('altSecondaryNext') || 'whatsapp') === 'whatsapp' ? 'whatsapp' : 'phone';
+                var showWhatsApp = (next === 'whatsapp');
+                document.querySelectorAll('.cta-container[data-alt-secondary-group]').forEach(function(container) {
+                    var opts = container.querySelectorAll('.alt-secondary.alt-option');
+                    opts.forEach(function(el) {
+                        var isWhatsApp = el.getAttribute('data-alt') === 'whatsapp';
+                        el.style.display = (isWhatsApp === showWhatsApp) ? 'inline-block' : 'none';
+                    });
+                });
+                localStorage.setItem('altSecondaryNext', showWhatsApp ? 'phone' : 'whatsapp');
+            } catch(e) {
+                document.querySelectorAll('.alt-secondary.alt-option').forEach(function(el) {
+                    el.style.display = (el.getAttribute('data-alt') === 'whatsapp') ? 'inline-block' : 'none';
+                });
             }
-            if (ev.target.matches('.lead-close') || ev.target.hasAttribute('data-close') || ev.target === overlay) {
-              closeModal();
-            }
-          });
-          document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-          });
         })();
+
+        // Modal functionality (preserved from original)
+        (function() {
+            var overlay = document.getElementById('program-modal');
+            var bodyEl  = document.getElementById('program-modal-body');
+            var titleEl = document.getElementById('program-modal-title');
+            var tmplRoot= document.getElementById('program-templates');
+
+            function openModal(programId, titleText) {
+                var tmpl = tmplRoot?.querySelector('[data-program-template="' + programId + '"]');
+                if (!tmpl) return;
+                titleEl.textContent = titleText || 'פרטי התוכנית';
+                bodyEl.innerHTML = tmpl.innerHTML;
+                overlay.style.display = 'flex';
+                document.documentElement.classList.add('no-scroll');
+            }
+
+            function closeModal() {
+                if (overlay) overlay.style.display = 'none';
+                if (bodyEl) bodyEl.innerHTML = '';
+                document.documentElement.classList.remove('no-scroll');
+            }
+
+            document.addEventListener('click', function(ev) {
+                var a = ev.target.closest('a[data-cta="program-details"]');
+                if (a) {
+                    ev.preventDefault();
+                    var pid = a.getAttribute('data-program');
+                    var ttl = a.closest('section')?.querySelector('.features-title, h3')?.textContent?.trim();
+                    openModal(pid, ttl);
+                }
+                if (ev.target.matches('.lead-close') || ev.target.hasAttribute('data-close') || ev.target === overlay) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+        })();
+
+        // Add loading class when page loads
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+
+            // Trigger initial animations
+            setTimeout(() => {
+                document.querySelectorAll('.hero h1, .hero .subtitle, .code-strip').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 100);
+        });
+
+        // Performance optimization - lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('visible');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
     </script>
+
+    <style>
+        /* Ripple hover effect */
+        .ripple-hover {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            margin-top: -20px;
+            margin-left: -20px;
+            animation: ripple-hover-animation 1s;
+            pointer-events: none;
+        }
+
+        @@keyframes ripple-hover-animation {
+            from
+
+        {
+            transform: scale(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+
+        }
+
+        /* Page loaded state */
+        body.loaded * {
+            animation-play-state: running;
+        }
+
+        /* No scroll when modal is open */
+        .no-scroll {
+            overflow: hidden;
+        }
+    </style>
 }
