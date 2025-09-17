@@ -1,76 +1,76 @@
-@* Modal θετρ μιγιν γιπξι *@
+ο»Ώ@* Modal ΧΧ•Χ¤Χ΅ ΧΧ™Χ“Χ™Χ Χ“Χ™Χ ΧΧ™ *@
 <div id="leadModalOverlay" class="lead-modal-overlay" aria-hidden="true">
     <div id="leadModal" class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
-        <button type="button" class="lead-close" aria-label="ρβεψ" data-lead-close>ª</button>
+        <button type="button" class="lead-close" aria-label="Χ΅Χ’Χ•Χ¨" data-lead-close>Γ—</button>
 
-        <h3 id="leadTitle" class="lead-title">ιφιψϊ χωψ</h3>
-        <p id="leadIntro" class="lead-intro">πωξη μηζεψ ΰμιλν ςν τψθιν.</p>
+        <h3 id="leadTitle" class="lead-title">Χ™Χ¦Χ™Χ¨Χª Χ§Χ©Χ¨</h3>
+        <p id="leadIntro" class="lead-intro">Χ Χ©ΧΧ— ΧΧ—Χ–Χ•Χ¨ ΧΧΧ™Χ›Χ ΧΆΧ Χ¤Χ¨ΧΧ™Χ.</p>
 
-        <!-- βεσ δθετρ (ξεφβ λαψιψϊ ξηγμ) -->
+        <!-- Χ’Χ•Χ£ Χ”ΧΧ•Χ¤Χ΅ (ΧΧ•Χ¦Χ’ Χ›Χ‘Χ¨Χ™Χ¨Χª ΧΧ—Χ“Χ) -->
         <div id="leadBody">
             <form id="leadForm" method="post" asp-controller="Schools" asp-action="SubmitLead" novalidate>
                 @Html.AntiForgeryToken()
 
-                <!-- ηαειιν -->
+                <!-- Χ—Χ‘Χ•Χ™Χ™Χ -->
                 <input type="hidden" name="cta_type" id="leadCtaType" />
                 <input type="hidden" name="section" id="leadSection" />
                 <input type="text" name="website" id="leadWebsite" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
                 <div class="lead-grid">
                     <label>
-                        ων ξμΰ
+                        Χ©Χ ΧΧΧ
                         <input name="full_name" required />
                         <small class="field-error" data-for="full_name"></small>
                     </label>
 
                     <label>
-                        ϊτχιγ (ψλζ/ϊ, ξπδμϊ, ξηπκ/ϊ)
+                        ΧªΧ¤Χ§Χ™Χ“ (Χ¨Χ›Χ–/Χª, ΧΧ Χ”ΧΧª, ΧΧ—Χ Χ/Χª)
                         <input name="role" />
                     </label>
 
                     <label>
-                        ων αιϊ ρτψ
+                        Χ©Χ Χ‘Χ™Χª Χ΅Χ¤Χ¨
                         <input name="school_name" required />
                         <small class="field-error" data-for="school_name"></small>
                     </label>
 
                     <label>
-                        γεΰΨμ
+                        Χ“Χ•ΧΧ΄Χ
                         <input name="email" type="email" required />
                         <small class="field-error" data-for="email"></small>
                     </label>
 
                     <label>
-                        θμτεο
+                        ΧΧΧ¤Χ•Χ
                         <input name="phone" type="tel" />
                     </label>
 
                     <label>
-                        δςψεϊ
+                        Χ”ΧΆΧ¨Χ•Χª
                         <textarea name="notes" rows="3"></textarea>
                     </label>
                 </div>
 
-                <!-- ϊερτεϊ γιπξιεϊ μτι CTA -->
+                <!-- ΧªΧ•Χ΅Χ¤Χ•Χª Χ“Χ™Χ ΧΧ™Χ•Χª ΧΧ¤Χ™ CTA -->
                 <div id="leadExtras" class="lead-extras"></div>
 
                 <div class="lead-actions">
-                    <button type="submit" class="btn btn-primary">ωμιηδ</button>
-                    <button type="button" class="btn btn-ghost" data-lead-close>αιθεμ</button>
+                    <button type="submit" class="btn btn-primary">Χ©ΧΧ™Χ—Χ”</button>
+                    <button type="button" class="btn btn-ghost" data-lead-close>Χ‘Χ™ΧΧ•Χ</button>
                 </div>
 
                 <div id="leadMsg" class="lead-msg" role="status" aria-live="polite"></div>
             </form>
         </div>
 
-        <!-- δεγςϊ ϊεγδ (ξερϊψϊ ςγ ΰηψι ωμιηδ ξεφμηϊ) -->
+        <!-- Χ”Χ•Χ“ΧΆΧª ΧªΧ•Χ“Χ” (ΧΧ•Χ΅ΧªΧ¨Χª ΧΆΧ“ ΧΧ—Χ¨Χ™ Χ©ΧΧ™Χ—Χ” ΧΧ•Χ¦ΧΧ—Χª) -->
         <div id="leadThanks" class="lead-thanks" hidden>
-            <h3>ϊεγδ! χιαμπε ΰϊ δτπιιδ</h3>
-            <p>πηζεψ ΰμιλν αδχγν. ΰν ζδ γηεσ — ΰτωψ ϊξιγ μτπεϊ βν αεεθρΰτ.</p>
+            <h3>ΧªΧ•Χ“Χ”! Χ§Χ™Χ‘ΧΧ Χ• ΧΧª Χ”Χ¤Χ Χ™Χ™Χ”</h3>
+            <p>Χ Χ—Χ–Χ•Χ¨ ΧΧΧ™Χ›Χ Χ‘Χ”Χ§Χ“Χ. ΧΧ Χ–Χ” Χ“Χ—Χ•Χ£ β€” ΧΧ¤Χ©Χ¨ ΧªΧΧ™Χ“ ΧΧ¤Χ Χ•Χª Χ’Χ Χ‘Χ•Χ•ΧΧ΅ΧΧ¤.</p>
             <div style="margin-top:16px">
-                <button type="button" class="btn btn-primary" data-lead-close>ρβιψϊ δημεο</button>
+                <button type="button" class="btn btn-primary" data-lead-close>Χ΅Χ’Χ™Χ¨Χª Χ”Χ—ΧΧ•Χ</button>
             </div>
-            <small id="leadAutoClose" class="auto-close-hint">δημεο ιιρβψ ΰεθεξθιϊ αςεγ 20 ωπιεϊ…</small>
+            <small id="leadAutoClose" class="auto-close-hint">Χ”Χ—ΧΧ•Χ Χ™Χ™Χ΅Χ’Χ¨ ΧΧ•ΧΧ•ΧΧΧ™Χª Χ‘ΧΆΧ•Χ“ 20 Χ©Χ Χ™Χ•Χªβ€¦</small>
         </div>
     </div>
 </div>
