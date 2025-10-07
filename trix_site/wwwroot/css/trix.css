@@ -826,3 +826,206 @@ footer {
     color: #666;
     margin-top: 8px
 }
+
+/********/
+/* === HERO IMAGE === */
+.hero-content {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 32px;
+    align-items: center;
+}
+
+.hero-image img {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    object-fit: contain;
+    margin-inline: auto;
+}
+
+@media (max-width: 960px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-image {
+        order: -1;
+    }
+    /* התמונה עולה מעל הטקסט במובייל */
+}
+
+/* === CAROUSEL === */
+.carousel {
+    position: relative;
+    max-width: 100%;
+    padding: 12px 44px; /* מקום לכפתורים */
+}
+
+.carousel-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-slide {
+    flex: 0 0 100%; /* שקופית = רוחב מסך */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.08);
+    padding: 12px;
+}
+
+    .carousel-slide img {
+        display: block;
+        max-width: 100%;
+        width: auto; /* חשוב לתמונות רחבות */
+        height: auto;
+        max-height: 360px; /* קבע גובה אחיד לנראות */
+        object-fit: contain; /* שלא ייחתך */
+    }
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    inline-size: 36px;
+    block-size: 36px;
+    border-radius: 999px;
+    border: 0;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+}
+
+    .carousel-btn:hover {
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-btn:disabled {
+        opacity: .35;
+        cursor: default;
+    }
+
+.carousel .prev {
+    left: 8px;
+}
+
+.carousel .next {
+    right: 8px;
+}
+
+@media (max-width: 640px) {
+    .carousel {
+        padding: 8px 40px;
+    }
+
+    .carousel-slide img {
+        max-height: 220px;
+    }
+}
+
+/* עיצוב טבלת מסלולים */
+.pricing-table table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: right;
+    direction: rtl;
+    font-size: 1.05rem;
+}
+
+.pricing-table th {
+    background: #f0f3f5;
+    color: #333;
+    padding: 16px;
+    font-weight: 600;
+}
+
+.pricing-table td {
+    border: 1px solid #e5e5e5;
+    padding: 16px;
+    vertical-align: top;
+}
+
+.pricing-table tr:hover {
+    background: #f7fdf9;
+}
+
+.pricing-table a.btn-secondary {
+    background: #fff;
+    border: 1px solid #27ae60;
+    color: #27ae60;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+    .pricing-table a.btn-secondary:hover {
+        background: #27ae60;
+        color: #fff;
+    }
+
+/* מובייל */
+.pricing-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .pricing-desktop {
+        display: none;
+    }
+
+    .pricing-mobile {
+        display: block;
+    }
+
+    .plan-card {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+        .plan-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .plan-card p {
+            margin: 6px 0;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .plan-card .note {
+            color: #27ae60;
+            font-weight: 500;
+        }
+
+        .plan-card .price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: #000;
+        }
+
+            .plan-card .price span {
+                font-weight: 400;
+                font-size: 0.9rem;
+                color: #666;
+            }
+}

@@ -17,7 +17,7 @@ public class HomeController : Controller
     public IActionResult Parents()
     {
         ViewData["Title"] = "12trix - הורים";
-        return View();
+        return View("ParentsNew");
     }
 
     [HttpGet]

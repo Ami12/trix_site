@@ -5,6 +5,13 @@ namespace trix_site.Controllers
     [Route("Parents")]
     public class ParentsController : Controller
     {
+        [HttpGet]
+        public IActionResult Bootcamp()
+        {
+            ViewData["Title"] = "בוטקאמפ מתמטיקה";
+            return View();
+        }
+
         [HttpGet("Programs/{grade:regex(^K(5|6|7)$)}")]
         public IActionResult Programs(string grade)
         {
