@@ -147,14 +147,14 @@
 
                     <tr style="background:#fdfdfd;">
                         <td style="padding:16px;font-weight:600;">🧑‍🏫 שיעור פרטי שבועי (Zoom)</td>
-                        <td style="padding:16px;">שיעור אחד בשבוע עם מדריך קבוע, כולל שימוש באפליקציות לתרגול בין המפגשים.</td>
+                        <td style="padding:16px;">שיעור אחד בשבוע עם עמי אריכא מייסד 12trix, כולל שימוש באפליקציות לתרגול בין המפגשים.</td>
                         <td style="padding:16px;">⭐ נשארו 2 מקומות</td>
                         <td style="padding:16px;font-weight:700;">180 ₪<br><span style="font-weight:400;font-size:0.9rem;">לשיעור</span></td>
                     </tr>
 
                     <tr style="background:#fff;">
                         <td style="padding:16px;font-weight:600;">👥 שיעור קבוצתי (3 ילדים)</td>
-                        <td style="padding:16px;">לילדים שנהנים ללמוד יחד. כולל תרגול אישי ותחרות קלה בין המשתתפים.</td>
+                        <td style="padding:16px;">לילדים שנהנים ללמוד יחד. כולל תרגול אישי ושימוש באפליקציות לתרגול בין המפגשים.</td>
                         <td style="padding:16px;">💬 אפקטיבי כמו שיעור פרטי</td>
                         <td style="padding:16px;font-weight:700;">110 ₪<br><span style="font-weight:400;font-size:0.9rem;">לשיעור</span></td>
                     </tr>
@@ -185,7 +185,7 @@
 </section>
 
 <!-- פורם יצירת קשר -->
-<section id="contact" class="fade-in" style="background:#f8fafb;padding:80px 0;">
+<section id="contact" class="fade-in" style="background:#f8fafb;padding:30px 0;">
     <div class="container" style="max-width:640px;background:#fff;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,0.08);padding:40px;">
         <h2 style="font-size:1.8rem;margin-bottom:16px;">רוצים לדעת איך אפשר לעזור לילד שלכם להצליח במתמטיקה?</h2>
         <p style="margin-bottom:32px;color:#555;font-size:1.1rem;">
@@ -222,10 +222,6 @@
     </div>
 </section>
 
-
-
-
-
 <script>
     (function () {
       const track = document.getElementById('appsTrack');
@@ -261,4 +257,30 @@
 
       updateButtons();
     })();
+</script>
+
+<script>
+    document.querySelector('.contact-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const container = form.closest('section');
+            container.innerHTML = `
+              <div class="fade-in-thankyou">
+                <h2 style="color:#27AE60;">תודה שפניתם אלינו!</h2>
+                <p>קיבלנו את פנייתכם ונחזור אליכם בהקדם.</p>
+            </div>
+    `;
+    container.querySelector('.fade-in-thankyou').classList.add('show');
+        } else {
+            alert("אירעה שגיאה בשליחה. נסו שוב מאוחר יותר.");
+        }
+    });
 </script>

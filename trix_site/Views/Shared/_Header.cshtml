@@ -6,11 +6,21 @@
   </div>
 
   <ul class="nav-menu">
-    <li><a asp-controller="Home" asp-action="Index">עמוד הבית</a></li>
-    <li><a asp-controller="Home" asp-action="Parents">הורים</a></li>
-    <li><a asp-controller="Home" asp-action="Schools">בתי ספר</a></li>
-    <li><a asp-controller="Home" asp-action="Apps">אפליקציות</a></li>
-    <li><a asp-controller="Home" asp-action="Contact">צור קשר</a></li>
+    <li><a asp-controller="Home" asp-action="Index"
+               class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")">עמוד הבית</a>
+        </li>
+    <li><a asp-controller="Home" asp-action="Parents"
+               class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Parents" ? "active" : "")">הורים</a>
+        </li>
+    <li><a asp-controller="Home" asp-action="Schools"
+               class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Schools" ? "active" : "")">בתי ספר</a>
+        </li>
+    <li><a asp-controller="Home" asp-action="Apps"
+               class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Apps" ? "active" : "")">אפליקציות</a>
+        </li>
+    <li><a asp-controller="Home" asp-action="Contact"
+               class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Contact" ? "active" : "")">צור קשר</a>
+        </li>
   </ul>
 
   <button class="mobile-toggle" aria-label="פתח תפריט" type="button">

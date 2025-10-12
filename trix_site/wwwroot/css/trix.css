@@ -89,6 +89,11 @@ nav {
             color: var(--green-primary);
         }
 
+        .nav-menu a.active {
+            color: var(--green-primary);
+            font-weight: 600;
+        }
+
 .nav-actions {
     display: flex;
     align-items: center;
@@ -310,7 +315,6 @@ h1 {
 /* Features Grid */
 .features {
     background: var(--bg-light);
-    padding: 64px 0;
     margin: 64px 0;
 }
 
@@ -1029,3 +1033,12 @@ footer {
                 color: #666;
             }
 }
+
+.fade-in-thankyou {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+    .fade-in-thankyou.show {
+        opacity: 1;
+    }
