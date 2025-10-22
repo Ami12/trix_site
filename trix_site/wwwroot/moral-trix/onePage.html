@@ -1,0 +1,441 @@
+﻿<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>12Trix — שיתוף פעולה אסטרטגי</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #16a34a;
+            --yellow: #eab308;
+            --orange: #f97316;
+            --text-dark: #1e293b;
+            --text-light: #475569;
+            --bg: #f9fafb;
+            --card-bg: #fff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --radius: 20px;
+        }
+
+        html, body {
+            font-family: 'Heebo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: clip;
+            width: 100%;
+            max-width: 100vw;
+            box-sizing: border-box;
+        }
+
+        section {
+            padding: 60px 6vw;
+            max-width: 1100px;
+            width: 100%;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3 {
+            font-weight: 800;
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: clamp(26px,5vw,48px);
+            color: var(--green);
+        }
+
+        h2 {
+            font-size: clamp(22px,3.5vw,36px);
+            color: var(--green);
+            border-right: 6px solid var(--green);
+            padding-right: 10px;
+        }
+
+        h3 {
+            color: var(--text-dark);
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        p, li {
+            font-size: 18px;
+            color: var(--text-light);
+            word-break: break-word;
+        }
+
+        ul {
+            padding-right: 22px;
+            margin: 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .grid {
+            display: grid;
+            gap: 24px;
+            margin-top: 24px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            height: auto;
+            display: block;
+        }
+
+            img.limited {
+                max-width: 700px;
+                max-height: 450px;
+                object-fit: contain;
+                display: block;
+                margin: auto;
+            }
+
+        .table-wrapper {
+            overflow-x: auto;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: right;
+            vertical-align: top;
+            word-wrap: break-word;
+        }
+
+        thead {
+            background: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .profit-bar-container {
+            background: #e5e7eb;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 36px;
+            margin-top: 20px;
+            position: relative;
+            box-shadow: var(--shadow);
+            max-width: 100%;
+        }
+
+        .profit-bar-fill {
+            background: linear-gradient(to left, var(--orange), var(--yellow), var(--green));
+            height: 100%;
+            width: 100%;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+
+            to {
+                transform: scaleX(1);
+                transform-origin: right;
+            }
+        }
+
+        .profit-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            padding: 0 14px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            font-size: 17px;
+        }
+
+        .profit-bar-caption {
+            text-align: center;
+            font-weight: 800;
+            color: var(--green);
+            margin-top: 8px;
+            font-size: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            background: #f1f5f9;
+            color: var(--text-light);
+            font-weight: 500;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            section {
+                padding: 40px 5vw;
+            }
+
+            h2 {
+                border-right: none;
+                border-bottom: 4px solid var(--green);
+                padding-bottom: 8px;
+            }
+
+            p, li, td, th {
+                font-size: 17px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            img.limited {
+                max-width: 90vw;
+            }
+
+            table, .profit-bar-container, .grid, .grid-2 {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="grid-2">
+        <div>
+            <h1>12Trix — המהפכה בלמידת מתמטיקה</h1>
+            <p>מ־"הקשב למורה" ל־<strong>“חקור בעצמך”</strong>. מ־שינון להבנה. מ־הוראה להתנסות.</p>
+            <p>פלטפורמת למידה עצמית במתמטיקה — הילד מגלה, מבין ומתקדם בקצב שלו.</p>
+        </div>
+        <div><img src="parentHero.png" alt="הורה וילד לומדים עם 12Trix"></div>
+    </section>
+
+    <section>
+        <h2>מצב המתמטיקה בעולם ובישראל</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>העולם</h3>
+                <ul>
+                    <li>UNESCO: 6 מתוך 10 ילדים אינם מגיעים לרמת הבסיס במתמטיקה.</li>
+                    <li>PISA 2022: ירידה כלל-עולמית של כ-15 נקודות.</li>
+                    <li>גם מדינות מובילות מראות פגיעה בהבנה ולא רק בזכירה.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>ישראל</h3>
+                <ul>
+                    <li>ציון ממוצע מתמטיקה: 458 (OECD: 472).</li>
+                    <li>מצטיינים (רמות 5–6): 8% (OECD: 9%).</li>
+                    <li>פערי ירידה: עברית –26 נק׳, ערבית –56 נק׳.</li>
+                    <li>פיזור אחוזון 10–90 מהגבוהים ב-OECD: 34.8 לעומת 28.9.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>12Trix — תחילת הפיצוח</h2>
+        <div class="grid-2">
+            <div>
+                <ul>
+                    <li>הילד מגלה בעצמו את העיקרון המתמטי — לא מקבל הסבר.</li>
+                    <li>כל נושא נלמד דרך אינטראקציה, ויזואליזציה ומשחק.</li>
+                    <li>ללא ידע מוקדם — הידע נבנה מבפנים החוצה.</li>
+                </ul>
+            </div>
+            <div><img src="pilotResults.png" alt="תוצאות פיילוט 16 ל-91"></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>מהוראה להסבר → ללמידה דרך עשייה</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th>הוראה קלאסית</th><th>הגישה של 12Trix</th></tr></thead>
+                <tbody>
+                    <tr><td>המורה מסביר → הילד מתרגל</td><td>הילד מתרגל → הילד מבין</td></tr>
+                    <tr><td>“נשמע ונעשה”</td><td>“נעשה ונשמע”</td></tr>
+                    <tr><td>חשיבה דקלרטיבית</td><td>חשיבה אופרטיבית</td></tr>
+                    <tr><td>למידה פסיבית</td><td>למידה פעילה והתנסותית</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <img class="limited" src="fractionTestmony.png" alt="עדות מורה לשברים">
+    </section>
+
+    <section>
+        <h2>פוטנציאל פעולה בישראל — B2C</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>השוק</h3>
+                <p>כ־180,000 ילדים בישראל מקבלים שיעורים פרטיים במתמטיקה.</p>
+                <p>12Trix מציעה אלטרנטיבה יעילה ומשתלמת — אפליקציות לימוד עצמי עם תוצאות מדידות.</p>
+                <h3>רווח שנתי תשפ״ז – אפליקציות בלבד</h3>
+                <ul>
+                    <li>פסימי: חדירה 0.5% → ≈ 900 תלמידים → ≈ 7.5 מיליון ₪</li>
+                    <li>אופטימי: חדירה 5% → ≈ 9,000 תלמידים → ≈ 75 מיליון ₪</li>
+                </ul>
+                <div class="profit-bar-container">
+                    <div class="profit-bar-fill"></div>
+                    <div class="profit-bar-labels"><span>7.5 מיליון ₪</span><span>75 מיליון ₪</span></div>
+                </div>
+                <div class="profit-bar-caption">טווח רווח צפוי — 7.5 מ׳ ₪ עד 75 מ׳ ₪</div>
+            </div>
+            <div class="card">
+                <h3>הצעת ערך</h3>
+                <p>מודל עסקי המשלב בין מנוי אפליקציות לתוכניות חיזוק ממוקדות. כל תלמיד יכול להתקדם עצמאית, למדוד הצלחות ולשמור מוטיבציה לאורך זמן.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>פוטנציאל פעולה בישראל — B2B</h2>
+        <div class="grid-2">
+            <div class="card">
+                <p>כ־3,300 בתי ספר יסודיים בישראל. מחיר מנוי שנתי לבית ספר (מודל גפ״ן): 9,000 ₪.</p>
+                <ul>
+                    <li><strong>טווח קצר (תשפ״ו):</strong> עיר אחת / 10 בתי ספר – 90,000 ₪ לשנה</li>
+                    <li><strong>תשפ״ז:</strong> 1,000 בתי ספר – כ־9 מיליון ₪ לשנה</li>
+                </ul>
+                <div class="profit-bar-container">
+                    <div class="profit-bar-fill"></div>
+                    <div class="profit-bar-labels"><span>90 אלף ₪</span><span>9 מיליון ₪</span></div>
+                </div>
+                <div class="profit-bar-caption">טווח רווח צפוי — 90 אלף ₪ עד 9 מיליון ₪</div>
+            </div>
+            <div class="card">
+                <h3>מסלול צמיחה</h3>
+                <ul>
+                    <li>Private → Schools → Municipal → National</li>
+                    <li>כל בית ספר שנכנס — נשאר. כל עיר שמודדת — רואה תוצאות.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>עלות תפעול חברה (שנתי, 2025)</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th>תפקיד</th><th>עלות שנתית כוללת</th></tr></thead>
+                <tbody>
+                    <tr><td>CTO</td><td>₪720,000–1,020,000</td></tr>
+                    <tr><td>פיתוח + QA</td><td>₪310,000–500,000</td></tr>
+                    <tr><td>UI/UX בכירה</td><td>₪340,000–480,000</td></tr>
+                    <tr><td>מעצב</td><td>₪215,000–310,000</td></tr>
+                    <tr><td>מנהל שיווק</td><td>₪340,000–500,000</td></tr>
+                    <tr><td>מזכירה</td><td>₪155,000–200,000</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="color:var(--text-light)">סה״כ צוות מלא: 2.1–3.0 מיליון ₪ לשנה | גרסה רזה: 1.2–1.6 מיליון ₪.</p>
+    </section>
+
+    <section>
+        <h2>תוכנית פעולה תשפ״ו–תשפ״ז</h2>
+        <ul>
+            <li>300 משתמשים במסלולים בתשלום</li>
+            <li>פרויקט עירוני בהיקף מלא</li>
+            <li>ניתוח התנהגות משתמשים ושיפור שיטתי</li>
+            <li>הפקת עדויות הצלחה — הורים, מורים, עירייה</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>שיתוף פעולה אסטרטגי</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead><tr><th></th><th>12Trix</th><th>מורל</th></tr></thead>
+                <tbody>
+                    <tr><td>נכסים קיימים</td><td>מוצר בשל (₪750k–₪1M)</td><td>אולפן פעיל</td></tr>
+                    <tr><td>מומחיות</td><td>אפליקציות לימוד מתמטיקה מבוססות תוצאות</td><td>תוכן משפחתי וקהילה קטנה של אימהות</td></tr>
+                    <tr><td>ניסיון בשטח</td><td>פיילוטים בבתי ספר, 16→91</td><td>תקשורת רכה, שיווק אורגני</td></tr>
+                    <tr><td>גישה לקהל</td><td>ילדים, הורים, מורים (נתוני שימוש)</td><td>מורל האימהות (48), מורל TV (107)</td></tr>
+                    <tr><td>הזדמנות</td><td>חדירה לשוק ההורים בקנה מידה</td><td>מיצוב חינוכי עם מוצר מוכח</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>מודלים לשיתוף פעולה</h3>
+                <ul>
+                    <li><strong>זכיון בלעדי בישראל</strong> (X שנים), בכפוף לעמידה ביעדים</li>
+                    <li><strong>חברה משותפת — “מורל–טריקס”</strong> עם זכויות בלעדיות לשיווק בישראל</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>תנאי הצלחה (מותנה בתוצאות)</h3>
+                <ul>
+                    <li>פרויקט עירוני פעיל אחד לפחות</li>
+                    <li>300 משתמשים בתשלום</li>
+                </ul>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th></th><th>טריקס</th><th>מורל</th></tr></thead>
+                        <tbody><tr><td>אחוזים לאחר עמידה ביעדים</td><td>?</td><td>?</td></tr></tbody>
+                    </table>
+                </div>
+                <p class="muted">חלוקת אחריות ותנאים נוספים ייקבעו בהסכם חתום.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>חזון מסכם</h2>
+        <div class="card">
+            <p><strong>בעולם שבו כולם מסבירים לילד איך לחשוב — אנחנו מאפשרים לו לגלות בעצמו.</strong></p>
+            <p>מ-שינון → להבנה. מ-הוראה → להתנסות. כל ילד יכול להצליח במתמטיקה — לא בזכות עוד שיעור, אלא בזכות חוויה.</p>
+        </div>
+        <p style="font-weight:800; color:var(--green); margin-top:20px;">יחד נוכל להוביל שינוי חינוכי אמיתי בישראל.</p>
+    </section>
+
+    <footer>© 2025 12Trix — כל הזכויות שמורות</footer>
+
+</body>
+</html>
