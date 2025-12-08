@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>סדנת אורח למורות למתמטיקה</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f5f7;
+            font-family: Arial, "Segoe UI", sans-serif;
+        }
+
+        .wrapper {
+            width: 100%;
+            background-color: #f4f5f7;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .header {
+            background: linear-gradient(90deg, #ffaf3f, #ff6f3f);
+            color: #ffffff;
+            padding: 16px 24px;
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .logo-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .logo-subtitle {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .tag {
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .content {
+            padding: 24px 24px 8px;
+            color: #222222;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 0 0 12px;
+            color: #222222;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin: 20px 0 8px;
+            color: #333333;
+        }
+
+        .highlight {
+            background-color: #fff5d8;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .bullets {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0;
+        }
+
+            .bullets li::before {
+                content: "✔ ";
+                color: #27ae60;
+                font-weight: bold;
+            }
+
+            .bullets li {
+                margin-bottom: 4px;
+            }
+
+        .chart-box {
+            background-color: #f8fafc;
+            border-radius: 10px;
+            padding: 14px 14px 18px;
+            margin: 18px 0;
+            border: 1px solid #e3e7ee;
+            font-size: 14px;
+        }
+
+        .chart-img {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+            .chart-img img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 6px;
+            }
+
+        .two-cols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .col {
+            flex: 1 1 240px;
+            background-color: #fafafa;
+            border-radius: 10px;
+            padding: 12px 14px;
+            border: 1px solid #eeeeee;
+            font-size: 14px;
+        }
+
+        .label {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #444;
+        }
+
+        .about-box {
+            background-color: #f8fafc;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin: 18px 0;
+            border-right: 4px solid #4f46e5;
+            font-size: 14px;
+        }
+
+        .offer-box {
+            background-color: #fff5e9;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin: 18px 0;
+            border-right: 4px solid #ff7a3c;
+            font-size: 14px;
+        }
+
+        .footer {
+            padding: 8px 24px 22px;
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .cta-wrapper {
+            margin: 18px 0;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #10b981;
+            color: #ffffff !important;
+            padding: 10px 28px;
+            border-radius: 999px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+            .cta-button span {
+                margin-left: 6px;
+            }
+
+        @media (max-width: 600px) {
+            .header, .content, .footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+
+            <!-- HEADER -->
+            <div class="header">
+                <div class="logo-row">
+                    <div>
+                        <p class="logo-title">12Trix · חשבון בקלות</p>
+                        <p class="logo-subtitle">סדנה־הרצאה למורות מתמטיקה · כיתות א׳–ו׳</p>
+                    </div>
+                    <div class="tag">
+                        קוד גפן - 13447
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <h1>סדנת אורח למורות למתמטיקה — כלים מעשיים לקפיצה קוונטית בהישגים</h1>
+
+                <p>
+                    רוב המורות מסבירות מצוין, ובכל זאת — יש תלמידים שפשוט לא מצליחים להבין.
+                    הם מתעייפים, נתקעים, מפחדים לטעות… והכיתה כולה מרגישה את זה.
+                </p>
+
+                <div class="highlight">
+                    <strong>הסדנה־הרצאה של 12Trix</strong> נועדה לתת למורות בדיוק את מה שחסר:
+                    כלים פשוטים ומיידיים שמחזירים לתלמידים את הביטחון ומאפשרים
+                    <strong>להבין בפעם הראשונה</strong> — בלי להחליף ספרים ובלי לשבור את שגרת ההוראה.
+                </div>
+
+                <h2>🌟 מה יוצא לבית הספר שלך?</h2>
+                <ul class="bullets">
+                    <li>שיפור מדיד ומהיר ביכולת להבין ולפתור תרגילים</li>
+                    <li>ירידה בתחושת התסכול אצל מורות ותלמידים</li>
+                    <li>כלים פרקטיים ליישום מיידי כבר מהשיעור הבא</li>
+                    <li>הבנה עמוקה של מה שעוצר את תלמידי הקושי — וכיצד לעזור להם</li>
+                </ul>
+
+                <div class="chart-box">
+                    <strong>📊 מה קורה כשמתחילים ליישם בפועל?</strong>
+                    <p style="margin-top:6px;">
+                        בפיילוט בבית ספר ניר צבי, עם 23 התלמידים שהתקשו ביותר במתמטיקה בכיתות א׳–ג׳,
+                        <strong>הממוצע קפץ מ־16 ל־91</strong> בתרגילים נכונים בתוך 6 שבועות בלבד — ללא תוספת שעות הוראה.
+                    </p>
+                    <div class="chart-img">
+                        <!-- החלף ב-URL לתמונה של הגרף -->
+                        <img src="pilotResults.png" alt="תוצאות פיילוט ניר צבי">
+                    </div>
+                </div>
+
+                <h2>🧠 מה המורות לומדות בסדנה?</h2>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="label">חלק תיאורטי (כ־40–45 דק׳)</div>
+                        <ul class="bullets">
+                            <li>שני סוגי חשיבה בלמידה (Intuitive / Analytical)</li>
+                            <li>למה שליטה בפעולות הבסיס היא תנאי להבנה מתקדמת</li>
+                            <li>פחד כגורם שמכבה יכולת קוגניטיבית אצל תלמידי קושי</li>
+                            <li>הבדל בין הבנה אמיתית לבין פתרון טכני של תרגילים</li>
+                            <li>פערי בשלות בכיתות א׳–ג׳ מול חוסר שליטה בכיתות ד׳–ו׳</li>
+                            <li>אפקט פיגמליון — איך ציפיות מורות משפיעות על הישגים</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="label">חלק פרקטי (כ־45–50 דק׳)</div>
+                        <ul class="bullets">
+                            <li>מודלים ויזואליים שעובדים גם אצל תלמידים חלשים מאוד</li>
+                            <li>שיטות שמפחיתות עומס קוגניטיבי ומונעות טעויות חוזרות</li>
+                            <li>דרכי תרגול שמייצרות שליטה אמיתית בפעולות הבסיס</li>
+                            <li>התאמת הכלים לכל שכבת גיל א׳–ו׳</li>
+                            <li>חיבור בין נקודת המבט של המורה לבין החוויה של הילד</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="about-box">
+                    <strong>👋 נעים מאוד</strong>
+                    <p style="margin:6px 0 0;">
+                        אני עמירם אריכא, מייסד 12Trix. מהנדס תוכנה במקצועי, מעל 20 שנה מלווה תלמידים מתקשים,
+                        מנחה מורות ומפתח אפליקציות אינטראקטיביות ללמידת מתמטיקה.
+                        את התובנות מעשרות אלפי תרגולי אמת בשטח ארזתי לסדנה אחת — שמטרתה לעזור למורות
+                        לראות את הכיתה בעיניים חדשות, ולתת לתלמידים הזדמנות אמיתית להצליח.
+                    </p>
+                </div>
+
+                <div class="offer-box">
+                    <strong>🎁 הטבה למנהלות בגל ההשקה</strong>
+                    <p style="margin:6px 0 0;">
+                        30% הנחה על הסדנה־הרצאה
+                        + ליווי קבוצתי למורות (Zoom / WhatsApp) ללא עלות
+                        עד <strong>31 בדצמבר</strong>.
+                    </p>
+                </div>
+
+                <h2>📞 אם זה יכול להתאים לבית הספר שלך</h2>
+                <p>
+                    אשמח לשיחת היכרות קצרה של 10–15 דקות, כדי להבין את הצרכים של בית הספר
+                    ולראות איך ניתן להתאים את הסדנה למורות ולתלמידים שלך.
+                </p>
+
+                <div class="cta-wrapper">
+                    <!-- החליפי את הקישור לכתובת התיאום המתאימה (Calendly / אתר / טופס) -->
+                    <a href="https://12trix.co.il" class="cta-button">
+                        <span>📅</span> לחצי כאן לתיאום שיחה
+                    </a>
+                </div>
+
+                <p style="font-size:13px; color:#777; margin-top:6px;">
+                    אפשר גם פשוט להשיב למייל הזה עם מספר טלפון ושעות נוחות לחזרה.
+                </p>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <p style="margin:0;">
+                    לפעמים הבנה אחת משנה לילד את כל השנה.
+                </p>
+                <p style="margin:4px 0 0;">
+                    בברכה,<br>
+                    עמירם אריכא · Founder &amp; CEO — 12Trix
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

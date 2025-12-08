@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>מצגת – להבין מתמטיקה באמת (Storytelling)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      direction: rtl;
+    }
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .slide {
+      width: 100%;
+      height: 100%;
+      padding: 56px 72px;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .slide.active {
+      display: flex;
+    }
+    .title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 1.4rem;
+    }
+    .subtitle {
+      font-size: 1.7rem;
+      font-weight: 400;
+      margin-bottom: 0.9rem;
+    }
+    .big-quote {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+    .points {
+      font-size: 1.5rem;
+      line-height: 1.9;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .math-block {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 1.8rem;
+      line-height: 2.0;
+      direction: ltr;
+      text-align: center;
+      background: #020617;
+      padding: 18px 28px;
+      border-radius: 14px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
+      margin-top: 1.4rem;
+      border: 1px solid #1f2937;
+    }
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      left: 40px;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      background: #e5f3ff;
+      color: #0369a1;
+    }
+    .hint {
+      font-size: 1.1rem;
+      color: #9ca3af;
+      margin-top: 0.7rem;
+    }
+    .emoji {
+      font-size: 2.4rem;
+      margin-bottom: 0.6rem;
+    }
+      .board-img {
+          max-width: 480px;
+         /* width: 80%;*/
+          border-radius: 14px;
+          box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
+          margin-top: 1.2rem;
+          max-height: 70%;
+      }
+
+      .wide-img {
+          max-width: 620px;
+          width: 90%;
+          border-radius: 14px;
+          box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
+          margin-top: 1.2rem;
+          max-height: 70%;
+      }
+
+  </style>
+</head>
+<body>
+    <div class="deck">
+
+        <!-- Slide 1: Opening big -->
+        <section class="slide active">
+            <div class="title">מה באמת עוצר ילדים מלהבין מתמטיקה — ואיך פותרים את זה?</div>
+            <div class="subtitle">מסע קצר לתוך הראש והלב של תלמידי המתמטיקה שלכם.</div>
+            <div class="badge">הרצאה–סדנה למורות ולמורי יסודי • עמירם אריכא</div>
+            <div class="footer">שקף 1</div>
+            <div class="controls">חיצים במקלדת או קליק ימין/שמאל על המסך</div>
+        </section>
+
+        <!-- Slide 2: about me -->
+        <section class="slide">
+            <div class="title">כמה מילים עלי</div>
+            <div class="points">
+                מהנס תוכנה<br>
+                40 שנה מלמד מתמטיקה באופן פרטי <br>
+                יזם הייטק חינוכי - 12trix<br>
+                מפתח ופדגוג של סביבת לימוד עצמי בחשבון לילדים<br>
+            </div>
+            <div class="footer">שקף 2</div>
+            <div class="controls">חיצים במקלדת או קליק ימין/שמאל על המסך</div>
+        </section>
+
+
+        <!-- Slide 3: Secondary line -->
+        <section class="slide">
+            <div class="big-quote">כלים מעשיים. מבוססי הבנה. בלי גימיקים.</div>
+            <div class="hint">נישאר עם מה שעובד לילדים בכיתה, לא רק בספרי מחקר.</div>
+            <div class="footer">שקף 3</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+        <!-- Slide 4: Invitation to experiment -->
+        <section class="slide">
+            <div class="big-quote">בואו נעשה ניסוי קצר.</div>
+            <div class="points">לכמה רגעים תהיו אתם במקומם של התלמידים בכיתה.</div>
+            <div class="emoji">🙂</div>
+            <div class="big-quote">אל דאגה — אין ציונים.</div>
+            <div class="points">אנחנו בודקים חוויה של חשיבה, לא מי "חזק" ומי "חלש".</div>
+            <div class="footer">שקף 4</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+        <!-- Slide 6: First exercise -->
+        <section class="slide">
+            <div class="big-quote">תרגיל 1</div>
+            <div class="math-block">
+                33 × 16 ÷ 8 = ?
+            </div>
+            <div class="big-quote">תרגיל 2</div>
+            <div class="math-block">
+                21 + 27 + 27 + 27 + 27 + 27 − 25 − 25 − 25 − 25 − 25 = ?
+            </div>
+            <div class="hint">תנסו לפתור כמה שיותר מהר.</div>
+            <div class="footer">שקף 6</div>
+            <div class="controls">אחרי שסיימו ▶ לשקף הבא</div>
+        </section>
+
+
+        <!-- Slide 6.5: מעבר -->
+        <section class="slide">
+            <div class="big-quote">מה שקרה עכשיו לא קשור ל"חכמה" — רק למיומנות.</div>
+            <div class="points">בואו נבין למה!</div>
+            <div class="footer">שקף 7</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 1 -->
+        <section class="slide">
+            <div class="big-quote">ניסוי: איך מומחי שחמט רואים לוח.</div>
+            <img src="chas1.png" alt="לוח שחמט באמצע משחק" class="board-img">
+            <!--<div class="hint">הראו למאסטרים ולמתחילים לוח באמצע משחק לחמש שניות, ואז ביקשו לשחזר את המצב.</div>-->
+            <div class="footer">שקף 8</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 2 -->
+        <section class="slide">
+            <div class="big-quote">אותו הלוח – לשחקנים מתחילים ולמאסטרים.</div>
+            <img src="chas2.png" alt="השוואה בין מתחיל למאסטר" class="board-img">
+            <div class="footer">שקף 9</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 3: Beginner recall -->
+        <section class="slide">
+            <div class="big-quote">כמה כלים המתחילים הצליחו לשחזר?</div>
+            <img src="chas3.PNG" alt="שחזור עמדת שחמט על ידי מתחיל" class="board-img">
+            <div class="points">בממוצע – בערך ארבעה כלים במקום הנכון.</div>
+            <div class="footer">שקף 10</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 4: Master recall -->
+        <section class="slide">
+            <div class="big-quote">וכמה כלים המאסטרים הצליחו לשחזר?</div>
+            <img src="chas4.PNG" alt="שחזור עמדת שחמט על ידי מאסטר" class="board-img">
+            <div class="points">בממוצע – סביב 16 כלים במקום הנכון.</div>
+            <div class="footer">שקף 11</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 5: Random position -->
+        <section class="slide">
+            <div class="big-quote">ואז חוקרי הניסוי ערבבו את הכלים על הלוח…</div>
+            <img src="rearange.PNG" alt="לוח שחמט עם כלים מפוזרים באקראי" class="board-img">
+            <div class="points">מה לדעתכם קרה?</div>
+            <div class="footer">שקף 12</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 5.5: Random position -->
+        <section class="slide">
+            <div class="big-quote">במצב אקראי – היתרון של המאסטרים כמעט נעלם</div>
+            <div class="footer">שקף 13</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 6: Chunking idea -->
+        <section class="slide">
+            <div class="big-quote">מה מאפשר למאסטרים לזכור כל כך הרבה?</div>
+            <!--<div class="points">הם לא זוכרים אוסף של פרטים בודדים – הם רואים דפוסים מוכרים.</div>
+        <div class="points">
+            הם לא זוכרים כלי־כלי — הם רואים קבוצות.
+        </div>-->
+            <div class="footer">שקף 14</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <img src="chanking1.PNG" alt="דוגמה ל-Chunking בזכירת מידע" class="wide-img">
+            <div class="footer">שקף 14</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Chess Slide 7: Chunkin -->
+        <section class="slide">
+            <div class="big-quote">מומחיות = שימוש ב–Chunking.</div>
+            <img src="chanking3.PNG" alt="Chunking של נוסחאות ומילים" class="wide-img">
+            <div class="points">
+                אנחנו אוספים פרטים ליחידות משמעות (Chunks) שקל למוח להחזיק.
+
+            </div>
+            <div class="footer">שקף 15</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+        <!-- Slide 7.5: Chunking + חיבור למתמטיקה -->
+        <section class="slide">
+            <div class="big-quote">גם במתמטיקה זה ככה: כשיש מיומנות, אנחנו רואים מיד</div>
+            <div class="math-block">
+                33 × <u>16 ÷ 8</u> = 66
+            </div>
+            <div class="math-block">
+                21 + 27 + 27 + 27 + 27 + 27 − 25 − 25 − 25 − 25 − 25  = ?<br>
+                21 + 5 x <u>(27 - 25)</u> = 31<br>
+            </div>
+            <div class="footer">שקף 16</div>
+            <div class="controls">אחרי שסיימו ▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="big-quote">מי פתר בדרך הארוכה — ומי ראה את הקיצור?</div>
+            <div class="points">זה לא עניין של "חכמה" — זה עניין של מיומנות (שליטה אריתמטית).</div>
+            <div class="footer">שקף 17</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="big-quote" dir="ltr">97 + 5 = ?</div>
+            <div class="footer">שקף 15</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="big-quote">
+                כשאין מבנה — המוח נכנס לבלבול.<br>
+                כשיש מבנה — המוח נרגע.
+            </div>
+            <div class="points">המוח לא יכול “להבין” כשכל המשאבים שלו עסוקים בלהחזיק מספרים בראש.</div>
+            <div class="footer">שקף 18</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="big-quote">
+                אני אציג לכם שני ילדים בכיתה א'
+            </div>
+            <div class="points">
+                איזה ילד יותר טוב במתמטיקה?<br />
+                מה הראשון מבין שהשני לא מבין?
+            </div>
+
+            <div class="footer">שקף 18</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 10: Flow Arithmetic -->
+        <section class="slide">
+            <div class="title">Arithmetic Flow</div>
+            <div class="points">המעבר מחשיבה מאומצת לזרימה טבעית בחשבון.</div>
+            <div class="badge">כשאריתמטיקה זורמת — ההבנה המתמטית יכולה להיבנות.</div>
+            <div class="footer">שקף 20</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <img src="arithmetics.png" alt="" class="board-img">
+            <div class="footer">שקף 20</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="title">חלק שני <br />מחליפים מקומות ישיבה 🙂</div>
+            <div class="footer">שקף 20</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 12: System 1/2 title -->
+        <section class="slide">
+            <div class="title">Intuitive / System 1<br>Analytical / System 2</div>
+            <div class="subtitle">Daniel Kahneman</div>
+            <div class="footer">שקף 22</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+        <!-- Slide 11: Brain visual text -->
+        <section class="slide">
+            <div class="big-quote">מוח עמוס לא יכול להבין.</div>
+            <div class="points">עומס קוגניטיבי = יותר מדי משימות במקביל על אותו "מעבד".</div>
+            <div class="footer">שקף 21</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+        <!-- Slide 13: System 1/2 core message -->
+        <section class="slide">
+            <div class="big-quote">כשהחישובים עוברים לאוטומט — העומס הקוגניטיבי יורד.</div>
+            <div class="points">
+                ואז נשאר מקום במוח לדבר החשוב באמת: להבין.<br>כשמערכת 1 חזקה, מערכת 2 פנויה להבין.<br />
+                3/6 = 1/2
+            </div>
+            <div class="footer">שקף 23</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+
+
+        <!-- Slide 14: Fear is enemy -->
+        <section class="slide">
+            <div class="big-quote">פחד הוא תוצאה של עומס — לא של "חולשה".</div>
+            <div class="points">כשהילד לא מבין מה קורה — המוח נכנס למגננה.</div>
+            <div class="footer">24</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 15: Equations block -->
+        <section class="slide">
+            <div class="big-quote">תרגיל פשוט, נכון?</div>
+            <div class="math-block">
+                5 + ? = 7<br>
+            </div>
+            <div class="footer">שקף 25</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="big-quote">אותו תרגיל בדרך אחרת</div>
+            <div class="math-block" style="text-align:left">
+                5 + ? = 7<br>
+                5 + x = 7 &nbsp;&nbsp;⇒&nbsp;&nbsp; x = ?<br>
+                f(x) = 5 + x &nbsp;&nbsp;⇒&nbsp;&nbsp; f(?) = 7
+            </div>
+            <div class="hint">מתמטיקה אינה קשה — היא לפעמים מוצגת באופן שמעלה עומס.</div>
+            <div class="footer">שקף 25</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="title">דוגמה להמחשה</div>
+            <img src="equations.PNG" alt="" class="board-img">
+            <div class="footer">שקף 20</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 16: Defense mode -->
+        <section class="slide">
+            <div class="big-quote">במצב הגנה — המוח הלומד פשוט "כבה".</div>
+            <div class="points">כדי להדליק חשיבה — צריך קודם להחזיר ביטחון.</div>
+            <div class="footer">שקף 26</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+
+        <section class="slide">
+            <div class="title">חלק שלישי <br />נשארים לשבת 🙂</div>
+            <div class="footer">שקף 20</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 18: Declarative vs Operative -->
+        <section class="slide">
+            <div class="title">חשיבה דקלרטיבית מול חשיבה אופרטיבית</div>
+            <img src="declerative.PNG" alt="" class="board-img">
+            <div class="footer">שקף 28</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <img src="decimal_1.PNG" alt="" class="board-img">
+            <img src="decimal_2.PNG" alt="" class="board-img">
+            <div class="footer">שקף 34</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="title">במודל למידה טבעי</div>
+            <div class="points" style="text-align:right">
+                הבנה לא מגיעה מבחוץ — היא נבנית מבפנים<br />
+                הבנה נוצרת על ידי חזרתיות והתנסות.<br />
+                הבנה היא לא דבר בינארי ('מבין' - 'לא מבין')<br />
+                הבנה היא תהליך — לא רגע.<br />
+                היא נבנית צעד-אחר-צעד, לא בשיעור אחד "קסום".<br />
+                ההסבר צריך לבוא אחרי ההבנה — לא לפני.<br />
+                בדיוק כמו לימוד שפה — לא מסבירים דקדוק לפני שמדברים.
+            </div>
+            <div class="footer">29</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+        <section class="slide">
+            <div class="title">חלק רביעי 🙂</div>
+            <div class="footer">שקף 20</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+        <section class="slide">
+            <div class="big-quote">אתגרים לפי שכבת גיל</div>
+            <img src=" chalange.gif" alt="" class="board-img">
+            <div class="footer">שקף 34</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 25: Badge grades 1-3 -->
+        <section class="slide">
+            <div class="big-quote">בכיתות א׳–ג</div>
+            <div class="points">האתגר הוא לא "להספיק את החומר" — אלא לאפשר לכל ילד 'להבשיל' בקצב שלו.</div>
+            <div class="footer">שקף 35</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+
+        <!-- Slide 24: Dana example -->
+        <section class="slide">
+            <div class="big-quote">באיזה גיל ללמד בעיות מילוליות?</div>
+            <img src="verbal.png" alt="" class="board-img">
+            <div class="footer">שקף 37</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 23: Cognitive maturity title -->
+        <section class="slide">
+            <div class="title">בשלות קוגניטיבית ≠ גיל כרונולוגי.</div>
+            <div class="points">אין גיל שבו כל הילדים בשלים לאותו נושא מתמטי.<br></div>
+            <div class="footer">שקף 36</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 26: grades 4-6 problem -->
+        <section class="slide">
+            <div class="big-quote">בכיתות ד׳–ו׳: הבעיה כבר לא קוגניטיבית — אלא רגשית.</div>
+            <div class="points">שברים, אלגברה, חילוק ארוך — מגיעים על בסיס רעוע, עם הרבה פחד.</div>
+            <div class="footer">שקף 38</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 27: abstract + fear -->
+        <section class="slide">
+            <div class="big-quote">מופשטות + חוסר שליטה + פחד = ניתוק מהמתמטיקה.</div>
+            <div class="points">גם תלמידים חכמים "נופלים בין הכיסאות".</div>
+            <div class="points">
+                הם לא "חלשים" — הם מפוחדים.
+            </div>
+            <div class="footer">שקף 39</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <section class="slide">
+            <div class="title">
+                חלק חמישי 🙂<br />
+                אפקט פיגמליון
+            </div>
+            <div class="footer">שקף 20</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 28: Pygmalion arrow -->
+        <section class="slide">
+            <div class="big-quote">ביצועי התלמיד ← ציפיות המורה.</div>
+            <div class="points"> מחקר Rosenthal & Jacobson (1968)</div>
+            <div class="footer">שקף 40</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 29: Belief -->
+        <section class="slide">
+            <div class="big-quote">אמונה יוצרת מציאות.</div>
+            <div class="points">האפקט חזק במיוחד אצל תלמידים חלשים – הם זקוקים לאמון של מישהו מבחוץ.</div>
+            <div class="footer">שקף 41</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 30: Child success placeholder -->
+        <section class="slide">
+            <div class="big-quote">כמה סיפורים אישיים</div>
+            <div class="points"><!--הסיפור של כל כיתה מתחיל בילד אחד שמישהו החליט להאמין בו.--></div>
+            <div class="footer">שקף 42</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 31: Three pillars -->
+        <section class="slide">
+            <div class="title">שליטה • ביטחון רגשי • למידה דרך פעולה</div>
+            <div class="points">כששלושת אלה מתקיימים – נוצרת סביבה שבה כל ילד יכול לצמוח במתמטיקה.</div>
+            <div class="footer">שקף 43</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 32: Success phrase -->
+        <section class="slide">
+            <div class="big-quote">סיכום</div>
+            <div class="points">
+                שליטה (כושר) אריתמטי<br />
+                מודל למידה טבעי - חקר והתנסות<br />
+                אמונה יוצרת מציאות<br />
+                ביטחון רגשי<br />
+
+            </div>
+            <div class="footer">שקף 44</div>
+            <div class="controls">▶ לשקף הבא</div>
+        </section>
+
+        <!-- Slide 33: Call to action -->
+        <section class="slide">
+            <div class="title">בואו נראה יחד איך עושים את זה בכיתה שלכם.</div>
+            <div class="points">בחלק הבא של המפגש נרד לרזולוציה של כלים, דוגמאות ותרגולים.</div>
+            <div class="footer">שקף 45</div>
+            <div class="controls">◀ חזרה אחורה או סיום</div>
+        </section>
+
+    </div>
+
+<script>
+  (function() {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let current = 0;
+
+    function showSlide(index) {
+      slides[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        showSlide(current + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        showSlide(current - 1);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      const x = e.clientX;
+      if (x > window.innerWidth / 2) {
+        showSlide(current + 1);
+      } else {
+        showSlide(current - 1);
+      }
+    });
+  })();
+</script>
+</body>
+</html>
