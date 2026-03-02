@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>מצגת – 12trix × עיריית קריית מוצקין</title>
+    <title>מצגת – 12trix × עיריית הרצליה</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -58,7 +58,7 @@
                 margin: 0 0 16px;
             }
 
-      
+
         .subtitle {
             color: var(--muted);
             font-size: clamp(16px, 1.8vw, 20px);
@@ -233,10 +233,74 @@
             }
         }
     </style>
+    <style>
+        @media print {
+
+            @page {
+                size: A4;
+                margin: 18mm;
+            }
+
+            body {
+                font-size: 14px;
+                line-height: 1.4;
+                background: #fff;
+                color: #000;
+            }
+
+            header.nav,
+            footer.deckbar,
+            .dotnav,
+            #prevBtn,
+            #nextBtn {
+                display: none !important;
+            }
+
+            .deck {
+                position: static;
+            }
+
+            .slide {
+                display: block !important;
+                width: auto;
+                min-height: auto;
+                padding: 0;
+                page-break-after: always;
+                break-after: page;
+            }
+
+                .slide:last-child {
+                    page-break-after: auto;
+                }
+
+            .card {
+                box-shadow: none;
+                background: #fff;
+                border: 1px solid #ddd;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+                page-break-inside: avoid;
+            }
+
+            h1, h2, h3 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            ul, p, .card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
+    </style>
+
 </head>
 <body>
     <header class="nav">
-        <div class="brand"><span class="dot"></span> 12trix × קריית מוצקין</div>
+        <div class="brand"><span class="dot"></span> 12trix × הרצליה</div>
         <div class="tools">
             <button id="prevBtn" title="שקף קודם">◀</button>
             <button id="nextBtn" class="primary" title="שקף הבא">▶</button>
@@ -247,9 +311,9 @@
 
         <section class="slide active" data-title="פתיחה" style="padding-top: 120px;">
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:80vh;text-align:center;">
-                <img src="cityLogo.png" alt="לוגו עיריית קריית מוצקין" style="max-width:200px;margin-bottom:24px;">
+                <img src="HerzliyaLogo.png" alt="לוגו עיריית הרצליה" style="max-width:200px;margin-bottom:24px;">
                 <img src="logo.webp" alt="לוגו 12trix" style="max-width:220px;margin-bottom:32px;">
-                <h1 class="title">שיתוף פעולה אסטרטגי<br>לשדרוג לימודי המתמטיקה בקריית מוצקין</h1>
+                <h1 class="title">שיתוף פעולה אסטרטגי<br>לשדרוג לימודי המתמטיקה בהרצליה</h1>
                 <p class="lead">תוכנית הוליסטית ללימוד מתמטיקה בבתי הספר היסודיים</p>
                
             </div>
@@ -258,12 +322,12 @@
         <!-- 1: חזון -->
         <section class="slide" data-title="חזון עירוני">
             <h1 class="title">החזון</h1>
-            <p class="lead">"קריית מוצקין – עיר מובילה בחדשנות לימודית"</p>
+            <p class="lead">"הרצליה – עיר מובילה בחדשנות לימודית"</p>
             <div class="grid cols-2">
                 <div class="card">
                     <span class="badge green">מטרות על</span>
                     <ul class="clean" style="margin-top:10px">
-                        <li>להביא את קריית מוצקין לראש רשימת ההישגים במתמטיקה (יסודי).</li>
+                        <li>להביא את הרצליה לראש רשימת ההישגים במתמטיקה (יסודי).</li>
                         <li>להעלות משמעותית את הביטחון, ההנאה והמסוגלות של התלמידים.</li>
                     </ul>
                 </div>
@@ -557,14 +621,14 @@
         <section class="slide" data-title="סיום">
             <div style="margin-top:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;">
                 <h1 class="title">השינוי מתחיל עכשיו</h1>
-                <p class="lead">יחד נוביל את קריית מוצקין לצמרת המתמטיקה בישראל</p>
+                <p class="lead">יחד נוביל את הרצליה לצמרת המתמטיקה בישראל</p>
                 <ul class="clean" style="margin-top:20px;text-align:center;">
                     <li>פיילוט תשפ״ו – 5 כיתות</li>
                     <li>שיתוף פעולה עירוני–חינוכי מלא</li>
                     <li>שינוי תרבות הלמידה והעלאת הישגים בכל שכבות הגיל</li>
                 </ul>
                 <div style="display:flex;justify-content:center;align-items:center;gap:40px;margin-top:40px;">
-                    <img src="cityLogo.png" alt="לוגו עיריית קריית מוצקין" style="height:80px;width:auto;">
+                    <img src="HerzliyaLogo.png" alt="לוגו עיריית הרצליה" style="height:80px;width:auto;">
                     <img src="logo.webp" alt="לוגו 12trix" style="height:70px;width:auto;">
                 </div>
                 <p style="margin-top:30px;font-size:16px;color:var(--muted);">עמירם אריכא – מייסד 12trix | 054-4684216 | support@12trix.co.il</p>
