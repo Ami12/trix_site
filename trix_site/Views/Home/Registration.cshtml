@@ -1,0 +1,119 @@
+﻿@using trix_site.Models;
+@model RegistrationViewModel
+
+@{
+    ViewData["Title"] = "רישום ומחויבות לתוצאות - 12trix";
+}
+
+<section class="bg-slate-50 min-h-screen py-12 px-4">
+    <div class="max-w-3xl mx-auto bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-gray-100">
+
+        <!-- Header עם דגש רגשי -->
+        <div class="bg-blue-600 p-10 text-white text-center">
+            <img src="~/images/amiram.png" alt="עמי - 12trix" class="w-32 h-32 rounded-full mx-auto border-4 border-white mb-4 object-cover shadow-lg">
+            <h1 class="text-3xl font-bold mb-2 italic text-blue-50">"זה הרבה יותר ממתמטיקה."</h1>
+            <p class="text-lg opacity-90">השקעה חד-פעמית בבסיס שתלווה את הילד לכל החיים.</p>
+        </div>
+
+        <div class="p-8 md:p-14">
+
+            <!-- סעיף המחיר והערך - הוספה חדשה -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6 border-r-4 border-blue-600 pr-4">ההשקעה בילד שלכם</h2>
+
+                <div class="grid md:grid-cols-2 gap-6 items-stretch">
+                    <!-- כרטיס מחיר -->
+                    <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 flex flex-col justify-center">
+                        <p class="text-gray-600 font-medium">עלות המסלול:</p>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-4xl font-black text-blue-700">160 ₪</span>
+                            <span class="text-gray-500">לחודש</span>
+                        </div>
+                        <p class="text-sm text-blue-800 mt-2">מסלול יחיד של 6 חודשי עומק</p>
+                        <p class="text-xs text-gray-500 mt-1">* ניתן לפרוס לעד 12 תשלומים נוחים</p>
+                    </div>
+
+                    <!-- כרטיס השוואה -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <h4 class="font-bold text-gray-800 mb-3">למה זה משתלם?</h4>
+                        <ul class="text-sm space-y-2 text-gray-600">
+                            <li class="flex items-center gap-2">
+                                <span class="text-green-500">●</span>
+                                עלות של שיעור פרטי אחד לחודש
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-green-500">●</span>
+                                מורה פרטי נותן "קביים", אנחנו בונים "רגליים".
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-green-500">●</span>
+                                חיסכון של שנים של תסכול ופערים לימודיים.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- הערך הרגשי -->
+            <div class="mb-12 bg-indigo-50 p-8 rounded-3xl text-center">
+                <h3 class="text-xl font-bold text-indigo-900 mb-4 italic">השינוי האמיתי הוא לא בציון</h3>
+                <p class="text-indigo-800 leading-relaxed">
+                    כשילד עובר מציון 16 ל-91, הוא לא רק למד לחשב. הוא למד שהוא **מסוגל**.
+                    הביטחון הזה מקרין על האנגלית, על החברים ועל השקט הנפשי בבית.
+                    אנחנו מחליפים את הריבים על שיעורי הבית בתחושת גאווה וניצחון.
+                </p>
+            </div>
+
+            <!-- תזכורת שיחה ותנאים -->
+            <div class="bg-amber-50 border-r-4 border-amber-400 p-5 mb-10 rounded-l-lg">
+                <p class="text-amber-900 font-bold leading-relaxed mb-2">
+                    עצרו. אם לא דיברנו בטלפון - אל תירשמו עדיין.
+                </p>
+                <a href="/#contact" class="text-blue-600 underline font-bold">תיאום שיחת הסבר של 15 דקות</a>
+            </div>
+
+            <form id="regForm" asp-action="ProcessRegistration" asp-controller="Home" method="post" class="space-y-6">
+                @Html.AntiForgeryToken()
+
+                <div class="space-y-4">
+                    <label class="flex items-start cursor-pointer group bg-white p-4 rounded-xl border border-gray-200">
+                        <input id="checkTerms" asp-for="TermsAccepted" type="checkbox" class="mt-1.5 ml-3 h-5 w-5 rounded border-gray-300 text-blue-600">
+                        <span class="text-gray-700">אני מאשר את תנאי המנוי (6 חודשים ללא החזר) ומבין שתהליך אמיתי לוקח זמן.</span>
+                    </label>
+
+                    <label class="flex items-start cursor-pointer group bg-white p-4 rounded-xl border border-gray-200">
+                        <input id="checkCommit" asp-for="ParentCommitment" type="checkbox" class="mt-1.5 ml-3 h-5 w-5 rounded border-gray-300 text-blue-600">
+                        <span class="text-gray-700">אני מתחייב ללוות את הילד שלי בתהליך בניית הבסיס האריתמטי.</span>
+                    </label>
+                </div>
+
+                <!-- הודעת שגיאה שמוסתרת כברירת מחדל -->
+                <p id="errorMsg" class="text-red-600 font-bold text-sm hidden">יש לאשר את שני התנאים כדי להמשיך לרישום.</p>
+
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 mb-6">
+                    <p class="text-gray-600">עלות המסלול: <span class="text-2xl font-black text-blue-700">160 ₪</span> לחודש</p>
+                    <p class="text-xs text-gray-500 italic">* מנוי ל-6 חודשים (ניתן לפרוס ל-12 תשלומים)</p>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white text-xl font-bold py-5 rounded-2xl shadow-lg hover:bg-blue-700 transition-all">
+                    אני מבין את התהליך - בואו נתחיל
+                </button>
+            </form>
+
+            <script>
+                document.getElementById('regForm').onsubmit = function(e) {
+                    const terms = document.getElementById('checkTerms').checked;
+                    const commit = document.getElementById('checkCommit').checked;
+                    const error = document.getElementById('errorMsg');
+
+                    if (!terms || !commit) {
+                        e.preventDefault(); // מונע שליחה וקפיצה למעלה
+                        error.classList.remove('hidden'); // מציג את ההודעה במקום
+                        return false;
+                    }
+                };
+            </script>
+                  
+        </div>
+    </div>
+</section>
