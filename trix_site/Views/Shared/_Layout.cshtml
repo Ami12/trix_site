@@ -1,126 +1,75 @@
-﻿<!DOCTYPE html>
+@{
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "Index";
+    string ActiveIf(string action) => currentAction == action ? "active" : "";
+}
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - 12trix</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Assistant', sans-serif;
-        }
-    </style>
+    <title>12trix - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="flex flex-col min-h-screen">
+<body>
 
-    <!-- Top Navbar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center gap-8">
-                    <!-- Logo -->
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="@Url.Action("Index", "Home")">
-                            <img class="h-12 w-auto" src="~/images/logo.webp" alt="12trix">
-                        </a>
-                    </div>
-
-                    <!-- Navigation Links (Desktop) -->
-                    <div class="hidden md:flex space-x-8 space-x-reverse">
-                        <a href="@Url.Action("Index", "Home")" class="text-gray-700 hover:text-blue-600 px-3 py-2 font-bold transition-colors">השיטה</a>
-                        <a href="@Url.Action("Registration", "Home")" class="text-gray-700 hover:text-blue-600 px-3 py-2 font-bold transition-colors">רישום</a>
-                        <a href="@Url.Action("Contact", "Home")" class="text-gray-700 hover:text-blue-600 px-3 py-2 font-bold transition-colors">צור קשר</a>
-                    </div>
-                </div>
-
-                <!-- Login & Mobile Toggle -->
-                <div class="flex items-center gap-4">
-                    <!-- Login Button (Hidden on very small screens if needed, or kept) -->
-                    <a href="https://app.12trix.com" class="hidden sm:inline-flex items-center px-6 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-full hover:bg-blue-600 hover:text-white transition-all">
-                        <svg xmlns="http://www.w3.org" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                        </svg>
-                        כניסת חברים
-                    </a>
-
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-button" class="md:hidden p-2 text-gray-700 hover:text-blue-600 focus:outline-none">
-                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="nav-right">
+                <a asp-controller="Home" asp-action="Index" class="nav-logo"><img src="~/img/logo.webp" alt="12trix" /></a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a asp-controller="Home" asp-action="Method" class="@ActiveIf("Method")">השיטה</a></li>
+                    <li><a asp-controller="Home" asp-action="Tutors" class="@ActiveIf("Tutors")">מורים פרטיים</a></li>
+                    <li><a asp-controller="Home" asp-action="Youth" class="@ActiveIf("Youth")">מובילי שינוי</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact" class="@ActiveIf("Contact")">צור קשר</a></li>
+                </ul>
             </div>
-        </div>
-
-        <!-- Mobile Navigation Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-xl">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="@Url.Action("Index", "Home")" class="block px-3 py-4 text-base font-bold text-gray-700 border-b border-gray-50">השיטה</a>
-                <a href="@Url.Action("Registration", "Home")" class="block px-3 py-4 text-base font-bold text-gray-700 border-b border-gray-50">רישום</a>
-                <a href="@Url.Action("Contact", "Home")" class="block px-3 py-4 text-base font-bold text-gray-700 border-b border-gray-50">צור קשר</a>
-                <a href="https://app.12trix.com" class="block mt-4 text-center px-6 py-3 bg-blue-600 text-white font-bold rounded-xl">כניסת חברים</a>
+            <div class="nav-actions">
+                @* TODO: point at the real app.12trix.com login URL *@
+                <a href="https://app.12trix.com/Account/Login" class="login-link">👤 כניסת חברים</a>
+                <button class="nav-toggle" id="navToggle" aria-label="תפריט" aria-expanded="false" aria-controls="navLinks">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </nav>
 
     <script>
-        // לוגיקה לפתיחה וסגירה של התפריט במובייל
-        const menuBtn = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // סגירה אוטומטית במעבר עמוד (חשוב ב-Single Page או Anchor Links)
-        window.addEventListener('hashchange', () => {
-            mobileMenu.classList.add('hidden');
-        });
+        (function () {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            if (!toggle || !links) return;
+            toggle.addEventListener('click', function () {
+                var open = links.classList.toggle('open');
+                toggle.classList.toggle('open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            links.addEventListener('click', function (e) {
+                if (e.target.tagName === 'A') {
+                    links.classList.remove('open');
+                    toggle.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
     </script>
 
+<main>
+    @RenderBody()
+</main>
 
-    <!-- Main Content -->
-    <main role="main" class="flex-grow">
-        @RenderBody()
-    </main>
+<footer>
+    <div class="footer-links">
+        <a asp-controller="Home" asp-action="Privacy">מדיניות פרטיות</a>
+        <span class="sep">|</span>
+        <a asp-controller="Home" asp-action="Terms">תנאי שימוש</a>
+        <span class="sep">|</span>
+        <a href="tel:054-4684-216">054-4684-216 📞</a>
+        <span class="sep">|</span>
+        <a href="mailto:support@12trix.com">support@12trix.com 💻</a>
+    </div>
+    <div class="footer-copy">© 12trix 2026 - כל הזכויות שמורות</div>
+</footer>
 
-    <!-- Footer (Based on your image) -->
-    <footer class="bg-white border-t border-gray-200 py-6">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row-reverse justify-center items-center gap-4 text-sm text-gray-600">
-
-            <div class="flex items-center gap-1">
-                <span>© 12trix 2026 - כל הזכויות שמורות</span>
-            </div>
-
-            <span class="hidden md:inline">|</span>
-
-            <div class="flex items-center gap-2">
-                <a href="tel:054-4684-216" class="hover:text-blue-600 font-bold flex items-center gap-1" dir="ltr">
-                    054-4684-216 📞
-                </a>
-            </div>
-
-            <span class="hidden md:inline">|</span>
-
-            <div class="flex items-center gap-2">
-                <a href="mailto:support@12trix.com" class="hover:text-blue-600 flex items-center gap-1 underline decoration-blue-200 underline-offset-4">
-                    support@12trix.com 💻
-                </a>
-            </div>
-
-            <span class="hidden md:inline">|</span>
-
-            <div class="flex items-center gap-4 font-medium">
-                <a href="@Url.Action("Privacy", "Home")" class="hover:text-blue-600 underline">מדיניות פרטיות</a>
-                <span class="text-gray-300">|</span>
-                <a href="@Url.Action("Terms", "Home")" class="hover:text-blue-600 underline">תנאי שימוש</a>
-            </div>
-
-        </div>
-    </footer>
-
-    @await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

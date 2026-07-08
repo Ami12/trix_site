@@ -1,72 +1,89 @@
-﻿@{
-    ViewData["Title"] = "צור קשר - 12trix";
+@model trix_site.Models.ContactViewModel
+@{
+    ViewData["Title"] = "צור קשר";
 }
 
-<section class="bg-white min-h-[80vh] py-16 px-4">
-    <div class="max-w-4xl mx-auto">
+@* NOTE FOR AMI:
+   This view assumes a shared _Layout.cshtml provides <html dir="rtl">, the
+   navbar, the footer, and links to the shared site.css. The markup below is
+   only the page body. If you are NOT using a layout, copy the <nav>/<footer>
+   and <head> from the standalone HTML file 12trix-contact.html. *@
 
-        <!-- כותרת ראשית -->
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">בואו נדבר על הילד שלכם</h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                כדי להבטיח תוצאות אמיתיות כמו בפיילוט, חשוב לי לוודא שיש התאמה מלאה בין הצרכים של הילד לבין השיטה שלנו.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-12 items-start">
-
-            <!-- אפשרות 1: תיאום שיחה (Calendly) -->
-            <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
-                <div class="flex items-center mb-6">
-                    <div class="bg-blue-600 p-3 rounded-full ml-4">
-                        <svg xmlns="http://www.w3.org" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">תיאום שיחה ביומן</h3>
-                </div>
-                <p class="text-gray-700 mb-8 leading-relaxed">
-                    בחרו את הזמן שנוח לכם לשיחת ייעוץ של 15 דקות. ללא התחייבות, רק בדיקת התאמה.
-                </p>
-                <a href="https://calendly.com" target="_blank" class="block text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-colors shadow-lg">
-                    בחירת מועד לשיחה
-                </a>
-            </div>
-
-            <!-- אפשרות 2: פנייה ישירה (WhatsApp / Mail) -->
-            <div class="bg-green-50 p-8 rounded-3xl border border-green-100 shadow-sm hover:shadow-md transition-shadow">
-                <div class="flex items-center mb-6">
-                    <div class="bg-green-600 p-3 rounded-full ml-4">
-                        <svg xmlns="http://www.w3.org" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">פנייה מהירה</h3>
-                </div>
-                <p class="text-gray-700 mb-8 leading-relaxed">
-                    יש לכם שאלה דחופה? רוצים לכתוב לי לפני שנתאם? אני זמין בווטסאפ ובמייל.
-                </p>
-                <div class="space-y-4">
-                    <a href="https://wa.link/62uesa" target="_blank" class="flex items-center justify-center gap-3 bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition-colors shadow-lg">
-                        <span>שלחו הודעת WhatsApp</span>
-                    </a>
-                    <a href="mailto:support@12trix.co.il" class="flex items-center justify-center text-gray-600 font-medium hover:text-blue-600 transition-colors">
-                        <span>או במייל: support@12trix.co.il</span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-        <div class="flex flex-col items-center text-center">
-            <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full border-4 border-gray-100 shadow-sm mx-auto mb-4">
-                <img src="~/images/amiram.png"
-                     alt="עמי"
-                     class="w-full h-full object-cover">
-            </div>
-            <p class="text-gray-500 italic max-w-xs mx-auto">"אני כאן כדי לעזור לילד שלכם לגלות שהוא מסוגל להרבה יותר."</p>
-        </div>
-
-       
-
+<section class="cream">
+    <div class="wrap-text" style="padding-bottom:24px;">
+        <h1>נשמח לשמוע מכם</h1>
+        <p class="intro">יש לכם שאלה, רעיון, או שאתם רוצים לשמוע איך 12trix יכול לעזור? כתבו לי ואחזור אליכם.</p>
     </div>
 </section>
+
+<section>
+    <div class="contact-grid">
+        <form class="contact-form" method="post" asp-action="Contact">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="form-error-summary"></div>
+
+            @* Honeypot: hidden from humans, must stay empty *@
+            <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+                <label for="Website">Website</label>
+                <input type="text" id="Website" asp-for="Website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Role">אני...</label>
+                <select asp-for="Role" required>
+                    <option value="">בחרו אחד</option>
+                    <option value="parent">הורה</option>
+                    <option value="tutor">מורה פרטי / סטודנט</option>
+                    <option value="institution">מרכז למידה / מוסד / ארגון</option>
+                    <option value="other">אחר</option>
+                </select>
+                <span asp-validation-for="Role" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Name">שם מלא</label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Phone">טלפון</label>
+                <input asp-for="Phone" type="tel" />
+                <span asp-validation-for="Phone" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Email">אימייל (לא חובה)</label>
+                <input asp-for="Email" type="email" />
+                <span asp-validation-for="Email" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Message">איך אפשר לעזור?</label>
+                <textarea asp-for="Message"></textarea>
+                <span asp-validation-for="Message" class="field-error"></span>
+            </div>
+
+            <div class="form-submit">
+                <button type="submit" class="btn-primary">שלחו — ואחזור אליכם</button>
+            </div>
+            <div class="form-note">הפרטים מגיעים ישירות לעמי, מייסד 12trix. לא מועברים לאף גורם אחר.</div>
+        </form>
+
+        <aside class="direct">
+            <img src="~/img/ami-portrait.webp" alt="עמי אריכא" class="direct-photo" />
+            <h2>מעדיפים ישירות?</h2>
+            <p>מדברים איתי, לא עם בוט.</p>
+            <div class="direct-links">
+                <a href="https://wa.link/62uesa" class="link-whatsapp">💬 וואטסאפ</a>
+                <a href="tel:054-4684-216" class="link-phone">📞 054-4684-216</a>
+                <a href="mailto:support@12trix.com" class="link-email">✉️ support@12trix.com</a>
+            </div>
+        </aside>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,85 +1,58 @@
-﻿@{
-    ViewData["Title"] = "12trix - זה לא ציון, זו זהות";
+@{
+    ViewData["Title"] = "הרשמה למשפחות";
 }
 
-<!-- Hero Section - הצהרת הזהות -->
-<section class="py-20 px-4 md:px-12 bg-white text-center">
-    <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-8 tracking-tight">
-            זה לא ציון, <span class="text-blue-600">זו זהות.</span>
-        </h1>
-        <div class="text-xl md:text-2xl text-slate-700 leading-relaxed space-y-6">
-            <p>
-                מתמטיקה היא לא רק מספרים על דף. היא הכלי שדרכו הילד שלכם לומד מה הוא שווה.
-                כשהוא נכשל פעם אחר פעם, הוא לא רק "מקבל ציון נמוך" – הוא בונה לעצמו זהות של "אחד שלא מבין".
-            </p>
-            <p class="font-bold">
-                אנחנו כאן כדי לשנות את התפיסה הזו מהשורש.
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- אפשר אחרת + הגרף הממוקד -->
-<section class="py-16 bg-slate-50 px-4">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-        <div class="md:w-1/2 text-right">
-            <h2 class="text-3xl font-bold text-slate-900 mb-6">זה לא גורל. הילד שלך יכול.</h2>
-            <div class="text-lg text-slate-700 space-y-4">
-                <p>
-                    הצלחה במתמטיקה ביסודי היא לא עניין של גאונות. היא עניין של קרקע יציבה.
-                    כשבונים את השליטה האריתמטית צעד אחרי צעד, הביטחון העצמי חוזר.
-                </p>
-                <p>
-                    כל ילד זכאי לחוות **הצלחה, גאווה ותחושת מסוגלות**. זה אפשרי, וזה קורה מהר יותר ממה שאתם חושבים.
-                </p>
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-top">
+            <div class="hero-text">
+                <h1>זה לא עוד ציון.<br><span class="accent">זו זהות.</span></h1>
+                <p class="trust-line">הילד שלכם קיבל המלצה עלינו ממורה שסומכים עליו. זה כבר אומר הרבה.</p>
+                <p>12trix היא סביבת לימוד עצמאית לחשבון, לכיתות א׳-ו׳, שבנויה כולה על התנסות – בלי הסברים ארוכים, בלי טקסט מייגע. הילד לומד דרך משחק, תנועה וגילוי, בקצב שלו.</p>
+                <p><strong>מה שאנחנו יודעים בטוח:</strong> ילדים שמתקשים בחשבון לא צריכים עוד הסבר. הם צריכים חוויה שבה הם מצליחים – ומרגישים את זה.</p>
             </div>
-        </div>
-        <div class="md:w-1/2">
-            <!-- הגרף בגודל מאוזן וממוקד -->
-            <div class="bg-white p-6 rounded-3xl shadow-lg border border-slate-200">
-                <p class="text-sm font-bold text-blue-600 mb-4">פיילוט אמיתי: מציון 16 ל-91 תוך חודש וחצי</p>
-                <img src="~/images/pilotResults.png" alt="תוצאות פיילוט" class="w-full h-auto rounded-lg">
+            <div class="hero-image">
+                <img src="~/img/classRoom.webp" alt="ילדים לומדים חשבון בצורה חווייתית" />
             </div>
         </div>
     </div>
-</section>
 
-<!-- המתודה השונה + הספר -->
-<section class="py-20 px-4 md:px-12 bg-white">
-    <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-8">אנחנו עובדים אחרת.</h2>
-        <p class="text-xl text-slate-700 mb-12 leading-relaxed">
-            בניגוד לשיטות המקובלות שמנסות "להסביר" שוב ושוב את אותו חומר, אנחנו מתמקדים בבניית **כושר אריתמטי**.
-            אנחנו לא נותנים לילד קביים – אנחנו מלמדים אותו לרוץ לבד.
-        </p>
-
-        <!-- לינק לספר -->
-        <div class="inline-block p-8 bg-blue-50 rounded-[2rem] border border-blue-100 transition-all hover:bg-blue-100">
-            <p class="text-lg font-bold text-blue-900 mb-4 italic">
-                רוצים להבין לעומק למה ילדים חכמים נתקעים במתמטיקה?
-            </p>
-            <a href="https://bookpod.co.il/product/%d7%90%d7%99%d7%9a-%d7%99%d7%9c%d7%93-%d7%97%d7%9b%d7%9d-%d7%9c%d7%95%d7%9e%d7%93-%d7%a9%d7%94%d7%95%d7%90-%d7%9c%d7%90-%d7%97%d7%9b%d7%9d-%d7%91%d7%9e%d7%aa%d7%9e%d7%98%d7%99%d7%a7%d7%94/" target="_blank" class="text-blue-600 font-bold underline decoration-2 underline-offset-8 hover:text-blue-800 transition-colors">
-                לספר שלי: "איך ילד חכם לומד שהוא לא חכם במתמטיקה"
-            </a>
+    <div class="trial-wrap">
+        <div class="trial-box">
+            <div class="gift-label">🎁 שבוע ראשון – במתנה</div>
+            <p>כדי שתראו את זה בעצמכם: השבוע הראשון פתוח לכולם, ללא עלות.</p>
+            <a href="https://app.12trix.com/Accounts/Account/registerFamily" class="btn-primary">התחילו שבוע ניסיון חינם</a>
+            <span class="btn-note">בלי כרטיס אשראי. בלי התחייבות.</span>
         </div>
     </div>
 </section>
 
-<!-- סיום רגוע וקריאה לשיחה -->
-<section id="contact" class="py-24 bg-slate-900 text-white rounded-t-[4rem] text-center px-4">
-    <div class="max-w-2xl mx-auto">
-        <h3 class="text-3xl font-bold mb-6 italic text-blue-400">בואו נחזיר לילד שלכם את הביטחון.</h3>
-        <p class="text-xl text-slate-300 mb-12">
-            השלב הראשון הוא שיחת הכרות קצרה. בלי לחץ, רק כדי להבין איפה הילד עומד והאם השיטה שלנו היא הפתרון הנכון עבורו.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-6">
-            <a href="@Url.Action("Contact", "Home")" class="bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-blue-500 transition-all">
-                תיאום שיחת הכרות (15 דק')
-            </a>
-            <a href="https://wa.link/62uesa" target="_blank" class="bg-green-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-green-500 transition-all">
-                הודעת WhatsApp מהירה
-            </a>
+<section class="next-section">
+    <div class="next-inner">
+        <img src="~/img/Desktop-1-4-Photoroom.webp" alt="ילד לומד ומצליח בחשבון" />
+        <div>
+            <h2>מה יקרה אחרי ההרשמה?</h2>
+            <p>תוך דקות הילד כבר בתוך הסביבה שלו – בלי צורך לדעת לקרוא, הכול מדובב ומוסבר בקול. ואתם, כהורים, תקבלו גישה לדשבורד שמראה בדיוק איך הוא מתקדם.</p>
         </div>
+    </div>
+</section>
+
+<section class="video-section">
+    <div class="video-inner">
+        <h2>לראות את זה במו עיניכם</h2>
+        <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/dTUm6IiaORU"
+                    title="12trix - ילד לומד חשבון"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<section class="final-cta">
+    <div class="final-inner">
+        <h2>מוכנים להתחיל?</h2>
+        <a href="https://app.12trix.com/Accounts/Account/registerFamily" class="btn-primary">התחילו עכשיו</a>
     </div>
 </section>

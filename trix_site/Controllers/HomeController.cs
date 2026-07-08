@@ -1,14 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using trix_site.Models; // החלף בשם הפרויקט שלך
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using trix_site.Models;
+using trix_site.Services;
+
 namespace trix_site.Controllers
 {
     public class HomeController : Controller
     {
-        // עמוד הבית
+        private readonly IMarketingContactService _contactService;
+
+        public HomeController(IMarketingContactService contactService)
+        {
+            _contactService = contactService;
+        }
+
+        // ---------- Static marketing pages ----------
+
+        // עמוד הבית / הרשמה למשפחות
         public IActionResult Index() => View();
 
-        // עמוד צור קשר
-        public IActionResult Contact() => View();
+        // עמוד השיטה
+        public IActionResult Method() => View();
+
+        // עמוד מובילי שינוי (בני נוער)
+        public IActionResult Youth() => View();
+
+        // עמוד מורים פרטיים
+        public IActionResult Tutors() => View();
 
         // עמוד תנאי שימוש
         public IActionResult Terms() => View();
@@ -16,27 +34,73 @@ namespace trix_site.Controllers
         // עמוד מדיניות פרטיות
         public IActionResult Privacy() => View();
 
-        // עמוד רישום (GET)
+        // עמוד רישום (GET) — נשאר כפי שהיה
         [HttpGet]
         public IActionResult Registration()
         {
             return View(new RegistrationViewModel());
         }
 
-        // עיבוד הרישום (POST)
+        // ---------- Contact page (GET + POST) ----------
+
+        // עמוד צור קשר (GET)
+        [HttpGet]
+        public IActionResult Contact() => View(new ContactViewModel());
+
+        // עמוד צור קשר (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ProcessRegistration(RegistrationViewModel model)
+        public async Task<IActionResult> Contact(ContactViewModel model)
         {
-            if (!ModelState.IsValid || !model.TermsAccepted || !model.ParentCommitment)
+            model.Source = "צור קשר";
+
+            // Honeypot: if the hidden field is filled, silently treat as success (bot).
+            if (!string.IsNullOrWhiteSpace(model.Website))
+                return RedirectToAction(nameof(ContactThanks));
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            model.Language = "עברית";
+            var ok = await _contactService.HandleContactAsync(model);
+            if (!ok)
             {
-                TempData["ErrorMessage"] = "יש לאשר את כל התנאים והמחויבות האישית כדי להמשיך.";
-                return View("Registration", model);
+                ModelState.AddModelError(string.Empty,
+                    "אירעה תקלה בשליחה. אפשר לפנות ישירות בוואטסאפ או בטלפון.");
+                return View(model);
             }
 
-            // לינק לסליקה (960 ש"ח לחודש X 6 חודשים)
-            string paymentUrl = "https://your-payment-link.co.il";
-            return Redirect(paymentUrl);
+            return RedirectToAction(nameof(ContactThanks));
+        }
+
+        [HttpGet]
+        public IActionResult ContactThanks() => View();
+
+        // ---------- Youth join form (POST) ----------
+        // The Youth page (GET) is served by Youth() above; the form posts here.
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> YouthJoin(ContactViewModel model)
+        {
+            model.Source = "מובילי שינוי";
+
+            if (!string.IsNullOrWhiteSpace(model.Website))
+                return RedirectToAction(nameof(ContactThanks));
+
+            if (!ModelState.IsValid)
+                return View("Youth", model);
+
+            model.Language = "עברית";
+            var ok = await _contactService.HandleContactAsync(model);
+            if (!ok)
+            {
+                ModelState.AddModelError(string.Empty,
+                    "אירעה תקלה בשליחה. אפשר לפנות ישירות בוואטסאפ או בטלפון.");
+                return View("Youth", model);
+            }
+
+            return RedirectToAction(nameof(ContactThanks));
         }
     }
 }
