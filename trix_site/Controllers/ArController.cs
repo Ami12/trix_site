@@ -41,6 +41,12 @@ namespace trix_site.Controllers
         [HttpGet("Tutors")]        // /ar/Tutors
         public IActionResult Tutors() => ArView("Tutors");
 
+        [HttpGet("/ar/Terms")]
+        public IActionResult Terms() => ArView("Terms");
+
+        [HttpGet("/ar/Privacy")]
+        public IActionResult Privacy() => ArView("Privacy");
+
         [HttpGet("Contact")]       // /ar/Contact
         public IActionResult Contact() => ArView("Contact", new ContactViewModel { Language = "ar" });
 

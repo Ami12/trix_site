@@ -30,10 +30,11 @@ namespace trix_site.Controllers
         [HttpGet("/Contact")]
         public IActionResult Contact() => View(new ContactViewModel());
 
-        // עמוד תנאי שימוש
+        [HttpGet("/Terms")]
         public IActionResult Terms() => View();
 
-        // עמוד מדיניות פרטיות
+
+        [HttpGet("/Privacy")]
         public IActionResult Privacy() => View();
 
         // עמוד רישום (GET) — נשאר כפי שהיה
