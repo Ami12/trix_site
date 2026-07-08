@@ -1,0 +1,75 @@
+@{
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "Index";
+    string ActiveIf(string action) => currentAction == action ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12trix - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-inner">
+        <div class="nav-right">
+            <a href="/ar" class="nav-logo"><img src="~/img/logo.webp" alt="12trix" /></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/ar/Method" class="@ActiveIf("Method")">الطريقة</a></li>
+                <li><a href="/ar/Tutors" class="@ActiveIf("Tutors")">معلمون خصوصيون</a></li>
+                <li><a href="/ar/Youth" class="@ActiveIf("Youth")">قادة التغيير</a></li>
+                <li><a href="/ar/Contact" class="@ActiveIf("Contact")">اتصلوا بنا</a></li>
+            </ul>
+        </div>
+        <div class="nav-actions">
+            <a href="/@(currentAction == "Index" ? "" : currentAction)" class="lang-switch">עברית</a>
+                <a href="https://app.12trix.com/accounts/Account/login" class="login-link">👤 دخول الأعضاء</a>
+            <button class="nav-toggle" id="navToggle" aria-label="القائمة" aria-expanded="false" aria-controls="navLinks">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main>
+    @RenderBody()
+</main>
+
+<footer>
+    <div class="footer-links">
+        <a href="/ar/Privacy">سياسة الخصوصية</a>
+        <span class="sep">|</span>
+        <a href="/ar/Terms">شروط الاستخدام</a>
+        <span class="sep">|</span>
+        <a href="tel:054-4684-216">054-4684-216 📞</a>
+        <span class="sep">|</span>
+        <a href="mailto:support@12trix.com">support@12trix.com 💻</a>
+    </div>
+    <div class="footer-copy">© 12trix 2026 - جميع الحقوق محفوظة</div>
+</footer>
+
+<script>
+    (function () {
+        var toggle = document.getElementById('navToggle');
+        var links = document.getElementById('navLinks');
+        if (!toggle || !links) return;
+        toggle.addEventListener('click', function () {
+            var open = links.classList.toggle('open');
+            toggle.classList.toggle('open', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        links.addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                links.classList.remove('open');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    })();
+</script>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

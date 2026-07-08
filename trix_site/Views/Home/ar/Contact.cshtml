@@ -1,0 +1,86 @@
+@model trix_site.Models.ContactViewModel
+@{
+    ViewData["Title"] = "اتصلوا بنا";
+}
+
+@* ملاحظة: ترجمة عربية أولية (مسودة) — يُنصح بمراجعتها من متحدث أصلي قبل النشر. *@
+
+<section class="cream">
+    <div class="wrap-text" style="padding-bottom:24px;">
+        <h1>يسعدنا أن نسمع منكم</h1>
+        <p class="intro">لديكم سؤال، فكرة، أو تريدون أن تسمعوا كيف يمكن لـ 12trix أن يساعد؟ اكتبوا لي وسأعود إليكم.</p>
+    </div>
+</section>
+
+<section>
+    <div class="contact-grid">
+        <form class="contact-form" method="post" asp-controller="Ar" asp-action="Contact">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="form-error-summary"></div>
+
+            @* Honeypot *@
+            <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+                <label for="Website">Website</label>
+                <input type="text" id="Website" asp-for="Website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <input type="hidden" asp-for="Language" value="ar" />
+
+            <div class="form-row">
+                <label asp-for="Role">أنا...</label>
+                <select asp-for="Role" required>
+                    <option value="">اختاروا واحدًا</option>
+                    <option value="parent">أحد الوالدين</option>
+                    <option value="tutor">معلّم خصوصي / طالب جامعي</option>
+                    <option value="institution">مركز تعليمي / مؤسسة / منظّمة</option>
+                    <option value="other">غير ذلك</option>
+                </select>
+                <span asp-validation-for="Role" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Name">الاسم الكامل</label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Phone">الهاتف</label>
+                <input asp-for="Phone" type="tel" />
+                <span asp-validation-for="Phone" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Email">البريد الإلكتروني (اختياري)</label>
+                <input asp-for="Email" type="email" />
+                <span asp-validation-for="Email" class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+                <label asp-for="Message">كيف يمكن أن نساعد؟</label>
+                <textarea asp-for="Message"></textarea>
+                <span asp-validation-for="Message" class="field-error"></span>
+            </div>
+
+            <div class="form-submit">
+                <button type="submit" class="btn-primary">أرسلوا — وسأعود إليكم</button>
+            </div>
+            <div class="form-note">التفاصيل تصل مباشرة إلى عمي، مؤسّس 12trix. لا تُنقل إلى أي جهة أخرى.</div>
+        </form>
+
+        <aside class="direct">
+            <img src="~/img/ami-portrait.webp" alt="عمي أريخا" class="direct-photo" />
+            <h2>تفضّلون مباشرة؟</h2>
+            <p>تتحدّثون معي، لا مع روبوت.</p>
+            <div class="direct-links">
+                <a href="https://wa.link/62uesa" class="link-whatsapp">💬 واتساب</a>
+                <a href="tel:054-4684-216" class="link-phone">📞 054-4684-216</a>
+                <a href="mailto:support@12trix.com" class="link-email">✉️ support@12trix.com</a>
+            </div>
+        </aside>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

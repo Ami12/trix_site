@@ -15,18 +15,20 @@ namespace trix_site.Controllers
         }
 
         // ---------- Static marketing pages ----------
-
         // עמוד הבית / הרשמה למשפחות
         public IActionResult Index() => View();
 
-        // עמוד השיטה
+        [HttpGet("/Method")]
         public IActionResult Method() => View();
 
-        // עמוד מובילי שינוי (בני נוער)
+        [HttpGet("/Youth")]
         public IActionResult Youth() => View();
 
-        // עמוד מורים פרטיים
+        [HttpGet("/Tutors")]
         public IActionResult Tutors() => View();
+
+        [HttpGet("/Contact")]
+        public IActionResult Contact() => View(new ContactViewModel());
 
         // עמוד תנאי שימוש
         public IActionResult Terms() => View();
@@ -40,12 +42,6 @@ namespace trix_site.Controllers
         {
             return View(new RegistrationViewModel());
         }
-
-        // ---------- Contact page (GET + POST) ----------
-
-        // עמוד צור קשר (GET)
-        [HttpGet]
-        public IActionResult Contact() => View(new ContactViewModel());
 
         // עמוד צור קשר (POST)
         [HttpPost]

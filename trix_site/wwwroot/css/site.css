@@ -28,6 +28,9 @@ a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 
 /* ---------- Navbar ---------- */
+.lang-switch { font-weight: 700; font-size: 0.95rem; color: var(--green-dark); border: 1.5px solid var(--green-dark); border-radius: var(--radius-pill); padding: 8px 18px; transition: background .2s ease, color .2s ease; }
+.lang-switch:hover { background: var(--green-dark); color: #FFFFFF; }
+
 .navbar { position: sticky; top: 0; z-index: 100; background: #FFFFFF; border-bottom: 1px solid var(--nav-border); box-shadow: 0 1px 6px rgba(0,0,0,0.03); }
 .navbar-inner { max-width: var(--maxw); margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .nav-right { display: flex; align-items: center; gap: 36px; }
