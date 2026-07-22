@@ -30,6 +30,9 @@ namespace trix_site.Controllers
         [HttpGet("/Contact")]
         public IActionResult Contact() => View(new ContactViewModel());
 
+        [HttpGet("/About")]
+        public IActionResult About() => View();
+
         [HttpGet("/Terms")]
         public IActionResult Terms() => View();
 

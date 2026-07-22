@@ -160,7 +160,7 @@ p strong { color: var(--ink); }
 .about-inner { max-width: var(--maxw); margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: center; }
 .about-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #FFFFFF; box-shadow: 0 6px 20px rgba(0,0,0,0.12); background: #EEE; }
 .about-text h2 { margin-bottom: 14px; }
-.about-text .signature { font-family: var(--font-display); color: var(--green-dark); font-size: 1.15rem; margin-top: 6px; }
+.about-text .signature { font-family: var(--font-display); /*color: var(--green-dark);*/ font-size: 1.15rem; margin-top: 6px; }
 
 /* ---------- Results / testimonials (method) ---------- */
 .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; margin-top: 8px; }
