@@ -41,6 +41,9 @@ namespace trix_site.Controllers
         [HttpGet("Tutors")]        // /ar/Tutors
         public IActionResult Tutors() => ArView("Tutors");
 
+        [HttpGet("About")]          // /ar/About
+        public IActionResult About() => ArView("About");
+
         [HttpGet("/ar/Terms")]
         public IActionResult Terms() => ArView("Terms");
 
